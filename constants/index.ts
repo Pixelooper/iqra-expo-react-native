@@ -80,6 +80,96 @@ export const onboarding = [
   },
 ];
 
+export const surahList = [
+  {
+    _id: 1,
+    no: '১',
+    name_bn: "আল ফাতিহা",
+    totalAyat: '৭',
+  },
+  {
+    _id: 2,
+    no: '২',
+    name_bn: "আল বাক্বারাহ",
+    totalAyat: '২৮৬',
+  },
+  {
+    _id: 3,
+    no: '৩',
+    name_bn: "আল-ইমরান",
+    totalAyat: '২০০',
+  }
+];
+
+export const blogs = [
+  {
+    _id: 1,
+    title: "জান্নাতী দল কোনটি?",
+    desc: "",
+  },
+  {
+    _id: 2,
+    title: "কিয়ামত কি খুব কাছে?",
+    desc: "",
+  },
+  {
+    _id: 3,
+    title: "ইসলামের মূল ভিত্তি কী?",
+    desc: "",
+  }
+];
+
+export const settings = [
+  {
+    _id: 1,
+    title: "Surah",
+    items: 1,
+    bgClass: "bg-yellow-100",
+    textClass: "text-yellow-700"
+  },
+  {
+    _id: 2,
+    title: "Ayat",
+    items: 2,
+    bgClass: "bg-pink-200",
+    textClass: "text-red-700"
+  },
+  {
+    _id: 3,
+    title: "Tafsir",
+    items: 0,
+    bgClass: "bg-red-200",
+    textClass: "text-pink-700"
+  }
+];
+
+export const moods = [
+  {
+    _id: 1,
+    name: "Surah",
+    bgClass: "bg-slate-300",
+    icon: "🌞"
+  },
+  {
+    _id: 2,
+    name: "Sadness",
+    bgClass: "bg-orange-300",
+    icon: "🌙"
+  },
+  {
+    _id: 3,
+    name: "Anger",
+    bgClass: "bg-lime-300",
+    icon: "🔥"
+  },
+  // {
+  //   _id: 4,
+  //   name: "Fear",
+  //   bgClass: "bg-yellow-500",
+  //   icon: "⚡"
+  // },
+];
+
 export const data = {
   onboarding,
 };
