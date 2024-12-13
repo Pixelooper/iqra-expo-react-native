@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import { Text, View, TouchableOpacity } from "react-native";
 import { blogs } from "@/constants";
+import CustomButton from "./CustomButton";
 
 const Blogs = () => {
   return (
@@ -21,6 +22,10 @@ const Blogs = () => {
                 <Text className="text-yellow-400 text-xs pt-2 font-AnekBanglaBold">এখন পড়ুন</Text>
             </TouchableOpacity>
         ))}
+        <CustomButton
+          title="আরো দেখুন"
+          onPress={() => router.replace("/(public)/surah")}
+        />
     </View>
   );
 };

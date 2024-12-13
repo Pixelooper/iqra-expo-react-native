@@ -26,7 +26,7 @@ const Featured = () => {
           onSnapToItem={(index) => setActiveIndex(index)}
           renderItem={({ item: surah }) => (
             <TouchableOpacity 
-                key={surah._id} onPress={() => {router.replace("/(public)/surah")}} 
+                key={surah._id} onPress={() => {router.push("/(public)/search")}} 
                 className="w-full bg-dark-green rounded-lg p-4 flex flex-col justify-center"
                 style={{
                     shadowColor: "#000",

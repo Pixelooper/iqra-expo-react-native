@@ -1,6 +1,5 @@
 import { router } from "expo-router";
 import { Text, View, TouchableOpacity } from "react-native";
-import { moods } from "@/constants";
 
 const Mood = () => {
   return (
@@ -11,22 +10,45 @@ const Mood = () => {
         <View
             className="flex flex-row flex-wrap justify-between items-center"
         >
-            {moods.map((mood) => (
                 <TouchableOpacity
-                    key={mood._id}
                     onPress={() => {
                         router.replace("/(public)/surah");
                     }}
-                    className={`rounded-lg p-4 justify-between items-center w-[30%] h-48 ${mood.bgClass}`}
+                    className={`rounded-lg p-4 justify-between items-center w-[30%] h-48 border bg-primary-200`}
                 >
                     <Text className="text-xl font-AnekBanglaBold text-center">
-                        {mood.icon}
+                        🌞
                     </Text>
                     <Text className="text-black text-md pt-2 font-AnekBanglaSemiBold text-center">
-                        {mood.name}
+                        Surah
                     </Text>
                 </TouchableOpacity>
-            ))}
+                <TouchableOpacity
+                    onPress={() => {
+                        router.replace("/(public)/surah");
+                    }}
+                    className={`rounded-lg p-4 justify-between items-center w-[30%] h-48 border bg-secondary-200`}
+                >
+                    <Text className="text-xl font-AnekBanglaBold text-center">
+                        🌙
+                    </Text>
+                    <Text className="text-black text-md pt-2 font-AnekBanglaSemiBold text-center">
+                        Sadness
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        router.replace("/(public)/surah");
+                    }}
+                    className={`rounded-lg p-4 justify-between items-center w-[30%] h-48 border bg-general-100`}
+                >
+                    <Text className="text-xl font-AnekBanglaBold text-center">
+                        🔥
+                    </Text>
+                    <Text className="text-black text-md pt-2 font-AnekBanglaSemiBold text-center">
+                        Anger
+                    </Text>
+                </TouchableOpacity>
         </View>
     </View>
   );

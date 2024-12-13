@@ -49,10 +49,10 @@ const LastRead = () => {
               <View className="flex flex-row items-center justify-between">
                 <CustomButton
                   title="এখন পড়ুন"
-                  onPress={() => router.replace("/(public)/surah")}
+                  onPress={() => router.push(`/(public)/surah/${surah.no}`)}
                 />
-                <View className="flex items-center justify-center border border-gray-50 px-2 py-1 rounded-md">
-                  <Text className="text-base text-white font-AnekBanglaSemiBold">
+                <View className="flex items-center justify-center border border-gray-50 px-3 py-1 rounded-md">
+                  <Text className="text-md text-white font-AnekBanglaSemiBold">
                     {surah.no}
                   </Text>
                 </View>
