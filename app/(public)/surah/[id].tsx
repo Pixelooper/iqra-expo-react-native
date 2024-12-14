@@ -11,7 +11,7 @@ const Surah = () => {
     const [surahData, setSurahData] = useState<typeof surahList[0] | null>(null);
 
     useEffect(() => {
-        const surah = surahList.find(surah => surah.no === id);
+        const surah = surahList.find(surah => surah.no == id);
         setSurahData(surah || null);
     }, [surahList, id]);
 
@@ -121,7 +121,7 @@ const Surah = () => {
                                     <View className="text-center pt-2">
                                         <CustomButton
                                             title="সব আয়াত পড়ুন"
-                                            onPress={() => router.replace(`/(public)/ayat/${surahData?.no}`)}
+                                            onPress={() => router.push(`/(public)/ayat/${surahData?.no}`)}
                                             className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                         />
                                     </View>

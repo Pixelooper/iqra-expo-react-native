@@ -8,6 +8,7 @@ const Layout = () => {
         <Stack.Screen name="home" options={{ headerShown: false }} />
         <Stack.Screen name="surah/[id]" options={{ headerShown: false }} />
         <Stack.Screen name="ayat/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="tafsir/[id]/[aid]" options={{ headerShown: false }} />
       </Stack>
   );
 };

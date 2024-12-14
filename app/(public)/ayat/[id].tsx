@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { surahList } from "@/constants";
 import { useEffect, useState } from "react";
 import bg from "@/assets/images/pattern.png";
-import CustomButton from "@/components/CustomButton";
 
 const Ayat = () => {
     const { id } = useLocalSearchParams();
@@ -16,7 +15,7 @@ const Ayat = () => {
     );
 
     useEffect(() => {
-        const surah = surahList.find(surah => surah.no === id);
+        const surah = surahList.find(surah => surah.no == id);
         setSurahData(surah || null);
     }, [surahList, id]);
 
@@ -48,7 +47,7 @@ const Ayat = () => {
                                     className="w-full px-4 py-2 border rounded-md text-gray-700 my-4 bg-white"
                                 />
 
-                                <View className="mt-2 px-4 py-6 text-white bg-pattern-aotd bg-dark-green rounded-3xl">
+                                <View className="mt-2 px-4 pt-6 text-white bg-pattern-aotd bg-dark-green rounded-3xl">
                                     <View className="text-center mb-8">
                                         <Text className="text-2xl font-AnekBanglaSemiBold text-yellow-400 mb-4 text-center">
                                             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
@@ -66,7 +65,7 @@ const Ayat = () => {
                                                     {ayat?.no}
                                                 </Text>
                                                 <View className="flex flex-row justify-between gap-2">
-                                                    <TouchableOpacity>
+                                                    <TouchableOpacity onPress={() => {router.push(`/(public)/tafsir/${surahData?.no}/${ayat?.no}`)}} >
                                                         <Text className="text-lg font-AnekBangla">🌐</Text>
                                                     </TouchableOpacity>
                                                     <TouchableOpacity>
