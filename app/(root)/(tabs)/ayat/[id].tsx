@@ -26,7 +26,7 @@ const Ayat = () => {
         <SafeAreaView>
             <ScrollView>
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
-                    <View className="w-full px-2 mt-24">
+                    <View className="w-full px-2 mt-24 mb-20">
                         {
                             !data || !surahData ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
@@ -68,7 +68,7 @@ const Ayat = () => {
                                                     {ayat?.no}
                                                 </Text>
                                                 <View className="flex flex-row justify-between gap-2">
-                                                    <TouchableOpacity onPress={() => {router.push(`/(public)/tafsir/${surahData?.no}/${ayat?.no}`)}} >
+                                                    <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayat?.no}`)}} >
                                                         <Text className="text-lg font-AnekBangla">🌐</Text>
                                                     </TouchableOpacity>
                                                     <TouchableOpacity>

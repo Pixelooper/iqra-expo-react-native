@@ -9,7 +9,7 @@ const Settings = () => {
         >
             <TouchableOpacity
                 onPress={() => {
-                    router.replace("/(public)/surah");
+                    router.replace("/(root)/(tabs)/search");
                 }}
                 className={`rounded-lg p-4 justify-between items-center w-[30%] h-[130px] border bg-primary-200`}
             >
@@ -22,7 +22,7 @@ const Settings = () => {
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {
-                    router.replace("/(public)/surah");
+                    router.replace("/(root)/(tabs)/search");
                 }}
                 className={`rounded-lg p-4 justify-between items-center w-[30%] h-[130px] border bg-secondary-200`}
             >
@@ -35,7 +35,7 @@ const Settings = () => {
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {
-                    router.replace("/(public)/surah");
+                    router.replace("/(root)/(tabs)/search");
                 }}
                 className={`rounded-lg p-4 justify-between items-center w-[30%] h-[130px] border bg-general-100`}
             >

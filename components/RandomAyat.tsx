@@ -8,7 +8,7 @@ const RandomAyat = () => {
             <Text className="text-md font-AnekBanglaSemiBold mb-1 text-left text-white">যিনি পরম করুণাময়, অসীম দয়ালু।</Text>
             <View className="flex flex-row justify-between">
                 <Text className="text-sm text-gray-300 text-left font-AnekBangla">- আল ফাতিহা ২/৭</Text>
-                <TouchableOpacity onPress={() => {router.replace("/(public)/home")}}>
+                <TouchableOpacity onPress={() => {router.replace("/(root)/(tabs)/search")}}>
                     <Text className="text-black text-md font-AnekBanglaBold">👉</Text>
                 </TouchableOpacity>
             </View>

@@ -14,6 +14,7 @@ import search from "@/assets/icons/search.png";
 import star from "@/assets/icons/star.png";
 import target from "@/assets/icons/target.png";
 import to from "@/assets/icons/to.png";
+import read from "@/assets/icons/read-icon.png";
 
 import logo from "@/assets/images/icon.png";
 import check from "@/assets/images/check.png";
@@ -42,6 +43,7 @@ export const icons = {
     star,
     target,
     to,
+    read
 };
 
 export const images = {

@@ -8,11 +8,11 @@ const Mood = () => {
             Moods
         </Text>
         <View
-            className="flex flex-row flex-wrap justify-between items-center"
+            className="flex flex-row flex-wrap justify-between items-center mb-16"
         >
                 <TouchableOpacity
                     onPress={() => {
-                        router.replace("/(public)/surah");
+                        router.replace("/(root)/(tabs)/search");
                     }}
                     className={`rounded-lg p-4 justify-between items-center w-[30%] h-48 border bg-primary-200`}
                 >
@@ -25,7 +25,7 @@ const Mood = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
-                        router.replace("/(public)/surah");
+                        router.replace("/(root)/(tabs)/search");
                     }}
                     className={`rounded-lg p-4 justify-between items-center w-[30%] h-48 border bg-secondary-200`}
                 >
@@ -38,7 +38,7 @@ const Mood = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
-                        router.replace("/(public)/surah");
+                        router.replace("/(root)/(tabs)/search");
                     }}
                     className={`rounded-lg p-4 justify-between items-center w-[30%] h-48 border bg-general-100`}
                 >

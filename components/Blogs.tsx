@@ -11,11 +11,11 @@ const Blogs = () => {
         </Text>
         {blogs.map((blog) => (
             <TouchableOpacity 
-                key={blog._id} onPress={() => {router.replace("/(public)/surah")}} 
+                key={blog._id} onPress={() => {router.replace("/(root)/(tabs)/search")}} 
                 className="py-3 px-5 bg-dark-green rounded-lg mb-3"
             >
                 <View className="w-full">
-                    <Text className="text-sm text-white font-AnekBanglaBold">
+                    <Text className="text-white font-AnekBanglaSemiBold">
                         {blog.title}
                     </Text>
                 </View>
@@ -24,7 +24,7 @@ const Blogs = () => {
         ))}
         <CustomButton
           title="আরো দেখুন"
-          onPress={() => router.replace("/(public)/surah")}
+          onPress={() => router.replace("/(root)/(tabs)/search")}
         />
     </View>
   );

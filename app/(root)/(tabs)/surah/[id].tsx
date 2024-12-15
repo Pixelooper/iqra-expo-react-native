@@ -22,12 +22,11 @@ const Surah = () => {
         <SafeAreaView>
             <ScrollView>
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
-                    <View className="w-full px-2 mt-24">
+                    <View className="w-full px-2 mt-24 mb-20">
                         {
                             !data || !surahData ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
                             <View className="mb-6">
-
                                 <View>
                                     <Text className="text-center text-3xl text-green-950 mb-2">
                                         سورة {surahData?.name_ar}
@@ -103,7 +102,7 @@ const Surah = () => {
                                                 {surahData?.ayat[0]?.no}
                                             </Text>
                                             <View className="flex flex-row justify-between gap-2">
-                                                <TouchableOpacity onPress={() => {router.push(`/(public)/tafsir/${surahData?.no}/${surahData?.ayat[0]?.no}`)}}>
+                                                <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahData?.no}/${surahData?.ayat[0]?.no}`)}}>
                                                     <Text className="text-lg font-AnekBangla">🌐</Text>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity>
@@ -124,7 +123,7 @@ const Surah = () => {
                                     <View className="text-center pt-2">
                                         <CustomButton
                                             title="সব আয়াত পড়ুন"
-                                            onPress={() => router.push(`/(public)/ayat/${surahData?.no}`)}
+                                            onPress={() => router.push(`/ayat/${surahData?.no}`)}
                                             className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                         />
                                     </View>

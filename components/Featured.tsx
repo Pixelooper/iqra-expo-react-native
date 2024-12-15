@@ -1,13 +1,18 @@
 import { Text, View, Dimensions, TouchableOpacity } from "react-native";
-import { surahList } from "@/constants";
 import { useState } from "react";
 import Carousel from "react-native-reanimated-carousel";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { router } from "expo-router";
+import { surah } from "@/types/type";
+// import { surahList } from "@/constants";
 
 const { width } = Dimensions.get("window");
 
-const Featured = () => {
+type FeaturedProps = {
+  data: surah[];
+};
+
+const Featured: React.FC<FeaturedProps> = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -19,14 +24,14 @@ const Featured = () => {
         <Carousel
           width={width * 0.9} 
           height={160}
-          data={surahList}
+          data={data.slice(0, 5)}
           loop={true}
           autoPlay={false}
           scrollAnimationDuration={800}
           onSnapToItem={(index) => setActiveIndex(index)}
           renderItem={({ item: surah }) => (
             <TouchableOpacity 
-                key={surah._id} onPress={() => {router.push("/(public)/search")}} 
+                key={surah._id} onPress={() => {router.push(`/(root)/(tabs)/surah/${surah.no}`)}} 
                 className="w-full bg-dark-green rounded-lg p-4 flex flex-col justify-center"
                 style={{
                     shadowColor: "#000",
@@ -47,7 +52,7 @@ const Featured = () => {
         />
         {/* Pagination Dots */}
         <View className="flex-row justify-center">
-          {surahList.map((_, index) => (
+          {data.slice(0, 5).map((_, index) => (
             <View
               key={index}
               className={`w-2 h-2 mx-1 rounded-full ${

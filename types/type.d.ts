@@ -1,4 +1,30 @@
+import { ayat } from '@/types/type';
 import { TextInputProps, TouchableOpacityProps } from "react-native";
+
+declare interface ayat {
+  _id: number;
+  no: number;
+  bn: string;
+  ar: string;
+  tafsir: string;
+}
+
+declare interface surah {
+  _id: number;
+  no: number;
+  para: number;
+  place: string;
+  ruku: number;
+  naming: string;
+  shanenuzul: string;
+  fazilat: string;
+  name_bn: string;
+  name_en: string;
+  name_ar: string;
+  totalAyat: number;
+  quote: string;
+  ayat: ayat[];
+}
 
 declare interface Driver {
   id: number;

@@ -25,7 +25,7 @@ const Tafsir = () => {
         <SafeAreaView>
             <ScrollView>
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
-                    <View className="w-full px-2 mt-24">
+                    <View className="w-full px-2 mt-24 mb-20">
                         {
                             !data || !surahData || !ayatData ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
@@ -86,12 +86,12 @@ const Tafsir = () => {
                                         <View className="flex flex-row justify-between mt-4">
                                             <CustomButton
                                                 title="পূর্ববর্তী"
-                                                onPress={() => {router.replace(`/(public)/tafsir/${surahData?.no}/${ayatData?.no - 1}`)}}
+                                                onPress={() => {router.replace(`/tafsir/${surahData?.no}/${ayatData?.no - 1}`)}}
                                                 className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                             />
                                             <CustomButton
                                                 title="পরবর্তী"
-                                                onPress={() => {router.replace(`/(public)/tafsir/${surahData?.no}/${ayatData?.no + 1}`)}}
+                                                onPress={() => {router.replace(`/tafsir/${surahData?.no}/${ayatData?.no + 1}`)}}
                                                 className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                             />
                                         </View>

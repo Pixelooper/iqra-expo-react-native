@@ -1,17 +1,22 @@
 import { router } from "expo-router";
 import { Text, View, Dimensions } from "react-native";
-import { surahList } from "@/constants";
 import { useState } from "react";
 import CustomButton from "./CustomButton";
 import Carousel from "react-native-reanimated-carousel";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { surah } from "@/types/type";
+// import { surahList } from "@/constants";
 
 //check: https://www.youtube.com/watch?v=qnI8m5Pk1ro
 //https://github.com/chitraket/animation/tree/main/src/animation-toast
 
 const { width } = Dimensions.get("window");
 
-const LastRead = () => {
+type LastReadProps = {
+  data: surah[];
+};
+
+const LastRead: React.FC<LastReadProps> = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -23,7 +28,7 @@ const LastRead = () => {
         <Carousel
           width={width * 0.9} 
           height={160}
-          data={surahList}
+          data={data.slice(0, 5)}
           loop={true}
           autoPlay={false}
           scrollAnimationDuration={800}
@@ -49,7 +54,7 @@ const LastRead = () => {
               <View className="flex flex-row items-center justify-between">
                 <CustomButton
                   title="এখন পড়ুন"
-                  onPress={() => router.push(`/(public)/surah/${surah.no}`)}
+                  onPress={() => router.push(`/(root)/(tabs)/surah/${surah.no}`)}
                 />
                 <View className="flex items-center justify-center border border-gray-50 px-3 py-1 rounded-md">
                   <Text className="text-md text-white font-AnekBanglaSemiBold">
@@ -62,7 +67,7 @@ const LastRead = () => {
         />
         {/* Pagination Dots */}
         <View className="flex-row justify-center">
-          {surahList.map((_, index) => (
+          {data.slice(0, 5).map((_, index) => (
             <View
               key={index}
               className={`w-2 h-2 mx-1 rounded-full ${

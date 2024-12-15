@@ -1,15 +1,18 @@
 import { ImageBackground, ScrollView, Text, TextInput, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
-import { surahList } from "@/constants";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import bg from "@/assets/images/pattern.png";
 import { useState } from "react";
+import { useData } from "@/utils/DataContext";
+import { surah } from "@/types/type";
+// import { surahList } from "@/constants";
 
 const Search = () => {
     const [searchQuery, setSearchQuery] = useState("");
+    const { data } = useData() as { data: surah[] };
 
-    const filteredSurahs = surahList.filter((surah) =>
+    const filteredSurahs = data.filter((surah) =>
       surah.name_bn.includes(searchQuery) || surah.name_en.includes(searchQuery) || surah.name_ar.includes(searchQuery)
     );
     
@@ -47,7 +50,7 @@ const Search = () => {
                                 <View className="flex flex-row items-center justify-between">
                                     <CustomButton
                                     title="এখন পড়ুন"
-                                    onPress={() => router.push(`/(public)/surah/${surah.no}`)}
+                                    onPress={() => router.push(`/(root)/(tabs)/surah/${surah.no}`)}
                                     />
                                     <View className="flex items-center justify-center border border-gray-50 px-3 py-1 rounded-md">
                                     <Text className="text-md text-white font-AnekBanglaSemiBold">
