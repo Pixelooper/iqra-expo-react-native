@@ -4,10 +4,18 @@ import { Image, Text, View, ImageBackground, ActivityIndicator } from "react-nat
 import { SafeAreaView } from "react-native-safe-area-context";
 import logo from "@/assets/images/icon.png";
 import bg from "@/assets/images/pattern.png";
-import { useData } from "@/utils/DataContext";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/utils/store/store";
+import { useEffect } from "react";
+import { fetchSurahData } from "@/utils/store/slices/surahSlice";
 
 const Splash = () => {
-    const { loading } = useData();
+    const dispatch = useDispatch<AppDispatch>();
+    const { data, loading, error } = useSelector((state: RootState) => state.surah);
+
+    useEffect(() => {
+        dispatch(fetchSurahData());
+    }, [dispatch])
 
     return (
         <SafeAreaView>

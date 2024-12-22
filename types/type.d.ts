@@ -4,9 +4,16 @@ import { TextInputProps, TouchableOpacityProps } from "react-native";
 declare interface ayat {
   _id: number;
   no: number;
-  bn: string;
+  para: number;
   ar: string;
-  tafsir: string;
+  bn: string;
+  tafsir: string[];
+  tika: string[];
+  quote: string;
+  shanenuzul: string;
+  mood: string;
+  featured: boolean;
+  audio: string;
 }
 
 declare interface surah {

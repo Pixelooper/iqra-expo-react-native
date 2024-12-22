@@ -4,7 +4,6 @@ import Carousel from "react-native-reanimated-carousel";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { router } from "expo-router";
 import { surah } from "@/types/type";
-// import { surahList } from "@/constants";
 
 const { width } = Dimensions.get("window");
 
@@ -24,7 +23,7 @@ const Featured: React.FC<FeaturedProps> = ({ data }) => {
         <Carousel
           width={width * 0.9} 
           height={160}
-          data={data.slice(0, 5)}
+          data={data}
           loop={true}
           autoPlay={false}
           scrollAnimationDuration={800}
@@ -51,7 +50,7 @@ const Featured: React.FC<FeaturedProps> = ({ data }) => {
           )}
         />
         {/* Pagination Dots */}
-        <View className="flex-row justify-center">
+        {/* <View className="flex-row justify-center">
           {data.slice(0, 5).map((_, index) => (
             <View
               key={index}
@@ -60,7 +59,7 @@ const Featured: React.FC<FeaturedProps> = ({ data }) => {
               }`}
             />
           ))}
-        </View>
+        </View> */}
       </View>
     </GestureHandlerRootView>
   );

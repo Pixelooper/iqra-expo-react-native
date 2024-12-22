@@ -7,10 +7,11 @@ import Featured from "@/components/Featured";
 import Blogs from "@/components/Blogs";
 import Settings from "@/components/Settings";
 import Mood from "@/components/Mood";
-import { useData } from "@/utils/DataContext";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
 
 const Home = () => {
-    const { data } = useData();
+    const { data } = useSelector((state: RootState) => state.surah);
 
     return (
         <SafeAreaView>

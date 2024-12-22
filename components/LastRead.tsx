@@ -5,7 +5,6 @@ import CustomButton from "./CustomButton";
 import Carousel from "react-native-reanimated-carousel";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { surah } from "@/types/type";
-// import { surahList } from "@/constants";
 
 //check: https://www.youtube.com/watch?v=qnI8m5Pk1ro
 //https://github.com/chitraket/animation/tree/main/src/animation-toast

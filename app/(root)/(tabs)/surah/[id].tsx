@@ -1,22 +1,18 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { Text, ActivityIndicator, ScrollView, ImageBackground, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
 import bg from "@/assets/images/pattern.png";
 import CustomButton from "@/components/CustomButton";
-import { useData } from "@/utils/DataContext";
-import { surah } from "@/types/type";
-// import { surahList } from "@/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
+import { selectSurahById } from "@/utils/selectors";
 
 const Surah = () => {
-    const { data } = useData() as { data: surah[] };
     const { id } = useLocalSearchParams();
-    const [surahData, setSurahData] = useState<surah | null>(null);
 
-    useEffect(() => {
-        const surah = data.find((item: surah) => item.no == id);
-        setSurahData(surah || null);
-    }, [data, id]);
+    const surahDetails = useSelector((state: RootState) =>
+        selectSurahById(Number(id))(state)
+    );
 
     return (
         <SafeAreaView>
@@ -24,63 +20,63 @@ const Surah = () => {
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
                     <View className="w-full px-2 mt-24 mb-20">
                         {
-                            !data || !surahData ? 
+                            !surahDetails ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
                             <View className="mb-6">
                                 <View>
                                     <Text className="text-center text-3xl text-green-950 mb-2">
-                                        سورة {surahData?.name_ar}
+                                        سورة {surahDetails?.name_ar}
                                     </Text>
                                     <Text className="text-center text-lg font-AnekBanglaMedium text-green-950 mb-1">
-                                        সূরা {surahData?.name_bn}
+                                        সূরা {surahDetails?.name_bn}
                                     </Text>
                                     <Text className="text-center text-sm text-gray-600">
-                                        আয়াত সংখ্যা {surahData?.totalAyat}
+                                        আয়াত সংখ্যা {surahDetails?.totalAyat}
                                     </Text>
                                 </View>
 
                                 <View className="mb-4 py-2">
                                     <View className="flex flex-row justify-between my-4">
                                         <Text className="text-lg font-AnekBanglaSemiBold text-yellow-400">
-                                            পারা {surahData?.para} / সূরা {surahData?.no}
+                                            পারা {surahDetails?.para} / সূরা {surahDetails?.no}
                                         </Text>
                                         <TouchableOpacity>
                                             <Text className="text-lg font-AnekBangla">⭐</Text>
                                         </TouchableOpacity>
                                     </View>
                                     <View className="flex flex-row justify-between mb-4">
-                                        <Text className="text-sm font-AnekBanglaSemiBold">{surahData?.place}</Text>
-                                        <Text className="text-sm font-AnekBanglaSemiBold">রুকুঃ {surahData?.ruku}</Text>
+                                        <Text className="text-sm font-AnekBanglaSemiBold">{surahDetails?.place}</Text>
+                                        <Text className="text-sm font-AnekBanglaSemiBold">রুকুঃ {surahDetails?.ruku}</Text>
                                     </View>
-                                    {surahData?.naming && 
+                                    {surahDetails?.naming && 
                                     <View className="mt-2">
                                         <Text> 
                                             <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">নামকরণ: </Text> 
-                                            <Text className="text-sm text-black font-AnekBangla">{surahData?.naming}</Text>   
+                                            <Text className="text-sm text-black font-AnekBangla">{surahDetails?.naming}</Text>   
                                         </Text>
                                     </View>
                                     }
-                                    {surahData?.shanenuzul && 
+                                    {surahDetails?.shanenuzul && 
                                     <View className="mt-2">
                                         <Text> 
                                             <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text> 
-                                            <Text className="text-sm text-black font-AnekBangla">{surahData?.shanenuzul}</Text>   
+                                            <Text className="text-sm text-black font-AnekBangla">{surahDetails?.shanenuzul}</Text>   
                                         </Text>
                                     </View>
                                     }
-                                    {surahData?.fazilat && 
+                                    {surahDetails?.fazilat && 
                                     <View className="mt-2">
                                         <Text> 
                                             <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">ফজিলত: </Text> 
-                                            <Text className="text-sm text-black font-AnekBangla">{surahData?.fazilat}</Text>   
+                                            <Text className="text-sm text-black font-AnekBangla">{surahDetails?.fazilat}</Text>   
                                         </Text>
                                     </View>
                                     }
-                                    {surahData?.quote && 
+                                    {surahDetails?.quote && 
                                     <View className="mt-2">
                                         <Text> 
                                             <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text> 
-                                            <Text className="text-sm text-black font-AnekBangla">{surahData?.quote}</Text>   
+                                            <Text className="text-sm text-black font-AnekBangla">{surahDetails?.quote}</Text>   
                                         </Text>
                                     </View>
                                     }
@@ -99,10 +95,10 @@ const Surah = () => {
                                     <View className="mb-4">
                                         <View className="flex flex-row justify-between mb-4">
                                             <Text className="text-lg font-AnekBanglaSemiBold text-yellow-400 mb-2">
-                                                {surahData?.ayat[0]?.no}
+                                                {surahDetails?.ayat[0]?.no}
                                             </Text>
                                             <View className="flex flex-row justify-between gap-2">
-                                                <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahData?.no}/${surahData?.ayat[0]?.no}`)}}>
+                                                <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahDetails?.no}/${surahDetails?.ayat[0]?.no}`)}}>
                                                     <Text className="text-lg font-AnekBangla">🌐</Text>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity>
@@ -112,10 +108,10 @@ const Surah = () => {
                                         </View>
                                         <View className="border-b-2 border-yellow-400 pb-4">
                                             <Text className="text-2xl text-white mb-6 text-right">
-                                                {surahData?.ayat[0]?.ar}
+                                                {surahDetails?.ayat[0]?.ar}
                                             </Text>
                                             <Text className="text-sm text-white mb-2 font-AnekBangla">
-                                                {surahData?.ayat[0]?.bn}
+                                                {surahDetails?.ayat[0]?.bn}
                                             </Text>
                                         </View>
                                     </View>
@@ -123,7 +119,7 @@ const Surah = () => {
                                     <View className="text-center pt-2">
                                         <CustomButton
                                             title="সব আয়াত পড়ুন"
-                                            onPress={() => router.push(`/ayat/${surahData?.no}`)}
+                                            onPress={() => router.push(`/ayat/${surahDetails?.no}`)}
                                             className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                         />
                                     </View>

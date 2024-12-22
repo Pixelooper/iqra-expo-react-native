@@ -1,26 +1,24 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { Text, ActivityIndicator, ScrollView, ImageBackground, View, TouchableOpacity, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import bg from "@/assets/images/pattern.png";
-import { surah } from "@/types/type";
-import { useData } from "@/utils/DataContext";
-// import { surahList } from "@/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
+import { ayat } from "@/types/type";
+import { selectSurahById } from "@/utils/selectors";
 
 const Ayat = () => {
     const { id } = useLocalSearchParams();
-    const { data } = useData() as { data: surah[] };
-    const [surahData, setSurahData] = useState<surah | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
-
-    const filteredAyats = !data || !surahData ? [] : surahData.ayat.filter((ayat) =>
-        ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)
+    
+    const surahDetails = useSelector((state: RootState) =>
+        selectSurahById(Number(id))(state)
     );
 
-    useEffect(() => {
-        const surah = data.find((item: surah) => item.no == id);
-        setSurahData(surah || null);
-    }, [data, id]);
+    const filteredAyats = !surahDetails ? [] : surahDetails.ayat.filter((ayat: ayat) =>
+        ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)
+    );
 
     return (
         <SafeAreaView>
@@ -28,18 +26,18 @@ const Ayat = () => {
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
                     <View className="w-full px-2 mt-24 mb-20">
                         {
-                            !data || !surahData ? 
+                            !surahDetails ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
                             <View className="mb-6">
                                 <View>
                                     <Text className="text-center text-3xl text-green-950 mb-2">
-                                        سورة {surahData?.name_ar}
+                                        سورة {surahDetails?.name_ar}
                                     </Text>
                                     <Text className="text-center text-lg font-AnekBanglaMedium text-green-950 mb-1">
-                                        সূরা {surahData?.name_bn}
+                                        সূরা {surahDetails?.name_bn}
                                     </Text>
                                     <Text className="text-center text-sm text-gray-600">
-                                        আয়াত সংখ্যা {surahData?.totalAyat}
+                                        আয়াত সংখ্যা {surahDetails?.totalAyat}
                                     </Text>
                                 </View>
                                 <TextInput
@@ -60,7 +58,7 @@ const Ayat = () => {
                                         </Text>
                                     </View>
 
-                                    {filteredAyats.map((ayat, index) => (
+                                    {filteredAyats.map((ayat: ayat, index: number) => (
                                     <View key={index}>
                                         <View className="mb-4">
                                             <View className="flex flex-row justify-between mb-4">
@@ -68,7 +66,7 @@ const Ayat = () => {
                                                     {ayat?.no}
                                                 </Text>
                                                 <View className="flex flex-row justify-between gap-2">
-                                                    <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayat?.no}`)}} >
+                                                    <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahDetails?.no}/${ayat?.no}`)}} >
                                                         <Text className="text-lg font-AnekBangla">🌐</Text>
                                                     </TouchableOpacity>
                                                     <TouchableOpacity>

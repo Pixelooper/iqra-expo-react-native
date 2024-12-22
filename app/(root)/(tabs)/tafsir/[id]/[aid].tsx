@@ -1,25 +1,23 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { Text, ActivityIndicator, ScrollView, ImageBackground, View, TouchableOpacity } from "react-native";
+import { Text, ActivityIndicator, ScrollView, ImageBackground, View, TouchableOpacity, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
 import bg from "@/assets/images/pattern.png";
 import CustomButton from "@/components/CustomButton";
-import { ayat, surah } from "@/types/type";
-import { useData } from "@/utils/DataContext";
-// import { surahList } from "@/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
+import { selectAyatById, selectSurahById } from "@/utils/selectors";
+import { ayat } from "@/types/type";
 
 const Tafsir = () => {
     const { id, aid } = useLocalSearchParams();
-    const { data } = useData() as { data: surah[] };
-    const [surahData, setSurahData] = useState<surah | null>(null);
-    const [ayatData, setAyatData] = useState<ayat | null>(null);
 
-    useEffect(() => {
-        const surah = data.find((item: surah) => item.no == id);
-        const ayat = surah?.ayat.find((ayat: ayat) => ayat.no == aid);
-        setSurahData(surah || null);
-        setAyatData(ayat || null);
-    }, [data, id]);
+    const surahDetails = useSelector((state: RootState) =>
+        selectSurahById(Number(id))(state)
+    );
+
+    const ayatDetails = useSelector((state: RootState) =>
+        selectAyatById(Number(id), Number(aid))(state)
+    );
 
     return (
         <SafeAreaView>
@@ -27,15 +25,15 @@ const Tafsir = () => {
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
                     <View className="w-full px-2 mt-24 mb-20">
                         {
-                            !data || !surahData || !ayatData ? 
+                            !surahDetails || !ayatDetails ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
                             <View className="mb-6">
                                 <View>
                                     <Text className="text-center text-3xl text-green-950 mb-2">
-                                        سورة {surahData?.name_ar}
+                                        سورة {surahDetails?.name_ar}
                                     </Text>
                                     <Text className="text-center text-lg font-AnekBanglaMedium text-green-950 mb-1">
-                                        সূরা {surahData?.name_bn}
+                                        সূরা {surahDetails?.name_bn}
                                     </Text>
                                     <Text className="text-center text-sm text-gray-600">
                                         তাফসীর ইবনে কাসীর
@@ -54,7 +52,7 @@ const Tafsir = () => {
                                     <View className="mb-4">
                                         <View className="flex flex-row justify-between mb-4">
                                             <Text className="text-lg font-AnekBanglaSemiBold text-yellow-400 mb-2">
-                                                {ayatData?.no}
+                                                {ayatDetails?.no}
                                             </Text>
                                             <View className="flex flex-row justify-between gap-2">
                                                 <TouchableOpacity>
@@ -73,25 +71,27 @@ const Tafsir = () => {
                                         </View>
                                         <View className="border-b-2 border-yellow-400 pb-4">
                                             <Text className="text-2xl text-white mb-6 text-right">
-                                                {ayatData?.ar}
+                                                {ayatDetails?.ar}
                                             </Text>
                                             <Text className="text-sm text-white mb-2 font-AnekBangla">
-                                                {ayatData?.bn}
+                                                {ayatDetails?.bn}
                                             </Text>
                                             <Text className="mt-6"> 
                                                 <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">তাফসির: </Text> 
-                                                <Text className="text-sm text-white mb-2 font-AnekBangla">তাফসির:  {ayatData?.tafsir}</Text> 
+                                                {ayatDetails?.tafsir.map((ayat: ayat) => ( 
+                                                    <Text key={ayat._id} className="text-sm text-white mb-2 font-AnekBangla">তাফসির:  {ayat}</Text> 
+                                                ))}
                                             </Text>
                                         </View>
                                         <View className="flex flex-row justify-between mt-4">
                                             <CustomButton
                                                 title="পূর্ববর্তী"
-                                                onPress={() => {router.replace(`/tafsir/${surahData?.no}/${ayatData?.no - 1}`)}}
+                                                onPress={() => {router.replace(`/tafsir/${surahDetails?.no}/${ayatDetails?.no - 1}`)}}
                                                 className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                             />
                                             <CustomButton
                                                 title="পরবর্তী"
-                                                onPress={() => {router.replace(`/tafsir/${surahData?.no}/${ayatData?.no + 1}`)}}
+                                                onPress={() => {router.replace(`/tafsir/${surahDetails?.no}/${ayatDetails?.no + 1}`)}}
                                                 className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                             />
                                         </View>

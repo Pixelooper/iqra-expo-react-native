@@ -4,13 +4,12 @@ import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import bg from "@/assets/images/pattern.png";
 import { useState } from "react";
-import { useData } from "@/utils/DataContext";
-import { surah } from "@/types/type";
-// import { surahList } from "@/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
 
 const Search = () => {
     const [searchQuery, setSearchQuery] = useState("");
-    const { data } = useData() as { data: surah[] };
+    const { data } = useSelector((state: RootState) => state.surah);
 
     const filteredSurahs = data.filter((surah) =>
       surah.name_bn.includes(searchQuery) || surah.name_en.includes(searchQuery) || surah.name_ar.includes(searchQuery)
