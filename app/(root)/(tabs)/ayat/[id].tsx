@@ -68,7 +68,7 @@ const Ayat = () => {
                                                     {ayat?.no}
                                                 </Text>
                                                 <View className="flex flex-row justify-between gap-2">
-                                                    <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayat?.no}`)}} >
+                                                    <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahData?._id}/${ayat?._id}`)}} >
                                                         <Text className="text-lg font-AnekBangla">🌐</Text>
                                                     </TouchableOpacity>
                                                     <TouchableOpacity>

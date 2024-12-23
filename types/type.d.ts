@@ -6,7 +6,7 @@ declare interface ayat {
   no: number;
   bn: string;
   ar: string;
-  tafsir: string;
+  tafsir: string[];
 }
 
 declare interface surah {

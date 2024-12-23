@@ -6,20 +6,33 @@ import bg from "@/assets/images/pattern.png";
 import CustomButton from "@/components/CustomButton";
 import { ayat, surah } from "@/types/type";
 import { useData } from "@/utils/DataContext";
-// import { surahList } from "@/constants";
+import axios from "axios";
 
 const Tafsir = () => {
     const { id, aid } = useLocalSearchParams();
-    const { data } = useData() as { data: surah[] };
     const [surahData, setSurahData] = useState<surah | null>(null);
     const [ayatData, setAyatData] = useState<ayat | null>(null);
 
+    // useEffect(() => {
+    //     const surah = data.find((item: surah) => item.no == id);
+    //     const ayat = surah?.ayat.find((ayat: ayat) => ayat.no == aid);
+    //     setSurahData(surah || null);
+    //     setAyatData(ayat || null);
+    // }, [data, id]);
+
     useEffect(() => {
-        const surah = data.find((item: surah) => item.no == id);
-        const ayat = surah?.ayat.find((ayat: ayat) => ayat.no == aid);
-        setSurahData(surah || null);
-        setAyatData(ayat || null);
-    }, [data, id]);
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/tafsir/${id}/${aid}`);
+                setSurahData(response.data.data);
+                setAyatData(response.data.data.ayat[0])
+            } catch (error) {
+                console.error("Error fetching data", error);
+            }
+        };
+
+        fetchData();
+    }, [id, aid]);
 
     return (
         <SafeAreaView>
@@ -27,7 +40,7 @@ const Tafsir = () => {
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
                     <View className="w-full px-2 mt-24 mb-20">
                         {
-                            !data || !surahData || !ayatData ? 
+                            !surahData ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
                             <View className="mb-6">
                                 <View>
@@ -58,16 +71,10 @@ const Tafsir = () => {
                                             </Text>
                                             <View className="flex flex-row justify-between gap-2">
                                                 <TouchableOpacity>
-                                                    <Text className="text-lg font-AnekBangla">🌐</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity>
                                                     <Text className="text-lg font-AnekBangla">🔖</Text>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity>
                                                     <Text className="text-lg font-AnekBangla">⚙️</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity>
-                                                    <Text className="text-lg font-AnekBangla">🔽</Text>
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -80,7 +87,9 @@ const Tafsir = () => {
                                             </Text>
                                             <Text className="mt-6"> 
                                                 <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">তাফসির: </Text> 
-                                                <Text className="text-sm text-white mb-2 font-AnekBangla">তাফসির:  {ayatData?.tafsir}</Text> 
+                                                {ayatData?.tafsir.map((item: string, index: number) => (
+                                                    <Text key={index} className="text-sm text-white mb-2 font-AnekBangla">তাফসির:  {item}</Text> 
+                                                ))}
                                             </Text>
                                         </View>
                                         <View className="flex flex-row justify-between mt-4">
