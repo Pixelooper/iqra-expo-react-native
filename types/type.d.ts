@@ -4,8 +4,9 @@ import { TextInputProps, TouchableOpacityProps } from "react-native";
 declare interface ayat {
   _id: number;
   no: number;
-  bn: string;
+  para: number;
   ar: string;
+  bn: string;
   tafsir: string[];
 }
 

@@ -7,19 +7,20 @@ import Featured from "@/components/Featured";
 import Blogs from "@/components/Blogs";
 import Settings from "@/components/Settings";
 import Mood from "@/components/Mood";
-import { useData } from "@/utils/DataContext";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
 
 const Home = () => {
-    const { data } = useData();
+    const { data } = useSelector((state: RootState) => state.home);
 
     return (
         <SafeAreaView>
             <ScrollView>
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-start bg-light-olive">
-                    <RandomAyat/>
+                    <RandomAyat random={data.random}/>
                     <Settings/>
-                    <LastRead data={data}/>
-                    <Featured data={data}/>
+                    <LastRead featured={data.featured}/>
+                    <Featured featured={data.featured}/>
                     <Blogs/>
                     <Mood/>
                 </ImageBackground>

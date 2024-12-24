@@ -1,22 +1,30 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { Text, ActivityIndicator, ScrollView, ImageBackground, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
 import bg from "@/assets/images/pattern.png";
 import CustomButton from "@/components/CustomButton";
-import { useData } from "@/utils/DataContext";
-import { surah } from "@/types/type";
-// import { surahList } from "@/constants";
+import { useEffect, useState } from "react";
+import { ayat, surah } from "@/types/type";
+import axios from "axios";
 
 const Surah = () => {
-    const { data } = useData() as { data: surah[] };
     const { id } = useLocalSearchParams();
     const [surahData, setSurahData] = useState<surah | null>(null);
+    const [ayatData, setAyatData] = useState<ayat | null>(null);
 
     useEffect(() => {
-        const surah = data.find((item: surah) => item.no == id);
-        setSurahData(surah || null);
-    }, [data, id]);
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surah/${id}`);
+                setSurahData(response.data.data);
+                setAyatData(response.data.data.ayat[0])
+            } catch (error) {
+                console.error("Error fetching data", error);
+            }
+        };
+
+        fetchData();
+    }, [id]);
 
     return (
         <SafeAreaView>
@@ -24,7 +32,7 @@ const Surah = () => {
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
                     <View className="w-full px-2 mt-24 mb-20">
                         {
-                            !data || !surahData ? 
+                            !surahData ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
                             <View className="mb-6">
                                 <View>
@@ -99,10 +107,10 @@ const Surah = () => {
                                     <View className="mb-4">
                                         <View className="flex flex-row justify-between mb-4">
                                             <Text className="text-lg font-AnekBanglaSemiBold text-yellow-400 mb-2">
-                                                {surahData?.ayat[0]?.no}
+                                                {ayatData?.no}
                                             </Text>
                                             <View className="flex flex-row justify-between gap-2">
-                                                <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahData?.no}/${surahData?.ayat[0]?.no}`)}}>
+                                                <TouchableOpacity onPress={() => {router.push(`/tafsir/${surahData?._id}/${ayatData?._id}`)}}>
                                                     <Text className="text-lg font-AnekBangla">🌐</Text>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity>
@@ -112,10 +120,10 @@ const Surah = () => {
                                         </View>
                                         <View className="border-b-2 border-yellow-400 pb-4">
                                             <Text className="text-2xl text-white mb-6 text-right">
-                                                {surahData?.ayat[0]?.ar}
+                                                {ayatData?.ar}
                                             </Text>
                                             <Text className="text-sm text-white mb-2 font-AnekBangla">
-                                                {surahData?.ayat[0]?.bn}
+                                                {ayatData?.bn}
                                             </Text>
                                         </View>
                                     </View>
@@ -123,7 +131,7 @@ const Surah = () => {
                                     <View className="text-center pt-2">
                                         <CustomButton
                                             title="সব আয়াত পড়ুন"
-                                            onPress={() => router.push(`/ayat/${surahData?.no}`)}
+                                            onPress={() => router.push(`/ayat/${surahData?._id}`)}
                                             className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                         />
                                     </View>

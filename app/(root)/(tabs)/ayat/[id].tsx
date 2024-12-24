@@ -3,24 +3,30 @@ import { Text, ActivityIndicator, ScrollView, ImageBackground, View, TouchableOp
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
 import bg from "@/assets/images/pattern.png";
-import { surah } from "@/types/type";
-import { useData } from "@/utils/DataContext";
-// import { surahList } from "@/constants";
+import { ayat, surah } from "@/types/type";
+import axios from "axios";
 
 const Ayat = () => {
     const { id } = useLocalSearchParams();
-    const { data } = useData() as { data: surah[] };
     const [surahData, setSurahData] = useState<surah | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
-    const filteredAyats = !data || !surahData ? [] : surahData.ayat.filter((ayat) =>
+    const filteredAyats = !surahData ? [] : surahData.ayat.filter((ayat: ayat) =>
         ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)
     );
 
     useEffect(() => {
-        const surah = data.find((item: surah) => item.no == id);
-        setSurahData(surah || null);
-    }, [data, id]);
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/ayat/${id}`);
+                setSurahData(response.data.data);
+            } catch (error) {
+                console.error("Error fetching data", error);
+            }
+        };
+
+        fetchData();
+    }, [id]);
 
     return (
         <SafeAreaView>
@@ -28,7 +34,7 @@ const Ayat = () => {
                 <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
                     <View className="w-full px-2 mt-24 mb-20">
                         {
-                            !data || !surahData ? 
+                            !surahData ? 
                             <ActivityIndicator size="large" color="#00ff00"/> :
                             <View className="mb-6">
                                 <View>
@@ -60,7 +66,7 @@ const Ayat = () => {
                                         </Text>
                                     </View>
 
-                                    {filteredAyats.map((ayat, index) => (
+                                    {filteredAyats.map((ayat: ayat, index: number) => (
                                     <View key={index}>
                                         <View className="mb-4">
                                             <View className="flex flex-row justify-between mb-4">

@@ -1,24 +1,16 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { Text, ActivityIndicator, ScrollView, ImageBackground, View, TouchableOpacity } from "react-native";
+import { Text, ActivityIndicator, ScrollView, ImageBackground, View, TouchableOpacity, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
 import bg from "@/assets/images/pattern.png";
 import CustomButton from "@/components/CustomButton";
 import { ayat, surah } from "@/types/type";
-import { useData } from "@/utils/DataContext";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Tafsir = () => {
     const { id, aid } = useLocalSearchParams();
     const [surahData, setSurahData] = useState<surah | null>(null);
     const [ayatData, setAyatData] = useState<ayat | null>(null);
-
-    // useEffect(() => {
-    //     const surah = data.find((item: surah) => item.no == id);
-    //     const ayat = surah?.ayat.find((ayat: ayat) => ayat.no == aid);
-    //     setSurahData(surah || null);
-    //     setAyatData(ayat || null);
-    // }, [data, id]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -95,12 +87,12 @@ const Tafsir = () => {
                                         <View className="flex flex-row justify-between mt-4">
                                             <CustomButton
                                                 title="পূর্ববর্তী"
-                                                onPress={() => {router.replace(`/tafsir/${surahData?.no}/${ayatData?.no - 1}`)}}
+                                                onPress={() => {router.push(`/tafsir/${surahData?._id}/${ayatData?._id}`)}}
                                                 className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                             />
                                             <CustomButton
                                                 title="পরবর্তী"
-                                                onPress={() => {router.replace(`/tafsir/${surahData?.no}/${ayatData?.no + 1}`)}}
+                                                onPress={() => {router.push(`/tafsir/${surahData?._id}/${ayatData?._id}`)}}
                                                 className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
                                             />
                                         </View>

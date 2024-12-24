@@ -1,9 +1,11 @@
-import { DataProvider } from '@/utils/DataContext';
+// import { DataProvider } from '@/utils/DataContext';
+import { store } from '@/utils/store/store';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { Provider } from 'react-redux';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,13 +30,15 @@ export default function RootLayout() {
   }
 
   return (
-    <DataProvider>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(public)" options={{ headerShown: false }} />
-        <Stack.Screen name="(root)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </DataProvider>
+    <Provider store={store}>
+      {/* <DataProvider> */}
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(public)" options={{ headerShown: false }} />
+          <Stack.Screen name="(root)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      {/* </DataProvider> */}
+    </Provider>
   );
 }
