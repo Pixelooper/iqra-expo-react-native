@@ -11,29 +11,41 @@ const Surah = () => {
     const { id } = useLocalSearchParams();
     const [surahData, setSurahData] = useState<surah | null>(null);
     const [ayatData, setAyatData] = useState<ayat | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true); 
             try {
                 const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surah/${id}`);
                 setSurahData(response.data.data);
                 setAyatData(response.data.data.ayat[0])
             } catch (error) {
                 console.error("Error fetching data", error);
+            } finally {
+                setLoading(false); 
             }
         };
 
         fetchData();
+
+        // Optional: Cleanup to reset state when component unmounts
+        return () => {
+            setSurahData(null);
+            setAyatData(null);
+        };
     }, [id]);
 
     return (
         <SafeAreaView>
             <ScrollView>
-                <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
+                {/* <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive"> */}
                     <View className="w-full px-2 mt-24 mb-20">
                         {
-                            !surahData ? 
-                            <ActivityIndicator size="large" color="#00ff00"/> :
+                            loading ? 
+                            <View className="min-h-screen d-flex justify-center">
+                                <ActivityIndicator size="large" color="#00ff00"/>
+                            </View>  :
                             <View className="mb-6">
                                 <View>
                                     <Text className="text-center text-3xl text-green-950 mb-2">
@@ -139,7 +151,7 @@ const Surah = () => {
                             </View>
                         }
                     </View>
-                </ImageBackground>
+                {/* </ImageBackground> */}
             </ScrollView>
         </SafeAreaView>
     );

@@ -4,8 +4,11 @@ import { Text, View, TouchableOpacity } from "react-native";
 const Mood = () => {
   return (
     <View className="w-full px-4 pb-8">
-        <Text className="text-lg font-AnekBanglaSemiBold text-gray-700 mt-5 mb-4">
+        <Text className="text-lg font-AnekBanglaSemiBold text-gray-700 mt-8">
             Moods
+        </Text>
+        <Text className="text-sm font-AnekBangla text-gray-700 mb-2">
+            আপনার মেজাজের উপর ভিত্তি করে পড়ুন
         </Text>
         <View
             className="flex flex-row flex-wrap justify-between items-center mb-16"

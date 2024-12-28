@@ -18,8 +18,8 @@ const Splash = () => {
     }, [dispatch])
 
     return (
-        <SafeAreaView>
-            <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
+        <SafeAreaView className="min-h-screen flex justify-center bg-light-olive">
+            {/* <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive"> */}
                 <View className="flex h-4/6 items-center justify-between p-5">
                     <Image
                         source={logo}
@@ -44,7 +44,7 @@ const Splash = () => {
                         </View>
                     }
                 </View>
-            </ImageBackground>
+            {/* </ImageBackground> */}
         </SafeAreaView>
     );
 };

@@ -10,6 +10,7 @@ const Ayat = () => {
     const { id } = useLocalSearchParams();
     const [surahData, setSurahData] = useState<surah | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const filteredAyats = !surahData ? [] : surahData.ayat.filter((ayat: ayat) =>
         ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)
@@ -17,25 +18,35 @@ const Ayat = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true); 
             try {
                 const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/ayat/${id}`);
                 setSurahData(response.data.data);
             } catch (error) {
                 console.error("Error fetching data", error);
+            } finally {
+                setLoading(false); 
             }
         };
 
         fetchData();
+
+        // Optional: Cleanup to reset state when component unmounts
+        return () => {
+            setSurahData(null);
+        };
     }, [id]);
 
     return (
         <SafeAreaView>
-            <ScrollView>
-                <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
+            <View>
+                {/* <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive"> */}
                     <View className="w-full px-2 mt-24 mb-20">
                         {
-                            !surahData ? 
-                            <ActivityIndicator size="large" color="#00ff00"/> :
+                            loading ? 
+                            <View className="min-h-screen d-flex justify-center">
+                                <ActivityIndicator size="large" color="#00ff00"/>
+                            </View>  :
                             <View className="mb-6">
                                 <View>
                                     <Text className="text-center text-3xl text-green-950 mb-2">
@@ -56,7 +67,7 @@ const Ayat = () => {
                                     className="w-full px-4 py-2 border rounded-md text-gray-700 my-4 bg-white"
                                 />
 
-                                <View className="mt-2 px-4 pt-6 text-white bg-pattern-aotd bg-dark-green rounded-3xl">
+                                <ScrollView className="mt-2 px-4 pt-6 text-white bg-pattern-aotd bg-dark-green rounded-3xl">
                                     <View className="text-center mb-8">
                                         <Text className="text-2xl font-AnekBanglaSemiBold text-yellow-400 mb-4 text-center">
                                             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
@@ -99,12 +110,12 @@ const Ayat = () => {
                                         </View>
                                     </View>
                                     ))}
-                                </View>
+                                </ScrollView>
                             </View>
                         }
                     </View>
-                </ImageBackground>
-            </ScrollView>
+                {/* </ImageBackground> */}
+            </View>
         </SafeAreaView>
     );
 };

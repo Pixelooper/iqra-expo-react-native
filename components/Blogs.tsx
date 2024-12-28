@@ -6,8 +6,11 @@ import CustomButton from "./CustomButton";
 const Blogs = () => {
   return (
     <View className="w-full px-4">
-        <Text className="text-lg font-AnekBanglaSemiBold text-gray-700 mt-5 mb-4">
+        <Text className="text-lg font-AnekBanglaSemiBold text-gray-700 mt-8">
             Blogs
+        </Text>
+        <Text className="text-sm font-AnekBangla text-gray-700 mb-2">
+            আপনি এখানে তথ্যপূর্ণ ব্লগ পেতে পারেন
         </Text>
         {blogs.map((blog) => (
             <TouchableOpacity 

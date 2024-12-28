@@ -10,6 +10,7 @@ import axios from "axios";
 const Search = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [surahData, setSurahData] = useState<surah[] | null>(null);
+    const [loading, setLoading] = useState(true);
 
     const filteredSurahs = !surahData ? [] : surahData.filter((surah: surah) =>
       surah.name_bn.includes(searchQuery) || surah.name_en.includes(searchQuery) || surah.name_en.toUpperCase().includes(searchQuery) || surah.name_en.toLowerCase().includes(searchQuery) || surah.name_ar.includes(searchQuery)
@@ -17,24 +18,34 @@ const Search = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true); 
             try {
                 const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surahs`);
                 setSurahData(response.data.data);
             } catch (error) {
                 console.error("Error fetching data", error);
+            } finally {
+                setLoading(false); 
             }
         };
 
         fetchData();
+
+        // Optional: Cleanup to reset state when component unmounts
+        return () => {
+            setSurahData(null);
+        };
     }, []);
     
     return (
         <SafeAreaView>
             <ScrollView>
-                <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive">
+                {/* <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive"> */}
                     {
-                        !surahData ? 
-                        <ActivityIndicator size="large" color="#00ff00"/> :
+                        loading ? 
+                        <View className="min-h-screen d-flex justify-center">
+                            <ActivityIndicator size="large" color="#00ff00"/>
+                        </View>  :
                         <View className="w-full px-2">
                             <Text className="text-center text-xl font-AnekBanglaSemiBold mt-24">সূরা তালিকা</Text>
                             <TextInput
@@ -77,7 +88,7 @@ const Search = () => {
                             ))}
                         </View>
                     }
-                </ImageBackground>
+                {/* </ImageBackground> */}
             </ScrollView>
         </SafeAreaView>
     );
