@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 const Settings = () => {
   return (
-    <View className="w-full px-4">
+    <View className="w-full px-4 mt-4">
         <View
             className="flex flex-row flex-wrap mt-4  justify-between items-center"
         >

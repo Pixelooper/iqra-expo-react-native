@@ -16,9 +16,10 @@ import target from "@/assets/icons/target.png";
 import to from "@/assets/icons/to.png";
 import read from "@/assets/icons/read-icon.png";
 
-import logo from "@/assets/images/icon.png";
 import avatar from "@/assets/images/avatar.png";
 import ham from "@/assets/images/ham.png";
+
+import logo from "@/assets/images/icon.png";
 import check from "@/assets/images/check.png";
 import getStarted from "@/assets/images/get-started.png";
 import message from "@/assets/images/message.png";
@@ -45,13 +46,13 @@ export const icons = {
     star,
     target,
     to,
-    read
+    read,
+    avatar,
+    ham,
 };
 
 export const images = {
   logo,
-  avatar,
-  ham,
   onboarding1,
   onboarding2,
   onboarding3,

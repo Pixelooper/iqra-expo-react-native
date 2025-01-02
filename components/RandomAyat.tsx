@@ -1,6 +1,6 @@
 import { ayat } from "@/types/type";
 import { router } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 
 type RandomProps = {
     random: ayat & {
@@ -9,10 +9,16 @@ type RandomProps = {
     };
 };
 
+const paddingTop = Platform.select({
+    ios: 'pt-16',
+    android: 'pt-24',
+    default: 'pt-24',
+});
+
 
 const RandomAyat: React.FC<RandomProps> = ({ random }) => {
     return (
-        <View className="bg-dark-green rounded-b-3xl p-6 text-white pt-32">
+        <View className={`bg-dark-green rounded-b-3xl p-6 text-white ${paddingTop}`}>
             <Text className="text-2xl font-AnekBanglaSemiBold mb-8 text-right text-white">{random.ar}</Text>
             <Text className="text-md font-AnekBanglaSemiBold mb-1 text-left text-white">{random.bn}</Text>
             <View className="flex flex-row justify-between">

@@ -37,10 +37,10 @@ const Surah = () => {
     }, [id]);
 
     return (
-        <SafeAreaView>
+        <SafeAreaView className="bg-light-olive">
             <ScrollView>
                 {/* <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive"> */}
-                    <View className="w-full px-2 mt-24 mb-20">
+                    <View className="w-full px-2 mt-8 mb-20">
                         {
                             loading ? 
                             <View className="min-h-screen d-flex justify-center">

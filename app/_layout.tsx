@@ -1,4 +1,3 @@
-// import { DataProvider } from '@/utils/DataContext';
 import { store } from '@/utils/store/store';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -31,14 +30,12 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      {/* <DataProvider> */}
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(public)" options={{ headerShown: false }} />
           <Stack.Screen name="(root)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
-      {/* </DataProvider> */}
     </Provider>
   );
 }

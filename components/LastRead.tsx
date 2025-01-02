@@ -23,7 +23,6 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
   };
 
   return (
-    <GestureHandlerRootView>
       <View className="w-full px-4">
         <Text className="text-lg font-AnekBanglaSemiBold text-gray-700 mt-8">
           Last Read
@@ -73,14 +72,13 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
           {featured.slice(0, 5).map((_, index) => (
             <View
               key={index}
-              className={`w-2 h-2 mx-1 mt-4 rounded-full ${
-                index === activeIndex ? "bg-dark-green" : "bg-yellow-400"
+              className={`h-2 mx-1 mt-4 rounded-full ${
+                index === activeIndex ? "bg-dark-green w-7" : "bg-yellow-400 w-2"
               }`}
             />
           ))}
         </View>
       </View>
-    </GestureHandlerRootView>
   );
 };
 

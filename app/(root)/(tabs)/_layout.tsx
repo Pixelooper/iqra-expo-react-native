@@ -80,6 +80,17 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon source={icons.avatar} focused={focused} />
+          ),
+        }}
+      /> 
+
+      <Tabs.Screen
         name="ayat/[id]"
         options={{
           title: "Ayat",
@@ -88,7 +99,8 @@ export default function Layout() {
             <ReadIcon source={icons.read} focused={focused} />
           ),
         }}
-      />
+      /> 
+      
       <Tabs.Screen
         name="search"
         options={{
@@ -99,6 +111,16 @@ export default function Layout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon source={icons.ham} focused={focused} />
+          ),
+        }}
+      /> 
       <Tabs.Screen
         name="surah/[id]"
         options={{
