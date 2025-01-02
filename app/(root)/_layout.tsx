@@ -83,7 +83,7 @@ const Layout = () => {
         paddingTop: insets.top,
         paddingBottom: Platform.OS === 'ios' ? 10 : insets.bottom,
       }}
-      className="bg-light-olive"
+      // className="bg-light-olive"
     >
       <PathHeader />
       <View style={{ flex: 1 }}>
