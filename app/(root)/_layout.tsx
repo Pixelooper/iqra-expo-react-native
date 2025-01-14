@@ -1,7 +1,9 @@
 import { router, Stack, useRouter, useSegments } from "expo-router";
 import { View, Image, TouchableOpacity, Text, Platform } from "react-native";
 import { images, icons } from "@/constants";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import shape from "../../assets/shapes/shape-8.png";
+import { useEffect } from "react";
 
 const GlobalHeader = () => {
   const insets = useSafeAreaInsets();
@@ -9,11 +11,10 @@ const GlobalHeader = () => {
   return (
     <View
       style={{
-        // height: Platform.OS === 'ios' ? 100 : insets.top,
         paddingHorizontal: 16,
         paddingTop: Platform.OS === 'ios' ? 54 : insets.top,
       }}
-      className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between bg-dark-green"
+      className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between"
     >
       <TouchableOpacity onPress={() => router.push('/home')}>
         <Image source={images.logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
@@ -32,14 +33,15 @@ const PathHeader = () => {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const segments = useSegments();
+  // console.log('Segments:', segments)
 
   const currentPage = segments[2] || "home";
   const isHome = currentPage === "home";
 
   const getTextClass = (page: string) => {
     return currentPage === page
-      ? "text-lg font-AneekBanglabold text-black"
-      : "text-xs font-AneekBangla text-gray-500";
+      ? "text-lg font-AneekBanglabold text-dark-green"
+      : "text-xs font-AneekBangla text-[#B6B6B6]";
   };
 
   return isHome ? (
@@ -47,26 +49,29 @@ const PathHeader = () => {
   ) : (
     <View 
       style={{
-        // height: Platform.OS === 'ios' ? 100 : insets.top,
+        backgroundColor: '#FFFFFF',
         paddingHorizontal: 16,
         paddingTop: Platform.OS === 'ios' ? 54 : insets.top,
       }}
       className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between py-2 pl-4">
       <TouchableOpacity
-        className="mr-2 justify-center items-center bg-gray-300 rounded-full w-8 h-8"
         onPress={() => router.back()}
       >
-        <Text className="text-gray-600 text-lg font-bold">←</Text>
+        <Image
+          source={shape}
+          className="w-[32px] h-[32px]"
+          resizeMode="contain"
+        />
       </TouchableOpacity>
       <View className="flex-row items-center">
         <View className="mr-4">
-          <Text className={getTextClass("surah")}>SURAH</Text>
+          <Text className={getTextClass("surah")}>সূরা</Text>
         </View>
         <View className="mr-4">
-          <Text className={getTextClass("ayat")}>AYAT</Text>
+          <Text className={getTextClass("ayat")}>আয়াত</Text>
         </View>
         <View className="mr-4">
-          <Text className={getTextClass("tafsir")}>TAFSIR</Text>
+          <Text className={getTextClass("tafsir")}>তাফসীর</Text>
         </View>
       </View>
     </View>
@@ -83,7 +88,6 @@ const Layout = () => {
         paddingTop: insets.top,
         paddingBottom: Platform.OS === 'ios' ? 10 : insets.bottom,
       }}
-      // className="bg-light-olive"
     >
       <PathHeader />
       <View style={{ flex: 1 }}>

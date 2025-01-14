@@ -3,7 +3,7 @@ import arrowUp from "@/assets/icons/arrow-up.png";
 import backArrow from "@/assets/icons/back-arrow.png";
 import checkmark from "@/assets/icons/check.png";
 import close from "@/assets/icons/close.png";
-import home from "@/assets/icons/home.png";
+// import home from "@/assets/icons/home.png";
 import list from "@/assets/icons/list.png";
 import out from "@/assets/icons/out.png";
 import person from "@/assets/icons/person.png";
@@ -15,19 +15,15 @@ import star from "@/assets/icons/star.png";
 import target from "@/assets/icons/target.png";
 import to from "@/assets/icons/to.png";
 import read from "@/assets/icons/read-icon.png";
+import keepread from "@/assets/icons/continue.png";
+import home from "@/assets/icons/homenav.png";
 
 import avatar from "@/assets/images/avatar.png";
 import ham from "@/assets/images/ham.png";
 
 import logo from "@/assets/images/icon.png";
 import check from "@/assets/images/check.png";
-import getStarted from "@/assets/images/get-started.png";
-import message from "@/assets/images/message.png";
 import noResult from "@/assets/images/no-result.png";
-import onboarding1 from "@/assets/images/onboarding1.png";
-import onboarding2 from "@/assets/images/onboarding2.png";
-import onboarding3 from "@/assets/images/onboarding3.png";
-import signUpCar from "@/assets/images/signup-car.png";
 
 export const icons = {
     arrowDown,
@@ -47,45 +43,16 @@ export const icons = {
     target,
     to,
     read,
+    keepread,
     avatar,
     ham,
 };
 
 export const images = {
   logo,
-  onboarding1,
-  onboarding2,
-  onboarding3,
-  getStarted,
-  signUpCar,
   check,
   noResult,
-  message,
 };
-
-export const onboarding = [
-  {
-    id: 1,
-    title: "The perfect ride is just a tap away!",
-    description:
-      "Your journey begins with Ryde. Find your ideal ride effortlessly.",
-    image: images.onboarding1,
-  },
-  {
-    id: 2,
-    title: "Best car in your hands with Ryde",
-    description:
-      "Discover the convenience of finding your perfect ride with Ryde",
-    image: images.onboarding2,
-  },
-  {
-    id: 3,
-    title: "Your ride, your way. Let's go!",
-    description:
-      "Enter your destination, sit back, and let us take care of the rest.",
-    image: images.onboarding3,
-  },
-];
 
 export const surahList = [
   {
@@ -194,17 +161,17 @@ export const blogs = [
   {
     _id: 1,
     title: "জান্নাতী দল কোনটি?",
-    desc: "",
+    desc: "পবিত্র কুরআনের পাশাপাশি হাদিসের দিকে দৃষ্টিপাত করলে পাই যে রাসুলুল্লাহ (সঃ) বলেছেনঃ নিশ্চয়ই বনি ইসরাইলরা ৭২ দলে...",
   },
   {
     _id: 2,
     title: "কিয়ামত কি খুব কাছে?",
-    desc: "",
+    desc: "কিয়ামত কবে সংগঠিত হবে এ ব্যপারে আল্লাহ ছাড়া আর কেউ জানেন না। এমনকি নবী-রাসূল কিংবা ফেরেশতাগণও জানেন না...",
   },
   {
     _id: 3,
     title: "ইসলামের মূল ভিত্তি কী?",
-    desc: "",
+    desc: "ইসলামে আরবি ভাষার একচ্ছত্র প্রাধান্য দেখা যায়। ইসলাম একটি আরবি শব্দ। এটি এসেছে আরেক আরবি শব্দ 'সালাম' থেকে।...",
   }
 ];
 
@@ -260,5 +227,4 @@ export const moods = [
 ];
 
 export const data = {
-  onboarding,
 };

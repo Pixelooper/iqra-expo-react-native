@@ -1,8 +1,10 @@
-import { Text, View, TouchableOpacity, FlatList } from "react-native";
+import { Text, View, TouchableOpacity, FlatList, ImageBackground } from "react-native";
 import { useRef, useState } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { router } from "expo-router";
 import { surah } from "@/types/type";
+import shape from "../assets/shapes/shape-5.png";
+import Title from "./Title";
+import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 
 type FeaturedProps = {
   featured: surah[];
@@ -20,41 +22,33 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
   };
 
   return (
-      <View className="w-full px-4">
-        <Text className="text-lg font-AnekBanglaSemiBold text-gray-700 mt-8">
-          Featured
-        </Text>
-        <Text className="text-sm font-AnekBangla text-gray-700 mb-2">
-          আপনি আমাদের পরামর্শে সূরা পড়তে পারেন
-        </Text>
+      <View className="w-full px-4 bg-white">
+        <Title title="Featured" subtitle="আপনি আমাদের পরামর্শে সূরা পড়তে পারেন" btnText="সব দেখুন"/>
         <FlatList 
           ref={flatListRef}
           data={featured}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           onScroll={handleScroll}
+          className="pt-4"
           renderItem={({item, index}) => (
             <TouchableOpacity 
-                key={item._id} onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
-                className="w-[260px] mr-3 bg-dark-green rounded-lg p-4 flex flex-col justify-center"
-                style={{
-                    shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 4 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 8,
-                    elevation: 3,
-                }}
+                key={index} onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
             >
-                <Text className="text-base text-white font-AnekBanglaBold mb-16 text-center">
-                  সূরা {item.name_bn}
+              <View className="mr-3 rounded-lg p-3 border border-gray-white bg-white">
+                <ImageBackground source={shape} className="w-[150px] h-[150px] flex justify-center items-center">
+                  <Text className="text-lg text-gray-black font-AnekBanglaBold mb-24 text-center">
+                    সূরা {item.name_bn}
+                  </Text>
+                </ImageBackground>
+                <Text className="text-xs text-dark-green text-center font-AnekBanglaMedium mt-5">
+                    সূরা নং {convertToBengaliDigits(item.no)} | আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
                 </Text>
-                <Text className="text-sm text-gray-300 text-center">
-                    সূরা নং {item.no} | আয়াত সংখ্যা {item.totalAyat}
-                </Text>
+              </View>
             </TouchableOpacity>
           )}
         />
-        <View className="flex-row justify-center">
+        <View className="flex-row justify-center mb-4">
           {featured.slice(0, 5).map((_, index) => (
             <View
               key={index}

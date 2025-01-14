@@ -5,18 +5,9 @@ import { Text } from "react-native";
 const TafsirTexts = React.memo(({ tafsir }: { tafsir: string[] }) => {
     const renderItem=useCallback(({item}: { item: string })=>{
       return(
-        <Text className="text-sm text-white mb-2 font-AnekBangla">{item}</Text>
+        <Text className="text-sm text-black mb-2 font-AnekBangla">{item}</Text>
       )
     },[])
-
-    // const splitText = (text: string, chunkSize: number) => {
-    //     const words = text.split(' ');
-    //     const chunks = [];
-    //     for (let i = 0; i < words.length; i += chunkSize) {
-    //         chunks.push(words.slice(i, i + chunkSize).join(' '));
-    //     }
-    //     return chunks;
-    // };
 
     const splitTextByBangla = (text: string, wordLimit: number) => {
         const sentences = text.split('।'); // Split by Bangla punctuation

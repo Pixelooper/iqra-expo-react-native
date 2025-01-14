@@ -1,17 +1,23 @@
-import { ActivityIndicator, ImageBackground, ScrollView, Text, TextInput, View } from "react-native"
+import { ActivityIndicator, Animated, Image, Platform, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
-import bg from "@/assets/images/pattern.png";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { surah } from "@/types/type";
 import axios from "axios";
-import { FlashList } from "@shopify/flash-list";
+import shape from "../../../assets/shapes/shape-4.png";
+import Title from "@/components/Title";
+import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
+
+const SPACING = 20;
+const AVATAR_SIZE = 100;
+const ITEM_SIZE = AVATAR_SIZE + SPACING * 2;
+const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
 const Search = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [surahData, setSurahData] = useState<surah[] | null>(null);
     const [loading, setLoading] = useState(true);
+    const scrollY = useRef(new Animated.Value(0)).current;
 
     const filteredSurahs = !surahData ? [] : surahData.filter((surah: surah) =>
       surah.name_bn.includes(searchQuery) || surah.name_en.includes(searchQuery) || surah.name_en.toUpperCase().includes(searchQuery) || surah.name_en.toLowerCase().includes(searchQuery) || surah.name_ar.includes(searchQuery)
@@ -37,68 +43,153 @@ const Search = () => {
             setSurahData(null);
         };
     }, []);
+
+    const translateY = useRef(new Animated.Value(0)).current;
+    const containerHeight = useRef(new Animated.Value(60)).current; // Adjust the default height as needed
+  
+    const handleFocus = () => {
+      Animated.parallel([
+        Animated.timing(translateY, {
+          toValue: -100, // Move the title up
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(containerHeight, {
+          toValue: 0, // Collapse the container height
+          duration: 300,
+          useNativeDriver: false, // Height cannot use native driver
+        }),
+      ]).start();
+    };
+  
+    const handleBlur = () => {
+      Animated.parallel([
+        Animated.timing(translateY, {
+          toValue: 0, // Reset the title position
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(containerHeight, {
+          toValue: 60, // Reset the container height
+          duration: 300,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    };
     
     return (
-        <SafeAreaView className="bg-light-olive">
-                {/* <ImageBackground source={bg} resizeMode="repeat" className="min-h-screen flex justify-center bg-light-olive"> */}
-                    {
-                        loading ? 
-                        <View className="min-h-screen d-flex justify-center">
-                            <ActivityIndicator size="large" color="#00ff00"/>
-                        </View>  :
-                        <View className="w-full px-2 min-h-screen">
-                            <Text className="text-center text-xl font-AnekBanglaSemiBold mt-24">সূরা তালিকা</Text>
-                            <TextInput
-                                placeholder="এখানে লিখুন"
-                                placeholderTextColor="#7B7B8B"
-                                value={searchQuery}
-                                onChangeText={(text) => setSearchQuery(text)}
-                                className="w-full px-4 py-2 border rounded-md text-gray-700 my-4 bg-white"
-                            />
-                            
-                            <FlashList
-                                estimatedItemSize={114}
-                                data={filteredSurahs}
-                                contentContainerStyle={{paddingBottom:80}}
-                                renderItem={({ item }) => {
-                                    const surah = item;
-                                    return (
-                                        <View
-                                            key={surah._id}
-                                            className="w-full bg-dark-green rounded-lg p-4 flex flex-col justify-between mb-4"
-                                            style={{
-                                                shadowColor: "#000",
-                                                shadowOffset: { width: 0, height: 4 },
-                                                shadowOpacity: 0.1,
-                                                shadowRadius: 8,
-                                                elevation: 3,
-                                            }}
-                                        >
-                                            <Text className="text-base text-white font-AnekBanglaBold mb-1">
-                                                {surah.name_bn}
-                                            </Text>
-                                            <Text className="text-sm text-gray-300 mb-4">
-                                                আয়াত সংখ্যা {surah.totalAyat}
-                                            </Text>
-                                            <View className="flex flex-row items-center justify-between">
-                                                <CustomButton
-                                                title="এখন পড়ুন"
-                                                onPress={() => router.push(`/(root)/(tabs)/surah/${surah._id}`)}
-                                                />
-                                                <View className="flex items-center justify-center border border-gray-50 px-3 py-1 rounded-md">
-                                                <Text className="text-md text-white font-AnekBanglaSemiBold">
-                                                    {surah.no}
-                                                </Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    );
-                                }}
-                            />
+        <AnimatedSafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+          {loading ? (
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+              <ActivityIndicator size="large" color="#00ff00" />
+            </View>
+          ) : (
+            <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35 }}>
+              <Animated.View
+                style={{
+                  height: containerHeight, // Animates the container height
+                  overflow: "hidden", // Prevents overflow content from being visible
+                }}
+              >
+                <Animated.View
+                  style={{
+                    transform: [{ translateY }],
+                    opacity: translateY.interpolate({
+                      inputRange: [-100, 0],
+                      outputRange: [0, 1],
+                      extrapolate: "clamp",
+                    }),
+                  }}
+                >
+                  <Title title="সূরা তালিকা" subtitle="এখানে আপনি সূরা অনুসন্ধান করুন" btnText={false} />
+                </Animated.View>
+              </Animated.View>
+              <TextInput
+                placeholder="এখানে লিখুন"
+                placeholderTextColor="#7B7B8B"
+                value={searchQuery}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                onChangeText={(text) => setSearchQuery(text)}
+                className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-2 bg-white"
+              />
+              <Animated.FlatList
+                data={filteredSurahs}
+                contentContainerStyle={{ paddingTop: 16 }}
+                // keyExtractor={(item) => item._id}
+                onScroll={Animated.event(
+                  [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                  { useNativeDriver: true }
+                )}
+                scrollEventThrottle={16}
+                renderItem={({ item, index }) => {
+                  const inputRange = [
+                    -1,
+                    0,
+                    ITEM_SIZE * index,
+                    ITEM_SIZE * (index + 1), // Correct scaling range
+                  ];
+    
+                  const scaleInputRange = [
+                    -1,
+                    0,
+                    ITEM_SIZE * index,
+                    ITEM_SIZE * (index + 0.5), // Visible scaling happens earlier
+                  ];
+    
+                  const opacity = scrollY.interpolate({
+                    inputRange,
+                    outputRange: [1, 1, 1, 0],
+                  });
+    
+                  const scale = scrollY.interpolate({
+                    inputRange: scaleInputRange,
+                    outputRange: [1, 1, 1, 0.8],
+                  });
+    
+                  return (
+                    <TouchableOpacity key={index} 
+                      onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
+                    >
+                      <Animated.View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
+                        style={{
+                          marginBottom: SPACING,
+                          borderRadius: 12,
+                          transform: [{ scale }],
+                          opacity,
+                        }}
+                      >
+                        <Image
+                          source={shape}
+                          className={`w-[${AVATAR_SIZE}px] h-[${AVATAR_SIZE}px]`}
+                          resizeMode="contain"
+                        />
+                        <View className="flex-1 flex items-start justify-between pl-3">
+                          <Text className="text-md text-black font-AnekBanglaSemiBold mb-1">
+                            সূরা {item.name_bn}
+                          </Text>
+                          <Text className="text-xs text-black mb-4">
+                            আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
+                          </Text>
+                          <View className="flex flex-row items-center justify-between w-full">
+                            <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
+                              <Text className="text-md text-black font-AnekBanglaSemiBold">
+                                {convertToBengaliDigits(item.no)}
+                              </Text>
+                            </View>
+                            <Text className="text-xl text-black text-right pr-1">
+                              {item.name_ar}
+                            </Text>
+                          </View>
                         </View>
-                    }
-                {/* </ImageBackground> */}
-        </SafeAreaView>
+                      </Animated.View>
+                    </TouchableOpacity>
+                  );
+                }}
+              />
+            </View>
+          )}
+        </AnimatedSafeAreaView>
     );
 };
 

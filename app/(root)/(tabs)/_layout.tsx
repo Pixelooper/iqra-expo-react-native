@@ -5,18 +5,21 @@ import { icons } from "@/constants";
 const TabIcon = ({
   source,
   focused,
+  text
 }: {
   source: ImageSourcePropType;
   focused: boolean;
+  text: string;
 }) => (
-  <View className={`flex flex-row justify-center items-center mb-7 ${focused ? "bg-general-300" : ""}`}>
-    <View className={`flex flex-row justify-center items-center rounded-md w-9 h-9 ${focused ? "bg-general-400" : ""}`}>
+  <View className={`flex flex-row justify-between items-center mb-7 ${focused ? "bg-general-300" : ""}`}>
+    <View className={`flex justify-center items-center rounded-md w-16 h-9 ${focused ? "" : ""}`}>
       <Image
         source={source}
         tintColor="white"
         resizeMode="contain"
         className="w-6 h-6"
       />
+      <Text className="text-xs text-white font-AnekBanglaMedium uppercase pt-1">{text}</Text>
     </View>
   </View>
 );
@@ -37,7 +40,7 @@ const ReadIcon = ({
         source={source}
         tintColor={focused ? "white" : ""}
         resizeMode="contain"
-        className={focused ? "w-10 h-10" : "w-12 h-12"}
+        className={focused ? "w-10 h-10" : "w-[70px] h-[54px]"}
       />
       {
         !focused && <Text className="text-xs text-white">পড়া চালিয়ে যান</Text>
@@ -52,10 +55,10 @@ export default function Layout() {
       initialRouteName="home"
       screenOptions={{
         tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "white",
+        tabBarInactiveTintColor: "black",
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#1e2b1e",
+          backgroundColor: "#000000",
           borderRadius: 10,
           paddingBottom: 0, // ios only
           marginHorizontal: 16,
@@ -75,28 +78,17 @@ export default function Layout() {
           title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.home} focused={focused} />
+            <TabIcon source={icons.home} focused={focused} text="Home"/>
           ),
         }}
       />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.avatar} focused={focused} />
-          ),
-        }}
-      /> 
-
       <Tabs.Screen
         name="ayat/[id]"
         options={{
           title: "Ayat",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <ReadIcon source={icons.read} focused={focused} />
+            <ReadIcon source={icons.keepread} focused={focused} />
           ),
         }}
       /> 
@@ -107,20 +99,10 @@ export default function Layout() {
           title: "Search",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.search} focused={focused} />
+            <TabIcon source={icons.search} focused={focused} text="Search"/>
           ),
         }}
       />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.ham} focused={focused} />
-          ),
-        }}
-      /> 
       <Tabs.Screen
         name="surah/[id]"
         options={{

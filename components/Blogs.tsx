@@ -1,34 +1,35 @@
 import { router } from "expo-router";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 import { blogs } from "@/constants";
-import CustomButton from "./CustomButton";
+import shape from "../assets/shapes/shape-6.png";
+import Title from "./Title";
 
 const Blogs = () => {
   return (
-    <View className="w-full px-4">
-        <Text className="text-lg font-AnekBanglaSemiBold text-gray-700 mt-8">
-            Blogs
-        </Text>
-        <Text className="text-sm font-AnekBangla text-gray-700 mb-2">
-            আপনি এখানে তথ্যপূর্ণ ব্লগ পেতে পারেন
-        </Text>
-        {blogs.map((blog) => (
-            <TouchableOpacity 
-                key={blog._id} onPress={() => {router.replace("/(root)/(tabs)/search")}} 
-                className="py-3 px-5 bg-dark-green rounded-lg mb-3"
-            >
-                <View className="w-full">
-                    <Text className="text-white font-AnekBanglaSemiBold">
+    <View className="w-full p-4 bg-white">
+        <Title title="Blogs" subtitle="আপনি এখানে তথ্যপূর্ণ ব্লগ পেতে পারেন" btnText="সব দেখুন"/>
+        <View className="pt-4">
+            {blogs.map((blog) => (
+                <TouchableOpacity 
+                    key={blog._id} onPress={() => {router.replace("/(root)/(tabs)/search")}} 
+                    className="py-2 px-4 border border-gray-white bg-white rounded-lg mb-3"
+                >
+                    <Text className="text-gray-black font-AnekBanglaSemiBold">
                         {blog.title}
                     </Text>
-                </View>
-                <Text className="text-yellow-400 text-xs pt-2 font-AnekBanglaBold">এখন পড়ুন</Text>
-            </TouchableOpacity>
-        ))}
-        <CustomButton
-          title="আরো দেখুন"
-          onPress={() => router.replace("/(root)/(tabs)/search")}
-        />
+                    <View className="w-full flex flex-row justify-center pt-1 pl-1">
+                        <Image
+                            source={shape}
+                            className="w-[16px] h-[16px]"
+                            resizeMode="contain"
+                        />
+                        <Text className="text-xs text-gray-black font-AnekBangla pl-2">
+                            {blog.desc}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            ))}
+        </View>
     </View>
   );
 };

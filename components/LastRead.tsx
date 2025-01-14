@@ -1,11 +1,15 @@
 import { router } from "expo-router";
-import { Text, View, FlatList } from "react-native";
-import { useRef, useState } from "react";
-import CustomButton from "./CustomButton";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Text, View, FlatList, Image } from "react-native";
+import { useEffect, useRef, useState } from "react";
 import { surah } from "@/types/type";
+import Title from "./Title";
+import { TouchableOpacity } from "react-native";
+import shape from "../assets/shapes/shape-4.png";
+import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
+import axios from "axios";
 
-//check: https://www.youtube.com/watch?v=qnI8m5Pk1ro
 //https://github.com/chitraket/animation/tree/main/src/animation-toast
 
 type LastReadProps = {
@@ -13,8 +17,11 @@ type LastReadProps = {
 };
 
 const LastRead: React.FC<LastReadProps> = ({ featured }) => {
+  const { lastRead } = useSelector((state: RootState) => state.bookmark);
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+//   const [lastReadData, setLastReadData] = useState<surah[]>([]);
+//   console.log("Last read", lastReadData);
 
   const handleScroll = (event: any) => {
       const offsetX = event.nativeEvent.contentOffset.x;
@@ -22,53 +29,74 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
       setActiveIndex(index);
   };
 
+//   useEffect(() => {
+//     const fetchLastReadSurahs = async () => {
+//       try {
+//         const response = await axios.post(
+//           // "http://localhost:5000/api/iqra/expo/surah/last-read",
+//           "https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surah/last-read",
+//           lastRead
+//         );
+//         setLastReadData(response.data.data);
+//         console.log(response.data);
+//         return response.data;
+//       } catch (error) {
+//         console.error("Error fetching last read surahs:", error);
+//         return [];
+//       }
+//     };
+
+//     if (lastRead.length > 0) {
+//       fetchLastReadSurahs();
+//     }
+
+//     // Optional: Cleanup to reset state when component unmounts
+//     return () => {
+//       setLastReadData([]);
+//     };
+// }, [lastRead]);
+
   return (
-      <View className="w-full px-4">
-        <Text className="text-lg font-AnekBanglaSemiBold text-gray-700 mt-8">
-          Last Read
-        </Text>
-        <Text className="text-sm font-AnekBangla text-gray-700 mb-2">
-          এখানে আপনি যা পড়ছিলেন তা পেতে পারেন
-        </Text>
+      lastRead.length > 0 ?
+      <View className="w-full p-4 bg-white">
+        <Title title="Last Read" subtitle="এখানে আপনি যা পড়ছিলেন তা পেতে পারেন" btnText={false}/>
         <FlatList 
           ref={flatListRef}
           data={featured}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           onScroll={handleScroll}
+          className="pt-4"
           renderItem={({item, index}) => (
-            <View
-              key={item._id}
-              className="w-[240px] mr-3 bg-dark-green rounded-lg p-4 flex flex-col justify-between"
-              style={{
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.1,
-                shadowRadius: 8,
-                elevation: 3,
-              }}
+            <TouchableOpacity key={index} 
+              onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
             >
-              <Text className="text-base text-white font-AnekBanglaBold mb-1">
-                সূরা {item.name_bn}
-              </Text>
-              <Text className="text-sm text-gray-300 mb-4">
-                আয়াত সংখ্যা {item.totalAyat}
-              </Text>
-              <View className="flex flex-row items-center justify-between">
-                <CustomButton
-                  title="এখন পড়ুন"
-                  onPress={() => router.push(`/(root)/(tabs)/surah/${item._id}`)}
+              <View className="w-[240px] mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-between">
+                <Image
+                  source={shape}
+                  className="w-[100px] h-[100px]"
+                  resizeMode="contain"
                 />
-                <View className="flex items-center justify-center border border-gray-50 px-3 py-1 rounded-md">
-                  <Text className="text-md text-white font-AnekBanglaSemiBold">
-                    {item.no}
+                <View className="flex items-end justify-between">
+                  <Text className="text-md text-black font-AnekBanglaSemiBold mb-1">
+                    সূরা {item.name_bn}
                   </Text>
+                  <Text className="text-xs text-black mb-4">
+                    আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
+                  </Text>
+                  <View className="flex flex-row items-center justify-between">
+                    <View className="flex items-center justify-center border border-gray-white px-3 py-1 rounded-md">
+                      <Text className="text-sx text-black font-AnekBanglaSemiBold">
+                        {convertToBengaliDigits(item.no)}
+                      </Text>
+                    </View>
+                  </View>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         />
-        <View className="flex-row justify-center">
+        <View className="flex-row justify-center mb-4">
           {featured.slice(0, 5).map((_, index) => (
             <View
               key={index}
@@ -78,7 +106,7 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
             />
           ))}
         </View>
-      </View>
+      </View> : null
   );
 };
 

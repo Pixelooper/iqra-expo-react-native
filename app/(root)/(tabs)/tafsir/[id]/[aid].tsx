@@ -1,12 +1,13 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { Text, ActivityIndicator, ImageBackground, View, TouchableOpacity, FlatList } from "react-native";
+import { Text, ActivityIndicator, View, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import bg from "@/assets/images/pattern.png";
 import CustomButton from "@/components/CustomButton";
 import { ayat, surah } from "@/types/type";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import TafsirTexts from "@/components/TafsirTexts";
+import SurahHead from "@/components/SurahHead";
+import SingleAyat from "@/components/SingleAyat";
 
 const Tafsir = () => {
     const { id, aid } = useLocalSearchParams();
@@ -40,58 +41,39 @@ const Tafsir = () => {
     }, [id, aid]);
 
     return (
-        <SafeAreaView className="bg-light-olive">
+        <SafeAreaView className="bg-white">
             {
                 loading ? 
                 <View className="min-h-screen d-flex justify-center">
                     <ActivityIndicator size="large" color="#00ff00"/>
                 </View> :
-                <View className="w-full px-2 mt-8 mb-20">
-                    <View>
-                        <Text className="text-center text-3xl text-green-950 mb-2">
-                            سورة {surahData?.name_ar}
-                        </Text>
-                        <Text className="text-center text-lg font-AnekBanglaMedium text-green-950 mb-1">
-                            সূরা {surahData?.name_bn}
-                        </Text>
-                        <Text className="text-center text-sm text-gray-600">
-                            তাফসীর ইবনে কাসীর
-                        </Text>
-                    </View>
-
+                <View className="w-full px-2 mt-14 mb-20">
+                    <SurahHead
+                        ar={surahData?.name_ar}
+                        bn={surahData?.name_bn}
+                        total={surahData?.totalAyat}
+                        tafsir={true}
+                    />
                     <FlatList 
                         data={[]} 
                         renderItem={null}
                         showsVerticalScrollIndicator={false}
-                        contentContainerStyle={{paddingBottom:200}}
-                        className="mt-6 px-4 pt-6 text-white bg-dark-green rounded-3xl"
+                        contentContainerStyle={{paddingBottom:260}}
+                        className="mt-6 px-4 pt-6 text-white border border-gray-white bg-white rounded-3xl"
                         ListEmptyComponent={
-                            <View className="mb-4">
-                                <View className="flex flex-row justify-between mb-4">
-                                    <Text className="text-lg font-AnekBanglaSemiBold text-yellow-400 mb-2">
-                                        {ayatData?.no}
-                                    </Text>
-                                    <View className="flex flex-row justify-between gap-2">
-                                        <TouchableOpacity>
-                                            <Text className="text-lg font-AnekBangla">🔖</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity>
-                                            <Text className="text-lg font-AnekBangla">⚙️</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View>
-                                    <Text className="text-2xl text-white mb-6 text-right">
-                                        {ayatData?.ar}
-                                    </Text>
-                                    <Text className="text-sm text-white mb-2 font-AnekBangla">
-                                        {ayatData?.bn}
-                                    </Text>
-                                    <Text className="mt-6"> 
-                                        <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">তাফসির: </Text> 
-                                    </Text>
-                                    <TafsirTexts tafsir={ayatData?.tafsir || []} />
-                                </View>
+                            <View>
+                                <SingleAyat 
+                                    no={ayatData?.no ?? 0} 
+                                    sid={surahData?._id ?? 0} 
+                                    aid={ayatData?._id ?? 0} 
+                                    ar={ayatData?.ar || ""} 
+                                    bn={ayatData?.bn || ""}
+                                    tafsirPage={true}
+                                />
+                                <Text className="mt-6"> 
+                                    <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">তাফসির: </Text> 
+                                </Text>
+                                <TafsirTexts tafsir={ayatData?.tafsir || []} />
                                 <View className="flex flex-row justify-between mt-4">
                                     <CustomButton
                                         title="পূর্ববর্তী"
