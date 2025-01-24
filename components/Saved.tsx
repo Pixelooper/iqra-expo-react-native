@@ -53,7 +53,7 @@ const Saved = () => {
                     <Text className={`text-lg font-AnekBanglaSemiBold text-black`}>
                         {item.title}
                     </Text>
-                    <Text className="text-black text-xs pt-2 font-AnekBangla">
+                    <Text className="text-dark-green text-xs pt-2 font-AnekBangla">
                         {convertToBengaliDigits(item.total)}{item.total === 0 ? '' : 'টি'} সংরক্ষিত
                     </Text>
                 </TouchableOpacity>

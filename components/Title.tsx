@@ -6,10 +6,11 @@ import { router } from 'expo-router';
 type TitleProps = {
     title: string;
     subtitle: string;
-    btnText: string
+    btnText: string;
+    btnUrl?: string;
 };
 
-const Title: React.FC<TitleProps> = ({ title, subtitle, btnText }) => {
+const Title: React.FC<TitleProps> = ({ title, subtitle, btnText, btnUrl }) => {
     return (
         <View className='mt-4'>
             <View className='flex flex-row justify-between'>
@@ -20,7 +21,7 @@ const Title: React.FC<TitleProps> = ({ title, subtitle, btnText }) => {
                     btnText &&
                     <CustomButton
                         title={btnText}
-                        onPress={() => router.replace("/(root)/(tabs)/home")}
+                        onPress={() => router.replace(btnUrl)}
                         className="rounded-sm py-1 px-2 h-5 w-[74px] border-dark-green"
                     />
                 }

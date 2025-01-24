@@ -7,6 +7,7 @@ import axios from "axios";
 import shape from "../../../assets/shapes/shape-4.png";
 import Title from "@/components/Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
+import useAssignShapes from "@/utils/hooks/useAssignShapes";
 
 const SPACING = 20;
 const AVATAR_SIZE = 100;
@@ -77,6 +78,8 @@ const Search = () => {
       ]).start();
     };
     
+    const surahWithShapes = useAssignShapes(filteredSurahs);
+
     return (
         <AnimatedSafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
           {loading ? (
@@ -114,7 +117,7 @@ const Search = () => {
                 className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-2 bg-white"
               />
               <Animated.FlatList
-                data={filteredSurahs}
+                data={surahWithShapes}
                 contentContainerStyle={{ paddingTop: 16 }}
                 // keyExtractor={(item) => item._id}
                 onScroll={Animated.event(
@@ -160,7 +163,7 @@ const Search = () => {
                         }}
                       >
                         <Image
-                          source={shape}
+                          source={item.shape}
                           className={`w-[${AVATAR_SIZE}px] h-[${AVATAR_SIZE}px]`}
                           resizeMode="contain"
                         />

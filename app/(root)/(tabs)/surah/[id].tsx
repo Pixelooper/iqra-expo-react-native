@@ -139,6 +139,9 @@ const Surah = () => {
                                     ar={ayatData?.ar || ""} 
                                     bn={ayatData?.bn || ""}
                                     tafsirPage={false}
+                                    shanenuzul={ayatData?.shanenuzul || ""}
+                                    tika={ayatData?.tika || []}
+                                    quote={ayatData?.quote || ""}
                                 />
 
                                 <View className="text-center pt-2">
@@ -155,7 +158,6 @@ const Surah = () => {
                         </View>
                     }
                 </View>
-                <Toast />
             </AutoScrollToTop>
         </SafeAreaView>
     );

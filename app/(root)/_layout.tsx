@@ -2,8 +2,8 @@ import { router, Stack, useRouter, useSegments } from "expo-router";
 import { View, Image, TouchableOpacity, Text, Platform } from "react-native";
 import { images, icons } from "@/constants";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import shape from "../../assets/shapes/shape-8.png";
-import { useEffect } from "react";
+import back from "../../assets/icons/back.png";
+import Toast, { BaseToast } from "react-native-toast-message";
 
 const GlobalHeader = () => {
   const insets = useSafeAreaInsets();
@@ -58,7 +58,7 @@ const PathHeader = () => {
         onPress={() => router.back()}
       >
         <Image
-          source={shape}
+          source={back}
           className="w-[32px] h-[32px]"
           resizeMode="contain"
         />
@@ -78,6 +78,24 @@ const PathHeader = () => {
   );
 };
 
+const toastConfig = {
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#0C7900' }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 16,
+        fontWeight: '700'
+      }}
+      text2Style={{
+        fontSize: 13,
+        fontWeight: '500'
+      }}
+    />
+  ),
+};
+
 const Layout = () => {
   const insets = useSafeAreaInsets();
 
@@ -95,6 +113,11 @@ const Layout = () => {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
       </View>
+      <Toast 
+          config={toastConfig}
+          position='bottom'
+          bottomOffset={100}
+      />
     </View>
   );
 };

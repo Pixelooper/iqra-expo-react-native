@@ -150,6 +150,9 @@ const Ayat = () => {
                                                     aid={ayatData?._id ?? 0} 
                                                     ar={ayatData?.ar || ""} 
                                                     bn={ayatData?.bn || ""}
+                                                    shanenuzul={ayatData?.shanenuzul || ""}
+                                                    tika={ayatData?.tika || []}
+                                                    quote={ayatData?.quote || ""}
                                                 />
                                             );
                                         }}

@@ -8,6 +8,9 @@ declare interface ayat {
   ar: string;
   bn: string;
   tafsir: string[];
+  shanenuzul: string;
+  tika: string[];
+  quote: string;
 }
 
 declare interface surah {

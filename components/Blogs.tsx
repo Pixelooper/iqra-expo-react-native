@@ -7,7 +7,7 @@ import Title from "./Title";
 const Blogs = () => {
   return (
     <View className="w-full p-4 bg-white">
-        <Title title="Blogs" subtitle="আপনি এখানে তথ্যপূর্ণ ব্লগ পেতে পারেন" btnText="সব দেখুন"/>
+        <Title title="Blogs" subtitle="আপনি এখানে তথ্যপূর্ণ ব্লগ পেতে পারেন" btnText="সব দেখুন" btnUrl="/(root)/blogs"/>
         <View className="pt-4">
             {blogs.map((blog) => (
                 <TouchableOpacity 

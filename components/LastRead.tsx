@@ -9,8 +9,7 @@ import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import { useSelector } from "react-redux";
 import { RootState } from "@/utils/store/store";
 import axios from "axios";
-
-//https://github.com/chitraket/animation/tree/main/src/animation-toast
+import useAssignShapes from "@/utils/hooks/useAssignShapes";
 
 type LastReadProps = {
   featured: surah[];
@@ -28,6 +27,8 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
       const index = Math.round(offsetX / 240);
       setActiveIndex(index);
   };
+
+  const surahWithShapes = useAssignShapes(featured);
 
 //   useEffect(() => {
 //     const fetchLastReadSurahs = async () => {
@@ -62,7 +63,7 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
         <Title title="Last Read" subtitle="এখানে আপনি যা পড়ছিলেন তা পেতে পারেন" btnText={false}/>
         <FlatList 
           ref={flatListRef}
-          data={featured}
+          data={surahWithShapes}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           onScroll={handleScroll}
@@ -73,7 +74,7 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
             >
               <View className="w-[240px] mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-between">
                 <Image
-                  source={shape}
+                  source={item.shape}
                   className="w-[100px] h-[100px]"
                   resizeMode="contain"
                 />

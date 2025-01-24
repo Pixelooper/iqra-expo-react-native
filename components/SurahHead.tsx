@@ -1,6 +1,7 @@
 import { Image, Text, View } from 'react-native';
-import shape from "../assets/shapes/shape-2.png";
 import { convertToBengaliDigits } from '@/utils/hooks/useBengaliDigit';
+import { shapes } from "@/constants";
+// import { useMemo } from 'react';
 
 type TitleProps = {
     ar: string;
@@ -10,11 +11,13 @@ type TitleProps = {
 };
 
 const SurahHead = ({ ar, bn, total, tafsir } : TitleProps) => {
+    // const shape = useMemo(() => shapes[Math.floor(Math.random() * shapes.length)], []);
+
     return (
         <View className="pb-4">
             <Image
-                source={shape}
-                className="w-[100px] h-[100px] absolute right-0 bottom-3"
+                source={shapes[Math.floor(Math.random() * shapes.length)]}
+                className="w-[100px] h-[100px] absolute left-0 bottom-3"
                 resizeMode="contain"
             />
             <Text className="text-center text-3xl text-green-950 mb-2">

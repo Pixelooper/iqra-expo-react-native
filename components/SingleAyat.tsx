@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import CustomButton from './CustomButton';
 import tafsir from "../assets/icons/tafsir.png";
@@ -17,10 +17,19 @@ type SingleAyatProps = {
     ar: string;
     bn: string;
     tafsirPage: boolean;
+    shanenuzul: string;
+    tika: string[];
+    quote: string;
 };
 
-const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage }: SingleAyatProps) => {
+const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote }: SingleAyatProps) => {
     const dispatch = useDispatch();
+    const [expandedAyat, setExpandedAyat] = useState(null);
+
+    const toggleExpand = (ayatNo: number) => {
+        setExpandedAyat(expandedAyat === ayatNo ? null : ayatNo);
+    };
+
     const handleAyatOrTafsirSave = (sId: string, aId: string) => {
         if(tafsirPage){
             dispatch(addTafsir({ sId, aId }));
@@ -64,11 +73,12 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage }: SingleAyatProps) => {
                         onPress={() => handleAyatOrTafsirSave(sid, aid)}
                     />
                     {
-                        !tafsirPage &&
+                        tafsirPage || (!quote && !shanenuzul && tika.length === 0) ? null : 
                         <CustomButton
                             title="তথ্য"
                             className="rounded-2xl py-1 px-1 h-5 w-[46px] border-gray-white"
                             ImgLeft={tick}
+                            onPress={() => toggleExpand(no)}
                         />
                     }
                 </View>
@@ -80,6 +90,36 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage }: SingleAyatProps) => {
                 <Text className="text-sm text-black mb-2 font-AnekBangla">
                     {bn}
                 </Text>
+
+                {
+                    expandedAyat === no && (
+                        <>
+                            {
+                                shanenuzul &&
+                                <Text className="font-AnekBangla text-sm text-black-300 mt-3">
+                                    <Text className="font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text>  
+                                    {shanenuzul}
+                                </Text>
+                            }
+                            {
+                                tika.length > 0 &&
+                                tika.map((text, index) => (
+                                    <Text key={index} className="font-AnekBangla text-sm text-black-300 mt-3">
+                                        <Text className="font-AnekBanglaSemiBold text-yellow-400">টিকা ({index+1}): </Text>  
+                                        {text}
+                                    </Text>
+                                ))
+                            }
+                            {
+                                quote &&
+                                <Text className="font-AnekBangla text-sm text-black-300 mt-3">
+                                    <Text className="font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text>  
+                                    {quote}
+                                </Text>
+                            }
+                        </>
+                    )
+                }
             </View>
         </View>
     );

@@ -1,4 +1,3 @@
-import AutoScrollToTop from '@/utils/AutoScrollToTop';
 import { store } from '@/utils/store/store';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';

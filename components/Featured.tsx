@@ -2,9 +2,9 @@ import { Text, View, TouchableOpacity, FlatList, ImageBackground } from "react-n
 import { useRef, useState } from "react";
 import { router } from "expo-router";
 import { surah } from "@/types/type";
-import shape from "../assets/shapes/shape-5.png";
 import Title from "./Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
+import useAssignShapes from "@/utils/hooks/useAssignShapes";
 
 type FeaturedProps = {
   featured: surah[];
@@ -21,12 +21,14 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
       setActiveIndex(index);
   };
 
+  const surahWithShapes = useAssignShapes(featured);
+
   return (
       <View className="w-full px-4 bg-white">
-        <Title title="Featured" subtitle="আপনি আমাদের পরামর্শে সূরা পড়তে পারেন" btnText="সব দেখুন"/>
+        <Title title="Featured" subtitle="আপনি আমাদের পরামর্শে সূরা পড়তে পারেন" btnText="সব দেখুন" btnUrl="/(root)/(tabs)/search"/>
         <FlatList 
           ref={flatListRef}
-          data={featured}
+          data={surahWithShapes}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           onScroll={handleScroll}
@@ -36,7 +38,7 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
                 key={index} onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
             >
               <View className="mr-3 rounded-lg p-3 border border-gray-white bg-white">
-                <ImageBackground source={shape} className="w-[150px] h-[150px] flex justify-center items-center">
+                <ImageBackground source={item.shape} className="w-[150px] h-[150px] flex justify-center items-center">
                   <Text className="text-lg text-gray-black font-AnekBanglaBold mb-24 text-center">
                     সূরা {item.name_bn}
                   </Text>

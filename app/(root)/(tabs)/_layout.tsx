@@ -55,7 +55,7 @@ export default function Layout() {
       initialRouteName="home"
       screenOptions={{
         tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "black",
+        tabBarInactiveTintColor: "white",
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: "#000000",
