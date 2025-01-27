@@ -4,23 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import { surah } from "@/types/type";
 import Title from "./Title";
 import { TouchableOpacity } from "react-native";
-import shape from "../assets/shapes/shape-4.png";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
-import { useSelector } from "react-redux";
-import { RootState } from "@/utils/store/store";
 import axios from "axios";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
 
 type LastReadProps = {
-  featured: surah[];
+  lastRead: [];
 };
 
-const LastRead: React.FC<LastReadProps> = ({ featured }) => {
-  const { lastRead } = useSelector((state: RootState) => state.bookmark);
+const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
-//   const [lastReadData, setLastReadData] = useState<surah[]>([]);
-//   console.log("Last read", lastReadData);
+  const [lastReadData, setLastReadData] = useState<surah[]>([]);
 
   const handleScroll = (event: any) => {
       const offsetX = event.nativeEvent.contentOffset.x;
@@ -28,37 +23,35 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
       setActiveIndex(index);
   };
 
-  const surahWithShapes = useAssignShapes(featured);
+  const surahWithShapes = useAssignShapes(lastReadData);
 
-//   useEffect(() => {
-//     const fetchLastReadSurahs = async () => {
-//       try {
-//         const response = await axios.post(
-//           // "http://localhost:5000/api/iqra/expo/surah/last-read",
-//           "https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surah/last-read",
-//           lastRead
-//         );
-//         setLastReadData(response.data.data);
-//         console.log(response.data);
-//         return response.data;
-//       } catch (error) {
-//         console.error("Error fetching last read surahs:", error);
-//         return [];
-//       }
-//     };
+  useEffect(() => {
+    const fetchLastReadSurahs = async () => {
 
-//     if (lastRead.length > 0) {
-//       fetchLastReadSurahs();
-//     }
+      try {
+        const response = await axios.post(
+          // "http://localhost:5000/api/iqra/expo/lastread",
+          "https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/lastread",
+          lastRead, // Send your lastRead array in the request body
+          {
+            headers: {
+              "Content-Type": "application/json", // Specify headers if required
+            },
+          }
+        );
+        setLastReadData(response.data.data); // Assuming `data.data` is the correct response
+      } catch (err) {
+        console.error("Error fetching last read surahs:", err);
+      }
+    };
 
-//     // Optional: Cleanup to reset state when component unmounts
-//     return () => {
-//       setLastReadData([]);
-//     };
-// }, [lastRead]);
+    // Fetch data only if `lastRead` has elements
+    if (lastRead.length > 0) {
+      fetchLastReadSurahs();
+    }
+  }, [lastRead]);
 
   return (
-      lastRead.length > 0 ?
       <View className="w-full p-4 bg-white">
         <Title title="Last Read" subtitle="এখানে আপনি যা পড়ছিলেন তা পেতে পারেন" btnText={false}/>
         <FlatList 
@@ -98,7 +91,7 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
           )}
         />
         <View className="flex-row justify-center mb-4">
-          {featured.slice(0, 5).map((_, index) => (
+          {surahWithShapes.slice(0, 5).map((_, index) => (
             <View
               key={index}
               className={`h-2 mx-1 mt-4 rounded-full ${
@@ -107,7 +100,7 @@ const LastRead: React.FC<LastReadProps> = ({ featured }) => {
             />
           ))}
         </View>
-      </View> : null
+      </View>
   );
 };
 

@@ -9,26 +9,25 @@ import { RootState } from "@/utils/store/store";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 
 const Saved = () => {
-    const { surah, ayat, tafsir, lastRead } = useSelector((state: RootState) => state.bookmark);
-    // console.log("Saved", surah, ayat, tafsir, lastRead);
+    const { surah, ayat, tafsir } = useSelector((state: RootState) => state.bookmark);
 
     const items = [
         {
             title: 'সূরা',
             total: surah.length,
-            url: '/(root)/(tabs)/search',
+            url: '/(root)/(tabs)/bookmarkSurah',
             img: shape1
         },
         {
             title: 'আয়াত',
             total: ayat.length,
-            url: '/(root)/(tabs)/search',
+            url: '/(root)/(tabs)/bookmarkSurah',
             img: shape2
         },
         {
             title: 'তাফসীর',
             total: tafsir.length,
-            url: '/(root)/(tabs)/search',
+            url: '/(root)/(tabs)/bookmarkSurah',
             img: shape3
         }
     ]
@@ -41,7 +40,7 @@ const Saved = () => {
                 <TouchableOpacity
                     key={index}
                     onPress={() => {
-                        router.replace(`/(root)/(tabs)/search`);
+                        router.replace(item.url);
                     }}
                     className={`rounded-lg p-3 justify-between items-start w-[31%] h-[120px] border border-gray-white bg-white`}
                 >

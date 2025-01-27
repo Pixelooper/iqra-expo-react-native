@@ -119,6 +119,14 @@ export default function Layout() {
           href: null, // Prevent these from being added as tabs
         }}
       />
+      <Tabs.Screen
+        name="bookmarkSurah"
+        options={{
+          title: "bookmarkSurah",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
     </Tabs>
   );
 }

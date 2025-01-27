@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import RandomAyat from "@/components/RandomAyat";
 import LastRead from "@/components/LastRead";
 import Featured from "@/components/Featured";
@@ -10,13 +10,17 @@ import Saved from "@/components/Saved";
 
 const Home = () => {
     const { data } = useSelector((state: RootState) => state.home);
+    const { lastRead } = useSelector((state: RootState) => state.bookmark);
 
     return (
             <FlatList data={[6]} renderItem={ ()=> (
-                <View>
+                <View className="bg-white">
                     <RandomAyat random={data.random}/>
                     <Saved/>
-                    <LastRead featured={data.featured}/>
+                    {
+                        lastRead.length > 0 ?
+                        <LastRead lastRead={lastRead}/> : null
+                    }
                     <Featured featured={data.featured}/>
                     <Blogs/>
                     <Mood/>
