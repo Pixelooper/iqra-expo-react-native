@@ -1,9 +1,8 @@
 import { ActivityIndicator, Animated, Image, Platform, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
-import { useEffect, useRef, useState } from "react";
-import { surah } from "@/types/type";
-import axios from "axios";
+import { useRef, useState } from "react";
+import { ayat } from "@/types/type";
 import Title from "@/components/Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
@@ -13,36 +12,22 @@ const AVATAR_SIZE = 100;
 const ITEM_SIZE = AVATAR_SIZE + SPACING * 2;
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
-const Search = () => {
+type BookedAyatsProps = {
+    loading: boolean;
+    ayatData: ayat & {
+        surahId: string;
+        surahNo: number;
+        surahName_bn: string;
+    };
+};
+
+const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData}) => {
     const [searchQuery, setSearchQuery] = useState("");
-    const [surahData, setSurahData] = useState<surah[] | null>(null);
-    const [loading, setLoading] = useState(true);
     const scrollY = useRef(new Animated.Value(0)).current;
 
-    const filteredSurahs = !surahData ? [] : surahData.filter((surah: surah) =>
-      surah.name_bn.includes(searchQuery) || surah.name_en.includes(searchQuery) || surah.name_en.toUpperCase().includes(searchQuery) || surah.name_en.toLowerCase().includes(searchQuery) || surah.name_ar.includes(searchQuery)
+    const filteredSurahs = !ayatData ? [] : ayatData.filter((ayat: ayat) =>
+      ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)
     );
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true); 
-            try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surahs`);
-                setSurahData(response.data.data);
-            } catch (error) {
-                console.error("Error fetching data", error);
-            } finally {
-                setLoading(false); 
-            }
-        };
-
-        fetchData();
-
-        // Optional: Cleanup to reset state when component unmounts
-        return () => {
-            setSurahData(null);
-        };
-    }, []);
 
     const translateY = useRef(new Animated.Value(0)).current;
     const containerHeight = useRef(new Animated.Value(60)).current; // Adjust the default height as needed
@@ -103,7 +88,7 @@ const Search = () => {
                     }),
                   }}
                 >
-                  <Title title="সূরা তালিকা" subtitle="এখানে আপনি সূরা অনুসন্ধান করুন" btnText={false} />
+                  <Title title="সংরক্ষিত আয়াত তালিকা" subtitle="এখানে আপনি আপনার সংরক্ষিত আয়াতটি খুঁজে পেতে পারেন" btnText={false} />
                 </Animated.View>
               </Animated.View>
               <TextInput
@@ -151,7 +136,7 @@ const Search = () => {
     
                   return (
                     <TouchableOpacity key={index} 
-                      onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
+                      onPress={() => router.push(`/(root)/(tabs)/ayat/${item?.surahId}`)}
                     >
                       <Animated.View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
                         style={{
@@ -166,22 +151,22 @@ const Search = () => {
                           className={`w-[${AVATAR_SIZE}px] h-[${AVATAR_SIZE}px]`}
                           resizeMode="contain"
                         />
-                        <View className="flex-1 flex items-start justify-between pl-3">
-                          <Text className="text-md text-black font-AnekBanglaSemiBold mb-1">
-                            সূরা {item.name_bn}
-                          </Text>
-                          <Text className="text-xs text-black mb-4">
-                            আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
-                          </Text>
-                          <View className="flex flex-row items-center justify-between w-full">
-                            <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
-                              <Text className="text-md text-black font-AnekBanglaSemiBold">
-                                {convertToBengaliDigits(item.no)}
-                              </Text>
-                            </View>
-                            <Text className="text-xl text-black text-right pr-1">
-                              {item.name_ar}
+                        <View className="flex-1 flex items-end justify-between pl-3 min-h-[95px]">
+                            <Text className="text-xs text-black mb-2">
+                                {item.ar.slice(0, 75)}...
                             </Text>
+                            <Text className="text-xs text-black font-AnekBanglaSemiBold mb-4">
+                                {item.bn.slice(0, 75)}...
+                            </Text>
+                            <View className="flex flex-row items-center justify-between w-full">
+                                <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
+                                    <Text className="text-xs text-black font-AnekBanglaSemiBold">
+                                    সূরা {item.surahName_bn}
+                                    </Text>
+                                </View>
+                                <Text className="text-xs text-black text-right pr-1">
+                                    আয়াত নম্বর {convertToBengaliDigits(item.no)}
+                                </Text>
                           </View>
                         </View>
                       </Animated.View>
@@ -195,4 +180,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default BookedAyats;

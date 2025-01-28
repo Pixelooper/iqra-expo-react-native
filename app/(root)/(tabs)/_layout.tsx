@@ -127,6 +127,14 @@ export default function Layout() {
           href: null, // Prevent these from being added as tabs
         }}
       />
+      <Tabs.Screen
+        name="bookmarkAyat"
+        options={{
+          title: "bookmarkAyat",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
     </Tabs>
   );
 }

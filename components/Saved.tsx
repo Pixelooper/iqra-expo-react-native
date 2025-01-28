@@ -21,7 +21,7 @@ const Saved = () => {
         {
             title: 'আয়াত',
             total: ayat.length,
-            url: '/(root)/(tabs)/bookmarkSurah',
+            url: '/(root)/(tabs)/bookmarkAyat',
             img: shape2
         },
         {
