@@ -32,7 +32,7 @@ const ReadIcon = ({
   focused: boolean;
 }) => (
   <TouchableOpacity 
-    onPress={() => router.push("/ayat/1")} 
+    onPress={() => router.push(`/ayat/67478129856ca037b5d02f07?scrollTo=67479e9d856ca037b5d030f0`)} 
     className={`flex justify-center items-center mb-16`}
   >
     <View className={`flex justify-center items-center rounded-full ${focused ? "bg-general-400 w-14 h-14" : "w-20 h-20"}`}>
@@ -131,6 +131,14 @@ export default function Layout() {
         name="bookmarkAyat"
         options={{
           title: "bookmarkAyat",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
+      <Tabs.Screen
+        name="bookmarkTafsir"
+        options={{
+          title: "bookmarkTafsir",
           headerShown: false,
           href: null, // Prevent these from being added as tabs
         }}

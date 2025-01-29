@@ -27,7 +27,7 @@ const Saved = () => {
         {
             title: 'তাফসীর',
             total: tafsir.length,
-            url: '/(root)/(tabs)/bookmarkSurah',
+            url: '/(root)/(tabs)/bookmarkTafsir',
             img: shape3
         }
     ]
