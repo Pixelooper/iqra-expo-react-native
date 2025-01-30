@@ -2,18 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface SurahState {
     surah: any[];
-    ayat: { sId: string; aId: string }[];
-    tafsir: any[];
     lastRead: any[];
+    ayat: { sId: string; aId: string }[];
+    tafsir: { sId: string; aId: string }[];
+    continue: { sId?: string; aId?: string } | null;
     loading: boolean;
     error: string | null;
 }
   
 const initialState: SurahState = {
     surah: [],
+    lastRead: [],
     ayat: [],
     tafsir: [],
-    lastRead: [],
+    continue: null,
     loading: false,
     error: null,
 };
@@ -59,8 +61,11 @@ const bookmarkSlice = createSlice({
         state.lastRead.pop();
       }
     },
+    setContinueReading: (state, action: PayloadAction<{ sId: string; aId: string }>) => {
+        state.continue = action.payload;
+    },
   },
 });
 
-export const { addSurah, addAyat, addTafsir, updateLastRead } = bookmarkSlice.actions;
+export const { addSurah, addAyat, addTafsir, updateLastRead, setContinueReading } = bookmarkSlice.actions;
 export default bookmarkSlice.reducer;

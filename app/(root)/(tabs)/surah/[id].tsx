@@ -82,6 +82,7 @@ const Surah = () => {
                                         className="rounded-2xl py-1 px-1 h-5 w-[68px] border-gray-white"
                                         ImgLeft={bookmark}
                                         onPress={() => handleSurahSave(surahData?._id)}
+                                        bgVariant="secondary"
                                     />
                                 </View>
                                 <View className="flex flex-row justify-between mb-4">
@@ -134,8 +135,8 @@ const Surah = () => {
 
                                 <SingleAyat 
                                     no={ayatData?.no ?? 0} 
-                                    sid={surahData?._id ?? 0} 
-                                    aid={ayatData?._id ?? 0} 
+                                    sid={surahData?._id ?? ""} 
+                                    aid={ayatData?._id ?? ""} 
                                     ar={ayatData?.ar || ""} 
                                     bn={ayatData?.bn || ""}
                                     tafsirPage={false}
@@ -150,7 +151,7 @@ const Surah = () => {
                                         onPress={() => router.push(`/ayat/${surahData?._id}`)}
                                         className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm border-dark-green"
                                         bgVariant="primary"
-                                        textVariant="primary"
+                                        textVariant="secondary"
                                         ImgRight={angleRight}
                                     />
                                 </View>

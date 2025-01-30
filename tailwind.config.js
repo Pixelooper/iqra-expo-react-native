@@ -18,6 +18,7 @@ module.exports = {
             'dark-green': '#0C7900',
             'gray-black': '#5A5A5A',
             'gray-white': '#E3E3E3',
+            'low-green': '#C7F4C2',
             primary: {
                 100: "#F5F8FF",
                 200: "#EBF4FF",

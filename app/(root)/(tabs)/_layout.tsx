@@ -1,6 +1,8 @@
 import { router, Tabs } from "expo-router";
 import { Image, ImageSourcePropType, Text, TouchableOpacity, View } from "react-native";
-import { icons } from "@/constants";
+import { icons, images } from "@/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
 
 const TabIcon = ({
   source,
@@ -27,12 +29,14 @@ const TabIcon = ({
 const ReadIcon = ({
   source,
   focused,
+  continueReading
 }: {
   source: ImageSourcePropType;
   focused: boolean;
+  continueReading: { sId?: string; aId?: string };
 }) => (
   <TouchableOpacity 
-    onPress={() => router.push(`/ayat/67478129856ca037b5d02f07?scrollTo=67479e9d856ca037b5d030f0`)} 
+    onPress={() => router.push(`/ayat/${continueReading.sId}?scrollTo=${continueReading.aId}`)} 
     className={`flex justify-center items-center mb-16`}
   >
     <View className={`flex justify-center items-center rounded-full ${focused ? "bg-general-400 w-14 h-14" : "w-20 h-20"}`}>
@@ -50,6 +54,8 @@ const ReadIcon = ({
 );
 
 export default function Layout() {
+  const continueReading = useSelector((state: RootState) => state.bookmark.continue);
+
   return (
     <Tabs
       initialRouteName="home"
@@ -59,10 +65,10 @@ export default function Layout() {
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: "#000000",
-          borderRadius: 10,
+          borderRadius: 0,
           paddingBottom: 0, // ios only
-          marginHorizontal: 16,
-          marginBottom: 10,
+          marginHorizontal: 0,
+          marginBottom: 0,
           height: 50,
           display: "flex",
           justifyContent: "space-between",
@@ -88,7 +94,11 @@ export default function Layout() {
           title: "Ayat",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <ReadIcon source={icons.keepread} focused={focused} />
+            !continueReading ? 
+            <TouchableOpacity onPress={() => router.push('/home')}  className={`flex justify-center items-center mb-16`}>
+              <Image source={images.logo} style={{ width: 76, height: 76 }} resizeMode="contain" /> 
+            </TouchableOpacity>:
+            <ReadIcon source={icons.keepread} focused={focused} continueReading={continueReading}/>
           ),
         }}
       /> 

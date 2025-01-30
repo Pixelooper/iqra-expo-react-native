@@ -40,7 +40,7 @@ const Splash = () => {
                                 onPress={() => router.replace("/(root)/(tabs)/home")}
                                 className="rounded-lg py-3 px-3 h-12 w-[275px] border-dark-green"
                                 bgVariant="primary"
-                                textVariant="primary"
+                                textVariant="secondary"
                                 ImgRight={angleRight}
                             />
                         </View>

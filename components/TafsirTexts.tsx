@@ -43,7 +43,7 @@ const TafsirTexts = React.memo(({ tafsir }: { tafsir: string[] }) => {
         <FlashList
           data={processedTafsir}
           estimatedItemSize={150}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item, index) => index?.toString()}
           renderItem={renderItem}
           nestedScrollEnabled={true}
           scrollEnabled={true}

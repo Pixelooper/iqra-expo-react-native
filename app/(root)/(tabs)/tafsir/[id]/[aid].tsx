@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import TafsirTexts from "@/components/TafsirTexts";
 import SurahHead from "@/components/SurahHead";
 import SingleAyat from "@/components/SingleAyat";
+import angleRight from "@/assets/icons/angle-right.png";
 
 const Tafsir = () => {
     const { id, aid } = useLocalSearchParams();
@@ -64,8 +65,8 @@ const Tafsir = () => {
                             <View>
                                 <SingleAyat 
                                     no={ayatData?.no ?? 0} 
-                                    sid={surahData?._id ?? 0} 
-                                    aid={ayatData?._id ?? 0} 
+                                    sid={surahData?._id ?? ""} 
+                                    aid={ayatData?._id ?? ""} 
                                     ar={ayatData?.ar || ""} 
                                     bn={ayatData?.bn || ""}
                                     tafsirPage={true}
@@ -77,13 +78,23 @@ const Tafsir = () => {
                                 <View className="flex flex-row justify-between mt-4">
                                     <CustomButton
                                         title="পূর্ববর্তী"
-                                        onPress={() => {router.push(`/tafsir/${surahData?._id}/${ayatData?._id}`)}}
-                                        className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
+                                        onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayatData?.no - 1}`)}}
+                                        className={`px-6 py-1 rounded-lg text-sm border-dark-green ${
+                                            ayatData?.no === 1 ? "opacity-40 cursor-not-allowed" : ""
+                                        }`}
+                                        disabled={ayatData?.no === 1}
+                                        bgVariant="primary"
+                                        textVariant="secondary"
                                     />
                                     <CustomButton
                                         title="পরবর্তী"
-                                        onPress={() => {router.push(`/tafsir/${surahData?._id}/${ayatData?._id}`)}}
-                                        className="bg-yellow-500 text-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm"
+                                        onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayatData?.no + 1}`)}}
+                                        className={`px-6 py-1 rounded-lg text-sm border-dark-green ${
+                                            ayatData?.no === surahData?.totalAyat ? "opacity-40 cursor-not-allowed" : ""
+                                        }`}
+                                        disabled={ayatData?.no === surahData?.totalAyat}
+                                        bgVariant="primary"
+                                        textVariant="secondary"
                                     />
                                 </View>
                             </View>

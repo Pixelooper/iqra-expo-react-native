@@ -11,7 +11,7 @@ const GlobalHeader = () => {
   return (
     <View
       style={{
-        paddingHorizontal: 16,
+        paddingHorizontal: 10,
         paddingTop: Platform.OS === 'ios' ? 54 : insets.top,
       }}
       className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between"
@@ -33,7 +33,6 @@ const PathHeader = () => {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const segments = useSegments();
-  // console.log('Segments:', segments)
 
   const currentPage = segments[2] || "home";
   const isHome = currentPage === "home";
@@ -45,7 +44,8 @@ const PathHeader = () => {
   };
 
   return isHome ? (
-    <GlobalHeader />
+    // <GlobalHeader />
+    null
   ) : (
     <View 
       style={{
@@ -104,7 +104,8 @@ const Layout = () => {
       style={{
         flex: 1,
         paddingTop: insets.top,
-        paddingBottom: Platform.OS === 'ios' ? 10 : insets.bottom,
+        paddingBottom: Platform.OS === 'ios' ? 20 : insets.bottom,
+        backgroundColor: '#000000'
       }}
     >
       <PathHeader />

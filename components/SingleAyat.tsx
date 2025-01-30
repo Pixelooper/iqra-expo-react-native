@@ -1,19 +1,20 @@
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import CustomButton from './CustomButton';
 import tafsir from "../assets/icons/tafsir.png";
+import read from "../assets/icons/continue.png";
 import bookmark from "../assets/icons/bookmark.png";
 import tick from "../assets/icons/tick.png";
 import { convertToBengaliDigits } from '@/utils/hooks/useBengaliDigit';
 import Toast from 'react-native-toast-message';
-import { addAyat, addTafsir } from '@/utils/store/slices/bookmarkSlice';
+import { addAyat, addTafsir, setContinueReading } from '@/utils/store/slices/bookmarkSlice';
 import { useDispatch } from 'react-redux';
 
 type SingleAyatProps = {
     no: number;
-    sid: number;
-    aid: number;
+    sid: string;
+    aid: string;
     ar: string;
     bn: string;
     tafsirPage: boolean;
@@ -50,6 +51,16 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
         }
     };
 
+    const handleContinueReading = (sId: string, aId: string) => {
+        dispatch(setContinueReading({ sId, aId }));
+    
+        Toast.show({
+            type: "success",
+            text1: "Saved for later!",
+            text2: "আপনি পরে পড়া চালিয়ে যেতে পারেন।",
+        });
+    };
+
     return (
         <View className="mb-4">
             <View className="flex flex-row justify-between mb-4">
@@ -59,11 +70,22 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
                 <View className="flex flex-row justify-between gap-2">
                     {
                         !tafsirPage &&
+                        <TouchableOpacity onPress={() => handleContinueReading(sid, aid)}>
+                            <Image
+                                source={read}
+                                className="w-[24px] h-[24px] "
+                                resizeMode="contain"
+                            />
+                        </TouchableOpacity>
+                    }
+                    {
+                        !tafsirPage &&
                         <CustomButton
                             title="তাফসীর"
                             onPress={() => router.push(`/tafsir/${sid}/${aid}`)}
                             className="rounded-2xl py-1 px-1 h-5 w-[68px] border-gray-white"
                             ImgLeft={tafsir}
+                            bgVariant="secondary"
                         />
                     }
                     <CustomButton
@@ -71,6 +93,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
                         className="rounded-2xl py-1 px-1 h-5 w-[68px] border-gray-white"
                         ImgLeft={bookmark}
                         onPress={() => handleAyatOrTafsirSave(sid, aid)}
+                        bgVariant="secondary"
                     />
                     {
                         tafsirPage || (!quote && !shanenuzul && tika.length === 0) ? null : 
@@ -79,6 +102,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
                             className="rounded-2xl py-1 px-1 h-5 w-[46px] border-gray-white"
                             ImgLeft={tick}
                             onPress={() => toggleExpand(no)}
+                            bgVariant="secondary"
                         />
                     }
                 </View>
