@@ -130,6 +130,30 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
+        name="blog/[id]"
+        options={{
+          title: "Blog",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
+      <Tabs.Screen
+        name="blogs"
+        options={{
+          title: "blogs",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
+      <Tabs.Screen
+        name="mood/[slug]"
+        options={{
+          title: "Mood",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
+      <Tabs.Screen
         name="bookmarkSurah"
         options={{
           title: "bookmarkSurah",

@@ -22,7 +22,7 @@ const Home = () => {
                         <LastRead lastRead={lastRead}/> : null
                     }
                     <Featured featured={data.featured}/>
-                    <Blogs/>
+                    <Blogs blogs={data.blogs}/>
                     <Mood/>
                 </View>
             )}

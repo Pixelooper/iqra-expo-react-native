@@ -216,27 +216,31 @@ export const settings = [
 export const moods = [
   {
     _id: 1,
-    name: "Surah",
-    bgClass: "bg-primary-300",
-    icon: "🌞"
+    name: "Happiness",
+    slug: "happiness",
+    icon: "🌞",
+    shape: shape7
   },
   {
     _id: 2,
     name: "Sadness",
-    bgClass: "bg-secondary-300",
-    icon: "🌙"
+    slug: "sadness",
+    icon: "🌙",
+    shape: shape4
   },
   {
     _id: 3,
     name: "Anger",
-    bgClass: "bg-general-300",
-    icon: "🔥"
+    slug: "anger",
+    icon: "🔥",
+    shape: shape2
   },
   {
     _id: 4,
     name: "Fear",
-    bgClass: "bg-yellow-500",
-    icon: "⚡"
+    slug: "fear",
+    icon: "⚡",
+    shape: shape3
   },
 ];
 
