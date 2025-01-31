@@ -21,7 +21,7 @@ const paddingTop = Platform.select({
 
 const RandomAyat: React.FC<RandomProps> = ({ random }) => {
     return (
-        <View className={`bg-white p-4 border border-gray-white rounded-3xl pb-6 ${paddingTop}`}>
+        <View className={`bg-white mx-3 mt-3 p-4 border border-gray-white rounded-3xl pb-6 ${paddingTop}`}>
             <Text className="text-xl mb-4 text-right text-black">{random?.ar}</Text>
             <Text className="font-AnekBangla mb-1 text-left text-black">{random?.bn}</Text>
             <View className="flex flex-row justify-between">

@@ -40,9 +40,6 @@ const Ayat = () => {
     dispatch(updateLastRead(id));
   }, [dispatch, id]);
 
-  // Animation code (keep your existing animation logic here)
-  // ...
-
   if (error) {
     return (
       <View className="flex-1 justify-center items-center">

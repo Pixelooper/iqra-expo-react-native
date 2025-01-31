@@ -82,7 +82,8 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
                         !tafsirPage &&
                         <CustomButton
                             title="তাফসীর"
-                            onPress={() => router.push(`/tafsir/${sid}/${aid}`)}
+                            onPress={() => {router.push(`/tafsir/${sid}/${aid}`)}} 
+                            // onPress={() => pathPush(pathname, `/tafsir/${sid}/${aid}`)}
                             className="rounded-2xl py-1 px-1 h-5 w-[68px] border-gray-white"
                             ImgLeft={tafsir}
                             bgVariant="secondary"

@@ -6,6 +6,8 @@ interface SurahState {
     ayat: { sId: string; aId: string }[];
     tafsir: { sId: string; aId: string }[];
     continue: { sId?: string; aId?: string } | null;
+    history: string[];
+    previousRoutes: string[];
     loading: boolean;
     error: string | null;
 }
@@ -16,6 +18,8 @@ const initialState: SurahState = {
     ayat: [],
     tafsir: [],
     continue: null,
+    history: [],
+    previousRoutes: [],
     loading: false,
     error: null,
 };
@@ -64,8 +68,23 @@ const bookmarkSlice = createSlice({
     setContinueReading: (state, action: PayloadAction<{ sId: string; aId: string }>) => {
         state.continue = action.payload;
     },
+    addRoute: (state, action: PayloadAction<string>) => {
+      state.history.push(action.payload);
+    },
+    addPreviousRoute: (state, action: PayloadAction<string>) => {
+      // Prevent duplicate consecutive routes
+      if (state.previousRoutes[state.previousRoutes.length - 1] !== action.payload) {
+        state.previousRoutes.push(action.payload);
+      }
+    },
+    removeLastRoute: (state) => {
+      state.previousRoutes.pop();
+    },
+    clearHistory: (state) => {
+      state.previousRoutes = [];
+    }
   },
 });
 
-export const { addSurah, addAyat, addTafsir, updateLastRead, setContinueReading } = bookmarkSlice.actions;
+export const { addSurah, addAyat, addTafsir, updateLastRead, setContinueReading, addRoute, addPreviousRoute, removeLastRoute, clearHistory } = bookmarkSlice.actions;
 export default bookmarkSlice.reducer;

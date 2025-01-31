@@ -14,6 +14,7 @@ import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import { useDispatch } from "react-redux";
 import Toast from "react-native-toast-message";
 import { addSurah } from "@/utils/store/slices/bookmarkSlice";
+import useSmartBack from "@/utils/hooks/useSmartBack";
 
 const Surah = () => {
     const { id } = useLocalSearchParams();
@@ -148,7 +149,8 @@ const Surah = () => {
                                 <View className="text-center pt-2">
                                     <CustomButton
                                         title="সব আয়াত পড়ুন"
-                                        onPress={() => router.push(`/ayat/${surahData?._id}`)}
+                                        // onPress={() => pathPush(pathname, `/(root)/(tabs)/ayat/${surahData?._id}`)}
+                                        onPress={() => {router.push(`/ayat/${surahData._id}`)}} 
                                         className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm border-dark-green"
                                         bgVariant="primary"
                                         textVariant="secondary"

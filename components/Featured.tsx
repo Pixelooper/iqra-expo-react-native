@@ -35,7 +35,9 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
           className="pt-4"
           renderItem={({item, index}) => (
             <TouchableOpacity 
-                key={index} onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
+                key={index} 
+                // onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
+                onPress={() => {router.push(`/surah/${item._id}`)}} 
             >
               <View className="mr-3 rounded-lg p-3 border border-gray-white bg-white">
                 <ImageBackground source={item.shape} className="w-[150px] h-[150px] flex justify-center items-center">

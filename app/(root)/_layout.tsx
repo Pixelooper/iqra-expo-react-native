@@ -1,61 +1,65 @@
-import { router, Stack, useRouter, useSegments } from "expo-router";
+import { Stack, useSegments } from "expo-router";
 import { View, Image, TouchableOpacity, Text, Platform } from "react-native";
 import { images, icons } from "@/constants";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import back from "../../assets/icons/back.png";
 import Toast, { BaseToast } from "react-native-toast-message";
+import useSmartBack from "@/utils/hooks/useSmartBack";
 
-const GlobalHeader = () => {
-  const insets = useSafeAreaInsets();
+// const GlobalHeader = () => {
+//   const insets = useSafeAreaInsets();
 
-  return (
-    <View
-      style={{
-        paddingHorizontal: 10,
-        paddingTop: Platform.OS === 'ios' ? 54 : insets.top,
-      }}
-      className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between"
-    >
-      <TouchableOpacity onPress={() => router.push('/home')}>
-        <Image source={images.logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
-      </TouchableOpacity>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Image source={icons.avatar} style={{ width: 32, height: 32, marginRight: 16 }} resizeMode="contain" />
-        <TouchableOpacity onPress={() => console.log('Menu Pressed')}>
-          <Image source={icons.ham} style={{ width: 32, height: 32 }} resizeMode="contain" />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
+//   return (
+//     <View
+//       style={{
+//         paddingHorizontal: 10,
+//         paddingTop: Platform.OS === 'ios' ? 54 : insets.top,
+//       }}
+//       className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between"
+//     >
+//       <TouchableOpacity onPress={() => router.push('/home')}>
+//         <Image source={images.logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
+//       </TouchableOpacity>
+//       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+//         <Image source={icons.avatar} style={{ width: 32, height: 32, marginRight: 16 }} resizeMode="contain" />
+//         <TouchableOpacity onPress={() => console.log('Menu Pressed')}>
+//           <Image source={icons.ham} style={{ width: 32, height: 32 }} resizeMode="contain" />
+//         </TouchableOpacity>
+//       </View>
+//     </View>
+//   );
+// };
 
 const PathHeader = () => {
   const insets = useSafeAreaInsets();
-  const router = useRouter();
   const segments = useSegments();
+  const { smartBack } = useSmartBack();
 
   const currentPage = segments[2] || "home";
   const isHome = currentPage === "home";
+  const isHide = (currentPage === "blog" || currentPage === "blogs" || currentPage === "mood");
 
-  const getTextClass = (page: string) => {
-    return currentPage === page
+  const getTextClass = (...pages: string[]) => {
+    return pages.includes(currentPage)
       ? "text-lg font-AneekBanglabold text-dark-green"
       : "text-xs font-AneekBangla text-[#B6B6B6]";
   };
 
-  return isHome ? (
-    // <GlobalHeader />
-    null
-  ) : (
+
+  return (
+    isHome ? (
+      // <GlobalHeader />
+      null
+    ) : 
     <View 
       style={{
         backgroundColor: '#FFFFFF',
         paddingHorizontal: 16,
         paddingTop: Platform.OS === 'ios' ? 54 : insets.top,
       }}
-      className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between py-2 pl-4">
+      className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between py-2 px-3">
       <TouchableOpacity
-        onPress={() => router.back()}
+        onPress={smartBack}
       >
         <Image
           source={back}
@@ -63,17 +67,23 @@ const PathHeader = () => {
           resizeMode="contain"
         />
       </TouchableOpacity>
-      <View className="flex-row items-center">
-        <View className="mr-4">
-          <Text className={getTextClass("surah")}>সূরা</Text>
+      
+      {
+        isHide ? (
+          null
+        ) : 
+        <View className="flex-row items-center">
+          <View className="mr-4">
+            <Text className={getTextClass("surah", "search", "bookmarkSurah")}>সূরা</Text>
+          </View>
+          <View className="mr-4">
+            <Text className={getTextClass("ayat", "bookmarkAyat")}>আয়াত</Text>
+          </View>
+          <View>
+            <Text className={getTextClass("tafsir", "bookmarkTafsir")}>তাফসীর</Text>
+          </View>
         </View>
-        <View className="mr-4">
-          <Text className={getTextClass("ayat")}>আয়াত</Text>
-        </View>
-        <View className="mr-4">
-          <Text className={getTextClass("tafsir")}>তাফসীর</Text>
-        </View>
-      </View>
+      }
     </View>
   );
 };
