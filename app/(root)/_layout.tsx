@@ -1,5 +1,5 @@
-import { Stack, useSegments } from "expo-router";
-import { View, Image, TouchableOpacity, Text, Platform } from "react-native";
+import { router, Stack, useSegments } from "expo-router";
+import { View, Image, TouchableOpacity, Text, Platform, StatusBar } from "react-native";
 import { images, icons } from "@/constants";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import back from "../../assets/icons/back.png";
@@ -37,7 +37,7 @@ const PathHeader = () => {
 
   const currentPage = segments[2] || "home";
   const isHome = currentPage === "home";
-  const isHide = (currentPage === "blog" || currentPage === "blogs" || currentPage === "mood");
+  const isHide = (currentPage === "blog" || currentPage === "blogs" || currentPage === "mood" || currentPage === "basedons");
 
   const getTextClass = (...pages: string[]) => {
     return pages.includes(currentPage)
@@ -47,43 +47,49 @@ const PathHeader = () => {
 
 
   return (
-    isHome ? (
-      // <GlobalHeader />
-      null
-    ) : 
-    <View 
-      style={{
-        backgroundColor: '#FFFFFF',
-        paddingHorizontal: 16,
-        paddingTop: Platform.OS === 'ios' ? 54 : insets.top,
-      }}
-      className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between py-2 px-3">
-      <TouchableOpacity
-        onPress={smartBack}
-      >
-        <Image
-          source={back}
-          className="w-[32px] h-[32px]"
-          resizeMode="contain"
-        />
-      </TouchableOpacity>
-      
-      {
-        isHide ? (
-          null
-        ) : 
-        <View className="flex-row items-center">
-          <View className="mr-4">
-            <Text className={getTextClass("surah", "search", "bookmarkSurah")}>সূরা</Text>
-          </View>
-          <View className="mr-4">
-            <Text className={getTextClass("ayat", "bookmarkAyat")}>আয়াত</Text>
-          </View>
-          <View>
-            <Text className={getTextClass("tafsir", "bookmarkTafsir")}>তাফসীর</Text>
-          </View>
+      <View>
+        <StatusBar backgroundColor="#FFFFFF" translucent={false} />
+        <View 
+          style={{
+            paddingHorizontal: 16,
+            paddingTop: Platform.OS === 'ios' ? 0 : insets.top,
+          }}
+          className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between py-2 px-3 min-h-[64px]">
+          {
+            isHome ? (
+            // <GlobalHeader />
+            <TouchableOpacity onPress={() => router.push('/home')}>
+              <Image source={images.logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
+            </TouchableOpacity>
+          ) :
+            <TouchableOpacity
+              onPress={smartBack}
+            >
+              <Image
+                source={back}
+                className="w-[32px] h-[32px]"
+                resizeMode="contain"
+              />
+            </TouchableOpacity> 
+          }
+          
+          {
+            isHide ? (
+              null
+            ) : 
+            <View className="flex-row items-center">
+              <View className="mr-4">
+                <Text className={getTextClass("surah", "search", "bookmarkSurah")}>সূরা</Text>
+              </View>
+              <View className="mr-4">
+                <Text className={getTextClass("ayat", "bookmarkAyat", "basedon")}>আয়াত</Text>
+              </View>
+              <View>
+                <Text className={getTextClass("tafsir", "bookmarkTafsir")}>তাফসীর</Text>
+              </View>
+            </View>
+          }
         </View>
-      }
     </View>
   );
 };
@@ -115,7 +121,7 @@ const Layout = () => {
         flex: 1,
         paddingTop: insets.top,
         paddingBottom: Platform.OS === 'ios' ? 20 : insets.bottom,
-        backgroundColor: '#000000'
+        backgroundColor: '#FFFFFF'
       }}
     >
       <PathHeader />

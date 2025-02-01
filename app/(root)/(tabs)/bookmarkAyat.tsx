@@ -1,13 +1,17 @@
 import BookedAyats from "@/components/BookedAyats";
+import Title from "@/components/Title";
 import { surah } from "@/types/type";
 import { RootState } from "@/utils/store/store";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
+const PageTitle: React.FC = () => {
+  return <Title title="সংরক্ষিত আয়াত তালিকা" subtitle="এখানে আপনি আপনার সংরক্ষিত আয়াতটি খুঁজে পেতে পারেন" btnText={false} />;
+};
 
 const bookmarkAyat = () => {
     const { ayat } = useSelector((state: RootState) => state.bookmark);
-    // console.log(ayat)
 
     const [loading, setLoading] = useState(true);
     const [ayatData, setAyatData] = useState<surah[]>([]);
@@ -41,7 +45,7 @@ const bookmarkAyat = () => {
     }, [ayat]);
 
     return (
-        <BookedAyats loading={loading} ayatData={ayatData}/>
+        <BookedAyats loading={loading} ayatData={ayatData} Component={PageTitle}/>
     );
 };
 

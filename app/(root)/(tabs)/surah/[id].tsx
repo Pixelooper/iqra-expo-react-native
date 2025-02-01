@@ -2,11 +2,10 @@ import { router, useLocalSearchParams } from "expo-router";
 import { Text, ActivityIndicator, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ayat, surah } from "@/types/type";
 import axios from "axios";
 import SurahHead from "@/components/SurahHead";
-import SingleAyat from "@/components/SingleAyat";
 import angleRight from "@/assets/icons/angle-right.png";
 import bookmark from "@/assets/icons/bookmark.png";
 import AutoScrollToTop from "@/utils/AutoScrollToTop";
@@ -14,13 +13,15 @@ import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import { useDispatch } from "react-redux";
 import Toast from "react-native-toast-message";
 import { addSurah } from "@/utils/store/slices/bookmarkSlice";
-import useSmartBack from "@/utils/hooks/useSmartBack";
+import { FlashList } from "@shopify/flash-list";
+import { AyatList } from "@/components/AyatList";
 
 const Surah = () => {
     const { id } = useLocalSearchParams();
     const [surahData, setSurahData] = useState<surah | null>(null);
     const [ayatData, setAyatData] = useState<ayat | null>(null);
     const [loading, setLoading] = useState(true);
+    const flashListRef = useRef<FlashList<any>>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,7 +29,7 @@ const Surah = () => {
             try {
                 const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surah/${id}`);
                 setSurahData(response.data.data);
-                setAyatData(response.data.data.ayat[0])
+                setAyatData(response.data.data.ayat)
             } catch (error) {
                 console.error("Error fetching data", error);
             } finally {
@@ -123,34 +124,21 @@ const Surah = () => {
                                 </View>
                                 }
                             </View>
-
-                            <View className="mt-2 px-4 py-6 border border-gray-white bg-white rounded-3xl">
-                                <View className="text-center mb-8">
-                                    <Text className="text-2xl text-dark-green mb-4 text-center">
-                                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                                    </Text>
-                                    <Text className="text-sm font-AnekBangla text-dark-green mb-4 text-center">
-                                        পরম করুণাময় অসীম দয়ালু আল্লাহতায়ালার নামে
-                                    </Text>
-                                </View>
-
-                                <SingleAyat 
-                                    no={ayatData?.no ?? 0} 
-                                    sid={surahData?._id ?? ""} 
-                                    aid={ayatData?._id ?? ""} 
-                                    ar={ayatData?.ar || ""} 
-                                    bn={ayatData?.bn || ""}
+                            <View className="mt-2 px-4 pt-6 text-dark-greem  border border-gray-white bg-white rounded-3xl" style={{ 
+                                flex: 1,
+                                minHeight: 200,
+                                backgroundColor: 'transparent' 
+                            }}>
+                                <AyatList
+                                    sid={id}
+                                    data={ayatData}
+                                    flashListRef={flashListRef}
                                     tafsirPage={false}
-                                    shanenuzul={ayatData?.shanenuzul || ""}
-                                    tika={ayatData?.tika || []}
-                                    quote={ayatData?.quote || ""}
                                 />
-
-                                <View className="text-center pt-2">
+                                <View className="text-center pb-4">
                                     <CustomButton
                                         title="সব আয়াত পড়ুন"
-                                        // onPress={() => pathPush(pathname, `/(root)/(tabs)/ayat/${surahData?._id}`)}
-                                        onPress={() => {router.push(`/ayat/${surahData._id}`)}} 
+                                        onPress={() => {router.push(`/ayat/${id}`)}} 
                                         className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm border-dark-green"
                                         bgVariant="primary"
                                         textVariant="secondary"

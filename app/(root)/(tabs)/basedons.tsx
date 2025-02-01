@@ -1,30 +1,28 @@
-import BlogList from "@/components/BlogList";
+import BasedOnList from "@/components/BasedOnList";
 import Title from "@/components/Title";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Animated, Platform, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-type Blogs = [
-    {
-        _id: string;
-        title: string;
-        desc: string;
-    }
-];
+type Baseons = [{
+    _id: string;
+    title: string;
+    desc: string;
+}];
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
-const blogs = () => {
-    const [blogs, setBlogs] = useState<Blogs | []>([]);
+const basedons = () => {
+    const [basedon, setBasedon] = useState<Baseons | []>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/blog`);
-                setBlogs(response.data.data);
+                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/basedon`);
+                setBasedon(response.data.data);
             } catch (error) {
                 console.error("Error fetching data", error);
             } finally {
@@ -36,7 +34,7 @@ const blogs = () => {
 
         // Optional: Cleanup to reset state when component unmounts
         return () => {
-            setBlogs([]);
+            setBasedon([]);
         };
     }, []);
     
@@ -48,12 +46,12 @@ const blogs = () => {
             </View>
           ) : (
             <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35 }}>
-                <Title title="Blogs" subtitle="আপনি এখানে তথ্যপূর্ণ ইসলামিক ব্লগ পেতে পারেন" btnText={false} />
-                <BlogList blogs={blogs}/>
+                <Title title="Ayat Based Topics" subtitle="আয়াত ভিত্তিক বিষয়গুলি এখানে খুঁজে পেতে পারেন" btnText={false}/>
+                <BasedOnList basedon={basedon}/>
             </View>
           )}
         </AnimatedSafeAreaView>
     );
 };
 
-export default blogs;
+export default basedons;

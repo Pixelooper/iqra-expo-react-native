@@ -51,7 +51,6 @@ const Blog = () => {
                     resizeMode="contain"
                 />
                 <Title title={blog?.title} subtitle={blog?.desc} btnText={false} />
-                {/* <BlogList blogs={blogs}/> */}
             </ScrollView>
           )}
         </SafeAreaView>

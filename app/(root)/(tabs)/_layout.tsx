@@ -13,15 +13,15 @@ const TabIcon = ({
   focused: boolean;
   text: string;
 }) => (
-  <View className={`flex flex-row justify-between items-center mb-7 ${focused ? "bg-general-300" : ""}`}>
-    <View className={`flex justify-center items-center rounded-md w-16 h-9 ${focused ? "" : ""}`}>
+  <View className={`flex flex-row justify-between items-center mb-7 ${focused ? "bg-green" : ""}`}>
+    <View className={`flex justify-center items-center rounded-md w-16 h-9 ${focused ? "bg-green" : ""}`}>
       <Image
         source={source}
-        tintColor="white"
+        tintColor={focused ? "#0CC25F" : "#000000"}
         resizeMode="contain"
         className="w-6 h-6"
       />
-      <Text className="text-xs text-white font-AnekBanglaMedium uppercase pt-1">{text}</Text>
+      <Text className="text-xs text-black font-AnekBanglaMedium uppercase pt-1">{text}</Text>
     </View>
   </View>
 );
@@ -47,7 +47,7 @@ const ReadIcon = ({
         className={focused ? "w-10 h-10" : "w-[70px] h-[54px]"}
       />
       {
-        !focused && <Text className="text-xs text-white">পড়া চালিয়ে যান</Text>
+        !focused && <Text className="text-xs text-black">পড়া চালিয়ে যান</Text>
       }
     </View>
   </TouchableOpacity>
@@ -60,11 +60,11 @@ export default function Layout() {
     <Tabs
       initialRouteName="home"
       screenOptions={{
-        tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "white",
+        tabBarActiveTintColor: "green",
+        tabBarInactiveTintColor: "green",
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#000000",
+          backgroundColor: "#FFFFFF",
           borderRadius: 0,
           paddingBottom: 0, // ios only
           marginHorizontal: 0,
@@ -96,7 +96,15 @@ export default function Layout() {
           tabBarIcon: ({ focused }) => (
             !continueReading ? 
             <TouchableOpacity onPress={() => router.push('/home')}  className={`flex justify-center items-center mb-16`}>
-              <Image source={images.logo} style={{ width: 76, height: 76 }} resizeMode="contain" /> 
+              <View className={`flex justify-center items-center rounded-full "w-20 h-20`}>
+                <Image source={icons.read} style={{ width: 76, height: 76 }} resizeMode="contain"/> 
+                {/* <Image
+                  source={icons.read}
+                  resizeMode="contain"
+                  className={"w-[36px] h-[26px]"}
+                />
+                <Text className="text-xs text-black">ইকরা</Text> */}
+              </View>
             </TouchableOpacity>:
             <ReadIcon source={icons.keepread} focused={focused} continueReading={continueReading}/>
           ),
@@ -130,6 +138,22 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
+        name="basedons"
+        options={{
+          title: "Basedons",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
+      <Tabs.Screen
+        name="basedon/[id]"
+        options={{
+          title: "Basedon",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
+      <Tabs.Screen
         name="blog/[id]"
         options={{
           title: "Blog",
@@ -140,7 +164,7 @@ export default function Layout() {
       <Tabs.Screen
         name="blogs"
         options={{
-          title: "blogs",
+          title: "Blogs",
           headerShown: false,
           href: null, // Prevent these from being added as tabs
         }}

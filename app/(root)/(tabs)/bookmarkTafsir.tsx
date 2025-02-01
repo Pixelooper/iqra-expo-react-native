@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 const bookmarkTafsir = () => {
     const { tafsir } = useSelector((state: RootState) => state.bookmark);
-    // console.log(tafsir)
 
     const [loading, setLoading] = useState(true);
     const [tafsirData, setTafsirData] = useState<surah[]>([]);

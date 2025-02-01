@@ -7,6 +7,7 @@ import Mood from "@/components/Mood";
 import { useSelector } from "react-redux";
 import { RootState } from "@/utils/store/store";
 import Saved from "@/components/Saved";
+import BasedOn from "@/components/BasedOn";
 
 const Home = () => {
     const { data } = useSelector((state: RootState) => state.home);
@@ -22,6 +23,7 @@ const Home = () => {
                         <LastRead lastRead={lastRead}/> : null
                     }
                     <Featured featured={data.featured}/>
+                    <BasedOn basedon={data.basedon}/>
                     <Blogs blogs={data.blogs}/>
                     <Mood/>
                 </View>

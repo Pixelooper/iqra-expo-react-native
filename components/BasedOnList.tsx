@@ -3,36 +3,32 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import shape from "../assets/shapes/shape-6.png";
 
-type BlogProps = {
-    blogs: [
+type BasedOnProps = {
+    basedon: [
         {
             _id: string;
-            title: string;
-            desc: string;
+            topic: string;
         }
     ]
 };
 
-const BlogList: React.FC<BlogProps> = ({blogs}) => {
+const BasedOnList: React.FC<BasedOnProps> = ({basedon}) => {
     return (
         <View className="pt-4">
-            {blogs.map((blog) => (
+            {basedon.map((item) => (
             <TouchableOpacity 
-                key={blog._id} 
-                onPress={() => router.push(`/(root)/(tabs)/blog/${blog._id}`)}
+                key={item._id} 
+                onPress={() => router.push(`/(root)/(tabs)/basedon/${item._id}`)}
                 className="py-2 px-4 border border-gray-white bg-white rounded-lg mb-3"
             >
-                <Text className="text-gray-black font-AnekBanglaSemiBold">
-                    {blog.title}
-                </Text>
-                <View className="w-full flex flex-row justify-center pt-1 pl-1">
+                <View className="w-full flex flex-row justify-start items-center">
                     <Image
                         source={shape}
                         className="w-[16px] h-[16px]"
                         resizeMode="contain"
                     />
-                    <Text className="text-xs text-gray-black font-AnekBangla pl-2">
-                        {blog.desc}...
+                    <Text className="text-gray-black font-AnekBanglaSemiBold ml-2">
+                        {item.topic}
                     </Text>
                 </View>
             </TouchableOpacity>
@@ -41,4 +37,4 @@ const BlogList: React.FC<BlogProps> = ({blogs}) => {
     );
 };
 
-export default BlogList;
+export default BasedOnList;

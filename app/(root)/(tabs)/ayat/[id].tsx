@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocalSearchParams } from 'expo-router';
 import { Animated, View, TextInput, ActivityIndicator, Text, Platform } from 'react-native';
 import { useScrollToAyat } from '@/utils/hooks/useScrollToAyat';
@@ -19,7 +19,7 @@ const Ayat = () => {
   const flashListRef = useRef<FlashList<any>>(null);
 
   const translateY = useRef(new Animated.Value(0)).current;
-  const containerHeight = useRef(new Animated.Value(100)).current; // Adjust the default height as needed
+  const containerHeight = useRef(new Animated.Value(100)).current; 
 
   // Data handling
   const { data: surahData, loading, error } = useSurahData(id);
@@ -113,11 +113,18 @@ const Ayat = () => {
         />
 
         {/* Ayat list */}
-        <AyatList
-            sid={id}
-            data={filteredAyats}
-            flashListRef={flashListRef}
-        />
+        <View className="mt-2 px-4 pt-6 text-dark-greem  border border-gray-white bg-white rounded-3xl" style={{ 
+            flex: 1,
+            minHeight: 200,
+            backgroundColor: 'transparent' 
+        }}>
+          <AyatList
+              sid={id}
+              data={filteredAyats}
+              flashListRef={flashListRef}
+              tafsirPage={false}
+          />
+        </View>
       </View>
     </AnimatedSafeAreaView>
   );

@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import CustomButton from './CustomButton';
 import tafsir from "../assets/icons/tafsir.png";
@@ -10,6 +10,7 @@ import { convertToBengaliDigits } from '@/utils/hooks/useBengaliDigit';
 import Toast from 'react-native-toast-message';
 import { addAyat, addTafsir, setContinueReading } from '@/utils/store/slices/bookmarkSlice';
 import { useDispatch } from 'react-redux';
+import { FlashList } from '@shopify/flash-list';
 
 type SingleAyatProps = {
     no: number;
@@ -21,14 +22,28 @@ type SingleAyatProps = {
     shanenuzul: string;
     tika: string[];
     quote: string;
+    flashListRef?: React.RefObject<FlashList<any>>;
 };
 
-const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote }: SingleAyatProps) => {
+const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote, flashListRef }: SingleAyatProps) => {
     const dispatch = useDispatch();
     const [expandedAyat, setExpandedAyat] = useState(null);
+    const expandableRef = useRef<View>(null);
 
     const toggleExpand = (ayatNo: number) => {
-        setExpandedAyat(expandedAyat === ayatNo ? null : ayatNo);
+        if (expandedAyat === ayatNo) {
+            setExpandedAyat(null);
+        } else {
+            setExpandedAyat(ayatNo);
+            
+            // Scroll to expanded content after a small delay
+            flashListRef.current?.scrollToIndex({
+                index: ayatNo,
+                viewOffset: 150, 
+                viewPosition: 0.5,
+                animated: true
+            });
+        }
     };
 
     const handleAyatOrTafsirSave = (sId: string, aId: string) => {
@@ -61,6 +76,9 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
         });
     };
 
+    const showInfoButton = !!(quote || shanenuzul || (tika && tika.length > 0));
+    console.log(no, showInfoButton)
+
     return (
         <View className="mb-4">
             <View className="flex flex-row justify-between mb-4">
@@ -83,7 +101,6 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
                         <CustomButton
                             title="তাফসীর"
                             onPress={() => {router.push(`/tafsir/${sid}/${aid}`)}} 
-                            // onPress={() => pathPush(pathname, `/tafsir/${sid}/${aid}`)}
                             className="rounded-2xl py-1 px-1 h-5 w-[68px] border-gray-white"
                             ImgLeft={tafsir}
                             bgVariant="secondary"
@@ -97,14 +114,15 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
                         bgVariant="secondary"
                     />
                     {
-                        tafsirPage || (!quote && !shanenuzul && tika.length === 0) ? null : 
-                        <CustomButton
-                            title="তথ্য"
-                            className="rounded-2xl py-1 px-1 h-5 w-[46px] border-gray-white"
-                            ImgLeft={tick}
-                            onPress={() => toggleExpand(no)}
-                            bgVariant="secondary"
-                        />
+                        showInfoButton && (
+                            <CustomButton
+                                title="তথ্য"
+                                className="rounded-2xl py-1 px-1 h-5 w-[46px] border-gray-white"
+                                ImgLeft={tick}
+                                onPress={() => toggleExpand(no)}
+                                bgVariant="secondary"
+                            />
+                        )
                     }
                 </View>
             </View>
@@ -118,7 +136,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
 
                 {
                     expandedAyat === no && (
-                        <>
+                        <View ref={expandableRef}>
                             {
                                 shanenuzul &&
                                 <Text className="font-AnekBangla text-sm text-black-300 mt-3">
@@ -127,7 +145,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
                                 </Text>
                             }
                             {
-                                tika.length > 0 &&
+                                tika?.length > 0 &&
                                 tika.map((text, index) => (
                                     <Text key={index} className="font-AnekBangla text-sm text-black-300 mt-3">
                                         <Text className="font-AnekBanglaSemiBold text-yellow-400">টিকা ({index+1}): </Text>  
@@ -142,7 +160,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote 
                                     {quote}
                                 </Text>
                             }
-                        </>
+                        </View>
                     )
                 }
             </View>

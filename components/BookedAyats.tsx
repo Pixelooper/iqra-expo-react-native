@@ -3,7 +3,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { useRef, useState } from "react";
 import { ayat } from "@/types/type";
-import Title from "@/components/Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
 
@@ -19,9 +18,10 @@ type BookedAyatsProps = {
         surahNo: number;
         surahName_bn: string;
     };
+    Component: React.ElementType;
 };
 
-const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData}) => {
+const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component}) => {
     const [searchQuery, setSearchQuery] = useState("");
     const scrollY = useRef(new Animated.Value(0)).current;
 
@@ -88,7 +88,7 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData}) => {
                     }),
                   }}
                 >
-                  <Title title="সংরক্ষিত আয়াত তালিকা" subtitle="এখানে আপনি আপনার সংরক্ষিত আয়াতটি খুঁজে পেতে পারেন" btnText={false} />
+                  <Component />
                 </Animated.View>
               </Animated.View>
               <TextInput
@@ -136,7 +136,7 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData}) => {
     
                   return (
                     <TouchableOpacity key={index} 
-                      onPress={() => router.push(`/(root)/(tabs)/ayat/${item?.surahId}`)}
+                      onPress={() => router.push(`/(root)/(tabs)/tafsir/${item?.surahId}/${item?._id}`)}
                     >
                       <Animated.View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
                         style={{

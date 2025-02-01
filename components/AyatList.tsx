@@ -4,26 +4,25 @@ import SingleAyat from './SingleAyat';
 import { Text, View } from 'react-native';
 
 type AyatListProps = {
+  currentAyatId?: string;
   sid: string;
   data: any[];
   flashListRef: React.RefObject<FlashList<any>>;
+  tafsirPage: boolean;
   onMomentumScrollEnd?: () => void;
 };
 
-export const AyatList = memo(({ sid, data, flashListRef }: AyatListProps) => {
+export const AyatList = memo(({ sid, data, flashListRef, tafsirPage, currentAyatId }: AyatListProps) => {
   return (
-    <View className="mt-2 px-4 pt-6 text-dark-greem  border border-gray-white bg-white rounded-3xl" style={{ 
-      flex: 1,
-      minHeight: 200,
-      backgroundColor: 'transparent' 
-    }}>
     <FlashList
       ref={flashListRef}
       data={data}
+      extraData={currentAyatId}
       estimatedItemSize={150}
       keyExtractor={(item) => item._id}
       renderItem={({ item }) => (
         <SingleAyat
+          key={item._id}
           no={item.no}
           sid={sid}
           aid={item._id}
@@ -32,6 +31,8 @@ export const AyatList = memo(({ sid, data, flashListRef }: AyatListProps) => {
           shanenuzul={item.shanenuzul}
           tika={item.tika}
           quote={item.quote}
+          flashListRef={flashListRef}
+          tafsirPage={tafsirPage}
         />
       )}
       ListHeaderComponent={
@@ -44,10 +45,8 @@ export const AyatList = memo(({ sid, data, flashListRef }: AyatListProps) => {
           </Text>
         </View>
       }
-      contentContainerStyle={{ paddingBottom: 560 }}
+      contentContainerStyle={data.length === 1 ? { paddingBottom: 0} : { paddingBottom: 40 }}
       showsVerticalScrollIndicator={false}
     />
-    
-  </View>
   );
 });

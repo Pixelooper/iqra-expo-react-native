@@ -4,6 +4,7 @@ import BlogList from "./BlogList";
 
 type BlogProps = {
     blogs: {
+        _id: string;
         title: string;
         desc: string;
     }

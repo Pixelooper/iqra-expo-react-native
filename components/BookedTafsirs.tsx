@@ -137,7 +137,6 @@ const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData}) => {
     
                   return (
                     <TouchableOpacity key={index} 
-                    //   onPress={() => router.push(`/(root)/(tabs)/ayat/${item?.surahId}`)}
                       onPress={() => router.push(`/tafsir/${item?.surahId}/${item?._id}`)}
                     >
                       <Animated.View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
