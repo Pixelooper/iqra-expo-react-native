@@ -45,7 +45,7 @@ const basedons = () => {
               <ActivityIndicator size="large" color="#00ff00" />
             </View>
           ) : (
-            <ScrollView style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35 }}>
+            <ScrollView style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35, marginBottom: Platform.OS === 'ios' ? 12 : 50 }}>
                 <Title title="Ayat Based Topics" subtitle="আয়াত ভিত্তিক বিষয়গুলি এখানে খুঁজে পেতে পারেন" btnText={false}/>
                 <BasedOnList basedon={basedon}/>
             </ScrollView>

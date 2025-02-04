@@ -1,10 +1,15 @@
 import BookedAyats from "@/components/BookedAyats";
 import BookedTafsirs from "@/components/BookedTafsirs";
+import Title from "@/components/Title";
 import { surah } from "@/types/type";
 import { RootState } from "@/utils/store/store";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+
+const PageTitle: React.FC = () => {
+  return <Title title="সংরক্ষিত তাফসীর তালিকা" subtitle="এখানে আপনি আপনার সংরক্ষিত তাফসীরটি খুঁজে পেতে পারেন" btnText={false} />;
+};
 
 const bookmarkTafsir = () => {
     const { tafsir } = useSelector((state: RootState) => state.bookmark);
@@ -43,7 +48,7 @@ const bookmarkTafsir = () => {
     }, [tafsir]);
 
     return (
-        <BookedTafsirs loading={loading} tafsirData={tafsirData}/>
+        <BookedTafsirs loading={loading} tafsirData={tafsirData} Component={PageTitle}/>
     );
 };
 

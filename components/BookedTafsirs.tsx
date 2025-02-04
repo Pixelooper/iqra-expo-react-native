@@ -3,14 +3,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { useRef, useState } from "react";
 import { ayat } from "@/types/type";
-import Title from "@/components/Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
 import EmptyData from "./EmptyData";
 
-const SPACING = 20;
-const AVATAR_SIZE = 100;
-const ITEM_SIZE = AVATAR_SIZE + SPACING * 2;
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
 type BookedTafsirsProps = {
@@ -21,11 +17,11 @@ type BookedTafsirsProps = {
         surahName_bn: string;
         splitedTafsir: string;
     };
+    Component: React.ElementType;
 };
 
-const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData}) => {
+const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData, Component}) => {
     const [searchQuery, setSearchQuery] = useState("");
-    const scrollY = useRef(new Animated.Value(0)).current;
 
     const filteredSurahs = !tafsirData ? [] : tafsirData.filter((ayat: ayat) =>
       ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)|| ayat.splitedTafsir.includes(searchQuery)
@@ -77,21 +73,11 @@ const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData}) => {
               <Animated.View
                 style={{
                   height: containerHeight, // Animates the container height
-                  overflow: "hidden", // Prevents overflow content from being visible
                 }}
               >
-                <Animated.View
-                  style={{
-                    transform: [{ translateY }],
-                    opacity: translateY.interpolate({
-                      inputRange: [-100, 0],
-                      outputRange: [0, 1],
-                      extrapolate: "clamp",
-                    }),
-                  }}
-                >
-                  <Title title="সংরক্ষিত তাফসীর তালিকা" subtitle="এখানে আপনি আপনার সংরক্ষিত তাফসীরটি খুঁজে পেতে পারেন" btnText={false} />
-                </Animated.View>
+                <View>
+                  <Component />
+                </View>
               </Animated.View>
               <TextInput
                 placeholder="এখানে লিখুন"
@@ -105,73 +91,47 @@ const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData}) => {
               <Animated.FlatList
                 data={surahWithShapes}
                 contentContainerStyle={{ paddingTop: 16 }}
-                // keyExtractor={(item) => item._id}
-                onScroll={Animated.event(
-                  [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                  { useNativeDriver: true }
-                )}
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {
-                  const inputRange = [
-                    -1,
-                    0,
-                    ITEM_SIZE * index,
-                    ITEM_SIZE * (index + 1), // Correct scaling range
-                  ];
-    
-                  const scaleInputRange = [
-                    -1,
-                    0,
-                    ITEM_SIZE * index,
-                    ITEM_SIZE * (index + 0.5), // Visible scaling happens earlier
-                  ];
-    
-                  const opacity = scrollY.interpolate({
-                    inputRange,
-                    outputRange: [1, 1, 1, 0],
-                  });
-    
-                  const scale = scrollY.interpolate({
-                    inputRange: scaleInputRange,
-                    outputRange: [1, 1, 1, 0.8],
-                  });
-    
                   return (
                     <TouchableOpacity key={index} 
                       onPress={() => router.push(`/tafsir/${item?.surahId}/${item?._id}`)}
                     >
-                      <Animated.View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
+                      <View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
                         style={{
-                          marginBottom: SPACING,
+                          marginBottom: 20,
                           borderRadius: 12,
-                          transform: [{ scale }],
-                          opacity,
                         }}
                       >
-                        <Image
-                          source={item.shape}
-                          className={`w-[${AVATAR_SIZE}px] h-[${AVATAR_SIZE}px]`}
-                          resizeMode="contain"
-                        />
-                        <View className="flex-1 flex items-end justify-between pl-3 min-h-[95px]">
-                            <Text className="text-xs text-black mb-2">
-                                {item.ar.slice(0, 75)}...
-                            </Text>
-                            <Text className="text-xs text-black font-AnekBanglaSemiBold mb-4">
-                                {item.splitedTafsir.slice(0, 75)}...
-                            </Text>
-                            <View className="flex flex-row items-center justify-between w-full">
-                                <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
-                                    <Text className="text-xs text-black font-AnekBanglaSemiBold">
-                                    সূরা {item.surahName_bn}
-                                    </Text>
-                                </View>
-                                <Text className="text-xs text-black text-right pr-1">
-                                    আয়াত নম্বর {convertToBengaliDigits(item.no)}
-                                </Text>
+                        <View className="flex-1 min-h-[95px]">
+                          <View className="flex-1 flex flex-row items-center justify-between">
+                            <Image
+                              source={item.shape}
+                              className={`w-[24px] h-[24px]`}
+                              resizeMode="contain"
+                            />
+                            <View className="flex flex-1 items-end justify-between w-full">
+                              <Text className="text-xs text-black">
+                                {item.ar.length > 100 ? item.ar.substring(0, 100) + "..." : item.ar}
+                              </Text>
+                            </View>
+                          </View>
+                          <Text className="text-xs text-black font-AnekBanglaSemiBold pt-3">
+                              {item.splitedTafsir.length > 125 ? item.splitedTafsir.substring(0, 125) + "..." : item.splitedTafsir}
+                          </Text>
+
+                          <View className="flex flex-row items-center justify-between w-full mt-2">
+                              <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
+                                  <Text className="text-xs text-black font-AnekBanglaSemiBold">
+                                  সূরা {item.surahName_bn}
+                                  </Text>
+                              </View>
+                              <Text className="text-xs text-black text-right pr-1">
+                                  আয়াত নম্বর {convertToBengaliDigits(item.no)}
+                              </Text>
                           </View>
                         </View>
-                      </Animated.View>
+                      </View>
                     </TouchableOpacity>
                   );
                 }}

@@ -68,11 +68,10 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
               <ActivityIndicator size="large" color="#00ff00" />
             </View>
           ) : (
-            <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35 }}>
+            <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35, marginBottom: Platform.OS === 'ios' ? 12 : 50 }}>
               <Animated.View
                 style={{
                   height: containerHeight, // Animates the container height
-                  // overflow: "hidden", // Prevents overflow content from being visible
                 }}
               >
                 <View>
@@ -94,40 +93,50 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {
                   return (
-                    <TouchableOpacity key={index} 
+                    <TouchableOpacity 
+                      key={index} 
                       onPress={() => router.push(`/(root)/(tabs)/ayat/${item?.surahId}/${item?._id}`)}
                     >
-                      <View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
+                      <View 
+                        className="w-full border border-gray-white bg-white rounded-lg p-2 flex flex-row items-start justify-start"
                         style={{
                           marginBottom: 20,
                           borderRadius: 12,
                         }}
                       >
-                        <Image
-                          source={item.shape}
-                          className={`w-[100px] h-[100px]`}
-                          resizeMode="contain"
-                        />
-                        <View className="flex-1 flex items-end justify-between pl-3 min-h-[95px]">
-                            <Text className="text-xs text-black mb-2">
-                                {item.ar.slice(0, 75)}...
-                            </Text>
-                            <Text className="text-xs text-black font-AnekBanglaSemiBold mb-4">
-                                {item.bn.slice(0, 75)}...
-                            </Text>
-                            <View className="flex flex-row items-center justify-between w-full">
-                                <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
-                                    <Text className="text-xs text-black font-AnekBanglaSemiBold">
-                                    সূরা {item.surahName_bn}
-                                    </Text>
-                                </View>
-                                <Text className="text-xs text-black text-right pr-1">
-                                    আয়াত নম্বর {convertToBengaliDigits(item.no)}
+                        <View className="flex-1 min-h-[95px]">
+                          <View className="flex-1 flex flex-row items-center justify-between">
+                            <Image
+                              source={item.shape}
+                              className="w-[24px] h-[24px]"
+                              resizeMode="contain"
+                            />
+                            <View className="flex flex-1 items-end justify-between w-full">
+                                <Text className="text-xs text-black">
+                                  {/* {item.ar.slice(0, 100)}... */}
+                                  {item.ar.length > 100 ? item.ar.substring(0, 100) + "..." : item.ar}
                                 </Text>
+                              </View>
                           </View>
+                          <Text className="text-xs text-black font-AnekBanglaSemiBold pt-3">
+                            {item.bn.length > 125 ? item.bn.substring(0, 125) + "..." : item.bn}
+                          </Text>
+
+                          <View className="flex flex-row items-center justify-between w-full mt-2">
+                            <View className="border border-gray-white px-3 py-1 rounded-md">
+                              <Text className="text-xs text-black font-AnekBanglaSemiBold">
+                                সূরা {item.surahName_bn}
+                              </Text>
+                            </View>
+                            <Text className="text-xs text-black text-right pr-1">
+                              আয়াত নম্বর {convertToBengaliDigits(item.no)}
+                            </Text>
+                          </View>
+
                         </View>
                       </View>
                     </TouchableOpacity>
+
                   );
                 }}
                 ListEmptyComponent={() => (
