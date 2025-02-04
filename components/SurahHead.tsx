@@ -1,7 +1,6 @@
 import { Image, Text, View } from 'react-native';
 import { convertToBengaliDigits } from '@/utils/hooks/useBengaliDigit';
 import { shapes } from "@/constants";
-// import { useMemo } from 'react';
 
 type TitleProps = {
     ar: string;
@@ -11,8 +10,6 @@ type TitleProps = {
 };
 
 const SurahHead = ({ ar, bn, total, tafsir } : TitleProps) => {
-    // const shape = useMemo(() => shapes[Math.floor(Math.random() * shapes.length)], []);
-
     return (
         <View className="pb-4">
             <Image

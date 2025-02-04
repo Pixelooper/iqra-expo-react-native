@@ -2,7 +2,7 @@ import BasedOnList from "@/components/BasedOnList";
 import Title from "@/components/Title";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Animated, Platform, View } from "react-native";
+import { ActivityIndicator, Animated, Platform, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type Baseons = [{
@@ -45,10 +45,10 @@ const basedons = () => {
               <ActivityIndicator size="large" color="#00ff00" />
             </View>
           ) : (
-            <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35 }}>
+            <ScrollView style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35 }}>
                 <Title title="Ayat Based Topics" subtitle="আয়াত ভিত্তিক বিষয়গুলি এখানে খুঁজে পেতে পারেন" btnText={false}/>
                 <BasedOnList basedon={basedon}/>
-            </View>
+            </ScrollView>
           )}
         </AnimatedSafeAreaView>
     );

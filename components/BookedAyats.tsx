@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { ayat } from "@/types/type";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
+import EmptyData from "./EmptyData";
 
 const SPACING = 20;
 const AVATAR_SIZE = 100;
@@ -136,7 +137,7 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
     
                   return (
                     <TouchableOpacity key={index} 
-                      onPress={() => router.push(`/(root)/(tabs)/tafsir/${item?.surahId}/${item?._id}`)}
+                      onPress={() => router.push(`/(root)/(tabs)/ayat/${item?.surahId}/${item?._id}`)}
                     >
                       <Animated.View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
                         style={{
@@ -173,6 +174,9 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                     </TouchableOpacity>
                   );
                 }}
+                ListEmptyComponent={() => (
+                 <EmptyData/>
+                )}
               />
             </View>
           )}

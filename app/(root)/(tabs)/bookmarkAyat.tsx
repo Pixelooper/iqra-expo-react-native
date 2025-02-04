@@ -30,7 +30,7 @@ const bookmarkAyat = () => {
               },
             }
           );
-          setAyatData(response.data.data); // Assuming `data.data` is the correct response
+          setAyatData(response.data.data);
         } catch (err) {
           console.error("Error fetching last read surahs:", err);
         } finally {
@@ -41,6 +41,8 @@ const bookmarkAyat = () => {
       // Fetch data only if `lastRead` has elements
       if (ayat.length > 0) {
         fetchLastReadSurahs();
+      }else{
+        setLoading(false); 
       }
     }, [ayat]);
 

@@ -12,7 +12,7 @@ import { AyatList } from '@/components/AyatList';
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
-const Ayat = () => {
+const Ayats = () => {
   const dispatch = useDispatch();
   const { id, scrollTo } = useLocalSearchParams<{ id: string; scrollTo?: string }>();
   const [searchQuery, setSearchQuery] = useState('');
@@ -130,4 +130,4 @@ const Ayat = () => {
   );
 };
 
-export default Ayat;
+export default Ayats;

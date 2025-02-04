@@ -1,34 +1,10 @@
 import { router, Stack, useSegments } from "expo-router";
 import { View, Image, TouchableOpacity, Text, Platform, StatusBar } from "react-native";
-import { images, icons } from "@/constants";
+import { images } from "@/constants";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import back from "../../assets/icons/back.png";
 import Toast, { BaseToast } from "react-native-toast-message";
 import useSmartBack from "@/utils/hooks/useSmartBack";
-
-// const GlobalHeader = () => {
-//   const insets = useSafeAreaInsets();
-
-//   return (
-//     <View
-//       style={{
-//         paddingHorizontal: 10,
-//         paddingTop: Platform.OS === 'ios' ? 54 : insets.top,
-//       }}
-//       className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between"
-//     >
-//       <TouchableOpacity onPress={() => router.push('/home')}>
-//         <Image source={images.logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
-//       </TouchableOpacity>
-//       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//         <Image source={icons.avatar} style={{ width: 32, height: 32, marginRight: 16 }} resizeMode="contain" />
-//         <TouchableOpacity onPress={() => console.log('Menu Pressed')}>
-//           <Image source={icons.ham} style={{ width: 32, height: 32 }} resizeMode="contain" />
-//         </TouchableOpacity>
-//       </View>
-//     </View>
-//   );
-// };
 
 const PathHeader = () => {
   const insets = useSafeAreaInsets();
@@ -57,7 +33,6 @@ const PathHeader = () => {
           className="absolute z-10 top-0 left-0 w-full flex flex-row items-center justify-between py-2 px-3 min-h-[64px]">
           {
             isHome ? (
-            // <GlobalHeader />
             <TouchableOpacity onPress={() => router.push('/home')}>
               <Image source={images.logo} style={{ width: 64, height: 64 }} resizeMode="contain" />
             </TouchableOpacity>
@@ -82,7 +57,7 @@ const PathHeader = () => {
                 <Text className={getTextClass("surah", "search", "bookmarkSurah")}>সূরা</Text>
               </View>
               <View className="mr-4">
-                <Text className={getTextClass("ayat", "bookmarkAyat", "basedon")}>আয়াত</Text>
+                <Text className={getTextClass("ayats", "ayat", "bookmarkAyat", "basedon")}>আয়াত</Text>
               </View>
               <View>
                 <Text className={getTextClass("tafsir", "bookmarkTafsir")}>তাফসীর</Text>

@@ -138,7 +138,7 @@ const Surah = () => {
                                 <View className="text-center pb-4">
                                     <CustomButton
                                         title="সব আয়াত পড়ুন"
-                                        onPress={() => {router.push(`/ayat/${id}`)}} 
+                                        onPress={() => {router.push(`/ayats/${id}`)}} 
                                         className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm border-dark-green"
                                         bgVariant="primary"
                                         textVariant="secondary"

@@ -7,6 +7,7 @@ import axios from "axios";
 import Title from "@/components/Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
+import EmptyData from "@/components/EmptyData";
 
 const SPACING = 20;
 const AVATAR_SIZE = 100;
@@ -118,7 +119,6 @@ const Search = () => {
               <Animated.FlatList
                 data={surahWithShapes}
                 contentContainerStyle={{ paddingTop: 16 }}
-                // keyExtractor={(item) => item._id}
                 onScroll={Animated.event(
                   [{ nativeEvent: { contentOffset: { y: scrollY } } }],
                   { useNativeDriver: true }
@@ -188,6 +188,9 @@ const Search = () => {
                     </TouchableOpacity>
                   );
                 }}
+                ListEmptyComponent={() => (
+                 <EmptyData/>
+                )}
               />
             </View>
           )}

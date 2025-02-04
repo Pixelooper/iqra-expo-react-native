@@ -37,6 +37,8 @@ const bookmarkTafsir = () => {
       // Fetch data only if `lastRead` has elements
       if (tafsir.length > 0) {
         fetchLastReadSurahs();
+      }else{
+        setLoading(false); 
       }
     }, [tafsir]);
 

@@ -77,7 +77,6 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
     };
 
     const showInfoButton = !!(quote || shanenuzul || (tika && tika.length > 0));
-    console.log(no, showInfoButton)
 
     return (
         <View className="mb-4">

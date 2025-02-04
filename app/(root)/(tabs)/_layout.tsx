@@ -1,6 +1,6 @@
 import { router, Tabs } from "expo-router";
 import { Image, ImageSourcePropType, Text, TouchableOpacity, View } from "react-native";
-import { icons, images } from "@/constants";
+import { icons } from "@/constants";
 import { useSelector } from "react-redux";
 import { RootState } from "@/utils/store/store";
 
@@ -36,7 +36,7 @@ const ReadIcon = ({
   continueReading: { sId?: string; aId?: string };
 }) => (
   <TouchableOpacity 
-    onPress={() => router.push(`/ayat/${continueReading.sId}?scrollTo=${continueReading.aId}`)} 
+    onPress={() => router.push(`/ayats/${continueReading?.sId}?scrollTo=${continueReading.aId}`)} 
     className={`flex justify-center items-center mb-16`}
   >
     <View className={`flex justify-center items-center rounded-full ${focused ? "bg-general-400 w-14 h-14" : "w-20 h-20"}`}>
@@ -89,21 +89,15 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="ayat/[id]"
+        name="ayats/[id]"
         options={{
-          title: "Ayat",
+          title: "Ayats",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             !continueReading ? 
             <TouchableOpacity onPress={() => router.push('/home')}  className={`flex justify-center items-center mb-16`}>
               <View className={`flex justify-center items-center rounded-full "w-20 h-20`}>
                 <Image source={icons.read} style={{ width: 76, height: 76 }} resizeMode="contain"/> 
-                {/* <Image
-                  source={icons.read}
-                  resizeMode="contain"
-                  className={"w-[36px] h-[26px]"}
-                />
-                <Text className="text-xs text-black">ইকরা</Text> */}
               </View>
             </TouchableOpacity>:
             <ReadIcon source={icons.keepread} focused={focused} continueReading={continueReading}/>
@@ -125,6 +119,14 @@ export default function Layout() {
         name="surah/[id]"
         options={{
           title: "Surah",
+          headerShown: false,
+          href: null, // Prevent these from being added as tabs
+        }}
+      />
+      <Tabs.Screen
+        name="ayat/[id]/[aid]"
+        options={{
+          title: "Ayat",
           headerShown: false,
           href: null, // Prevent these from being added as tabs
         }}

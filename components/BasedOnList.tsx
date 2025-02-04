@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import shape from "../assets/shapes/shape-6.png";
+import EmptyData from './EmptyData';
 
 type BasedOnProps = {
     basedon: [
@@ -15,7 +16,11 @@ type BasedOnProps = {
 const BasedOnList: React.FC<BasedOnProps> = ({basedon}) => {
     return (
         <View className="pt-4">
-            {basedon.map((item) => (
+            {
+            basedon.length === 0 ?
+                <EmptyData/> 
+            :
+            basedon.map((item) => (
             <TouchableOpacity 
                 key={item._id} 
                 onPress={() => router.push(`/(root)/(tabs)/basedon/${item._id}`)}

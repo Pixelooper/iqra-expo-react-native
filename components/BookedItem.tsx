@@ -6,6 +6,7 @@ import { surah } from "@/types/type";
 import Title from "@/components/Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
+import EmptyData from "./EmptyData";
 
 const SPACING = 20;
 const AVATAR_SIZE = 100;
@@ -169,6 +170,9 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
                     </TouchableOpacity>
                   );
                 }}
+                ListEmptyComponent={() => (
+                 <EmptyData/>
+                )}
               />
             </View>
           )}

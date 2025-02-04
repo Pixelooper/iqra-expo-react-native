@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import shape from "../assets/shapes/shape-6.png";
+import EmptyData from './EmptyData';
 
 type BlogProps = {
     blogs: [
@@ -16,7 +17,11 @@ type BlogProps = {
 const BlogList: React.FC<BlogProps> = ({blogs}) => {
     return (
         <View className="pt-4">
-            {blogs.map((blog) => (
+            {
+            blogs.length === 0 ?
+                <EmptyData/> 
+            :
+            blogs.map((blog) => (
             <TouchableOpacity 
                 key={blog._id} 
                 onPress={() => router.push(`/(root)/(tabs)/blog/${blog._id}`)}

@@ -38,7 +38,7 @@ const RandomAyat: React.FC<RandomProps> = ({ random }) => {
                 <Text className=" text-black text-left font-AnekBangla">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>
                 <CustomButton
                     title="পড়ুন"
-                    onPress={() => router.push(`/ayat/${random?.surahId}`)}
+                    onPress={() => router.push(`/ayats/${random?.surahId}`)}
                     className="rounded-sm py-1 px-2 h-5 w-[56px] border-dark-green"
                 />
             </View>
