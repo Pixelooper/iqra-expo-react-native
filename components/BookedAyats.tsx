@@ -1,4 +1,4 @@
-import { ActivityIndicator, Animated, Image, Platform, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Animated, FlatList, Image, Platform, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { useRef, useState } from "react";
@@ -7,9 +7,6 @@ import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
 import EmptyData from "./EmptyData";
 
-const SPACING = 20;
-const AVATAR_SIZE = 100;
-const ITEM_SIZE = AVATAR_SIZE + SPACING * 2;
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
 type BookedAyatsProps = {
@@ -24,7 +21,6 @@ type BookedAyatsProps = {
 
 const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component}) => {
     const [searchQuery, setSearchQuery] = useState("");
-    const scrollY = useRef(new Animated.Value(0)).current;
 
     const filteredSurahs = !ayatData ? [] : ayatData.filter((ayat: ayat) =>
       ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)
@@ -76,21 +72,12 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
               <Animated.View
                 style={{
                   height: containerHeight, // Animates the container height
-                  overflow: "hidden", // Prevents overflow content from being visible
+                  // overflow: "hidden", // Prevents overflow content from being visible
                 }}
               >
-                <Animated.View
-                  style={{
-                    transform: [{ translateY }],
-                    opacity: translateY.interpolate({
-                      inputRange: [-100, 0],
-                      outputRange: [0, 1],
-                      extrapolate: "clamp",
-                    }),
-                  }}
-                >
+                <View>
                   <Component />
-                </Animated.View>
+                </View>
               </Animated.View>
               <TextInput
                 placeholder="এখানে লিখুন"
@@ -103,53 +90,22 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
               />
               <Animated.FlatList
                 data={surahWithShapes}
-                contentContainerStyle={{ paddingTop: 16 }}
-                // keyExtractor={(item) => item._id}
-                onScroll={Animated.event(
-                  [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                  { useNativeDriver: true }
-                )}
+                contentContainerStyle={{ paddingTop: 16, paddingBottom: 64 }}
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {
-                  const inputRange = [
-                    -1,
-                    0,
-                    ITEM_SIZE * index,
-                    ITEM_SIZE * (index + 1), // Correct scaling range
-                  ];
-    
-                  const scaleInputRange = [
-                    -1,
-                    0,
-                    ITEM_SIZE * index,
-                    ITEM_SIZE * (index + 0.5), // Visible scaling happens earlier
-                  ];
-    
-                  const opacity = scrollY.interpolate({
-                    inputRange,
-                    outputRange: [1, 1, 1, 0],
-                  });
-    
-                  const scale = scrollY.interpolate({
-                    inputRange: scaleInputRange,
-                    outputRange: [1, 1, 1, 0.8],
-                  });
-    
                   return (
                     <TouchableOpacity key={index} 
                       onPress={() => router.push(`/(root)/(tabs)/ayat/${item?.surahId}/${item?._id}`)}
                     >
-                      <Animated.View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
+                      <View className="w-full mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-start"
                         style={{
-                          marginBottom: SPACING,
+                          marginBottom: 20,
                           borderRadius: 12,
-                          transform: [{ scale }],
-                          opacity,
                         }}
                       >
                         <Image
                           source={item.shape}
-                          className={`w-[${AVATAR_SIZE}px] h-[${AVATAR_SIZE}px]`}
+                          className={`w-[100px] h-[100px]`}
                           resizeMode="contain"
                         />
                         <View className="flex-1 flex items-end justify-between pl-3 min-h-[95px]">
@@ -170,7 +126,7 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                                 </Text>
                           </View>
                         </View>
-                      </Animated.View>
+                      </View>
                     </TouchableOpacity>
                   );
                 }}
