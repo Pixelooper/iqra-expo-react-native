@@ -44,7 +44,7 @@ const Blog = () => {
               <ActivityIndicator size="large" color="#00ff00" />
             </View>
           ) : (
-            <ScrollView style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35, marginBottom: Platform.OS === 'ios' ? 0 : 85 }}>
+            <ScrollView style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35, marginBottom: Platform.OS === 'ios' ? 12 : 50 }}>
                 <Image
                     source={shapes[Math.floor(Math.random() * shapes.length)]}
                     className="w-[100px] h-[100px] absolute right-0 top-3"

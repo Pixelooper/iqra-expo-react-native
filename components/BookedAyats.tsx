@@ -1,4 +1,4 @@
-import { ActivityIndicator, Animated, FlatList, Image, Platform, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Animated, Image, Platform, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { useRef, useState } from "react";

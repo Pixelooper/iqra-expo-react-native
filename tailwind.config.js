@@ -3,6 +3,14 @@ module.exports = {
     content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
     theme: {
       extend: {
+        // fontFamily: {
+        //     AnekBangla: ["AnekBangla", "sans-serif"],
+        //     AnekBanglaLight: ["AnekBangla-Light", "sans-serif"],
+        //     AnekBanglaMedium: ["AnekBangla-Medium", "sans-serif"],
+        //     AnekBanglaSemiBold: ["AnekBangla-SemiBold", "sans-serif"],
+        //     AnekBanglaBold: ["AnekBangla-Bold", "sans-serif"],
+        //     AnekBanglaExtraBold: ["AnekBangla-ExtraBold", "sans-serif"],
+        // },
         fontFamily: {
             AnekBangla: ["AnekBangla", "sans-serif"],
             AnekBanglaLight: ["AnekBangla-Light", "sans-serif"],
