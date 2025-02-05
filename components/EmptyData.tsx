@@ -9,7 +9,7 @@ const EmptyData = () => {
                 source={images.noResult} 
                 style={{ width: 200, height: 200, resizeMode: 'contain' }}
             />
-            <Text className="text-gray-500 text-lg mt-4 font-AnekBangla">
+            <Text className="text-gray-500 text-lg leading-8 mt-4 font-AnekBangla">
                 কোনো তথ্য পাওয়া যায়নি
             </Text>
         </View>

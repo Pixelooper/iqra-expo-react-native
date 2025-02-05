@@ -30,13 +30,13 @@ const BlogList: React.FC<BlogProps> = ({blogs}) => {
                 <Text className="text-gray-black font-AnekBanglaSemiBold">
                     {blog.title}
                 </Text>
-                <View className="w-full flex flex-row justify-center pt-1 pl-1">
+                <View className="w-full flex flex-row items-start justify-center pt-1 pl-1">
                     <Image
                         source={shape}
                         className="w-[16px] h-[16px]"
                         resizeMode="contain"
                     />
-                    <Text className="text-xs text-gray-black font-AnekBangla pl-2">
+                    <Text className="text-sm leading-6 text-gray-black font-AnekBangla pl-2">
                         {blog.desc}...
                     </Text>
                 </View>

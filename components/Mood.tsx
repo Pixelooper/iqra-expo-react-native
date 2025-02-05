@@ -32,7 +32,7 @@ const Mood = () => {
                         router.replace(`/(root)/(tabs)/mood/${item.slug}`);
                     }}
                 >
-                    <View className={`mr-3 rounded-lg p-4 justify-between items-center w-[100px] h-[170px] border border-gray-white bg-white`}>
+                    <View className={`mr-3 rounded-lg p-4 justify-between items-center w-[110px] h-[170px] border border-gray-white bg-white`}>
                         <Image
                             source={item.shape}
                             className="w-[84px] h-[84px] absolute left-2 bottom-2"
@@ -41,7 +41,7 @@ const Mood = () => {
                         <Text className="text-xl font-AnekBanglaBold text-center">
                             {item.icon}
                         </Text>
-                        <Text className="text-black text-md pt-2 font-AnekBanglaSemiBold text-center">
+                        <Text className="text-sm leading-6 text-black text-md pt-2 font-AnekBanglaSemiBold text-center w-full">
                             {item.name}
                         </Text>
                     </View>

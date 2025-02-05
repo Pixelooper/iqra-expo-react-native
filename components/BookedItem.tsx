@@ -149,19 +149,19 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
                           resizeMode="contain"
                         />
                         <View className="flex-1 flex items-start justify-between pl-3">
-                          <Text className="text-md text-black font-AnekBanglaSemiBold mb-1">
+                          <Text className="text-lg leading-/ text-black font-AnekBanglaSemiBold mb-1">
                             সূরা {item.name_bn}
                           </Text>
-                          <Text className="text-xs text-black mb-4">
+                          <Text className="text-sm leading-6 text-black mb-4">
                             আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
                           </Text>
                           <View className="flex flex-row items-center justify-between w-full">
                             <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
-                              <Text className="text-md text-black font-AnekBanglaSemiBold">
+                              <Text className="text-sm leading-6 text-black font-AnekBanglaSemiBold">
                                 {convertToBengaliDigits(item.no)}
                               </Text>
                             </View>
-                            <Text className="text-xl text-black text-right pr-1">
+                            <Text className="text-2xl text-black text-right pr-1">
                               {item.name_ar}
                             </Text>
                           </View>

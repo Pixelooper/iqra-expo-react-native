@@ -85,7 +85,7 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onChangeText={(text) => setSearchQuery(text)}
-                className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-2 bg-white"
+                className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-1 bg-white text-sm leading-6"
               />
               <Animated.FlatList
                 data={surahWithShapes}
@@ -112,23 +112,23 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                               resizeMode="contain"
                             />
                             <View className="flex flex-1 items-end justify-between w-full">
-                                <Text className="text-xs text-black">
+                                <Text className="text-sm leading-6 text-black">
                                   {/* {item.ar.slice(0, 100)}... */}
                                   {item.ar.length > 100 ? item.ar.substring(0, 100) + "..." : item.ar}
                                 </Text>
                               </View>
                           </View>
-                          <Text className="text-xs text-black font-AnekBanglaSemiBold pt-3">
-                            {item.bn.length > 125 ? item.bn.substring(0, 125) + "..." : item.bn}
+                          <Text className="text-sm leading-6 text-black font-AnekBanglaSemiBold pt-3">
+                            {item.bn.length > 100 ? item.bn.substring(0, 100) + "..." : item.bn}
                           </Text>
 
                           <View className="flex flex-row items-center justify-between w-full mt-2">
                             <View className="border border-gray-white px-3 py-1 rounded-md">
-                              <Text className="text-xs text-black font-AnekBanglaSemiBold">
+                              <Text className=" text-xs leading-5 text-black font-AnekBanglaSemiBold">
                                 সূরা {item.surahName_bn}
                               </Text>
                             </View>
-                            <Text className="text-xs text-black text-right pr-1">
+                            <Text className="text-xs leading-5 text-black text-right pr-1">
                               আয়াত নম্বর {convertToBengaliDigits(item.no)}
                             </Text>
                           </View>

@@ -81,7 +81,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
     return (
         <View className="mb-4">
             <View className="flex flex-row justify-between mb-4">
-                <Text className="text-lg font-AnekBanglaSemiBold text-yellow-400 mb-2">
+                <Text className="text-lg leading-8 font-AnekBanglaSemiBold text-yellow-400 mb-2">
                     {convertToBengaliDigits(no)}
                 </Text>
                 <View className="flex flex-row justify-between gap-2">
@@ -100,14 +100,14 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                         <CustomButton
                             title="তাফসীর"
                             onPress={() => {router.push(`/tafsir/${sid}/${aid}`)}} 
-                            className="rounded-2xl py-1 px-1 h-5 w-[68px] border-gray-white"
+                            className="rounded-2xl px-1 h-5 w-20 border-gray-white"
                             ImgLeft={tafsir}
                             bgVariant="secondary"
                         />
                     }
                     <CustomButton
                         title="সংরক্ষণ"
-                        className="rounded-2xl py-1 px-1 h-5 w-[68px] border-gray-white"
+                        className="rounded-2xl px-1 h-5 w-20 border-gray-white"
                         ImgLeft={bookmark}
                         onPress={() => handleAyatOrTafsirSave(sid, aid)}
                         bgVariant="secondary"
@@ -116,7 +116,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                         showInfoButton && (
                             <CustomButton
                                 title="তথ্য"
-                                className="rounded-2xl py-1 px-1 h-5 w-[46px] border-gray-white"
+                                className="rounded-2xl px-1 h-5 w-12 border-gray-white"
                                 ImgLeft={tick}
                                 onPress={() => toggleExpand(no)}
                                 bgVariant="secondary"
@@ -129,7 +129,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                 <Text className="text-2xl text-black mb-6 text-right">
                     {ar}
                 </Text>
-                <Text className="text-sm text-black mb-2 font-AnekBangla">
+                <Text className="text-sm leading-6 text-black mb-2 font-AnekBangla">
                     {bn}
                 </Text>
 
@@ -138,7 +138,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                         <View ref={expandableRef}>
                             {
                                 shanenuzul &&
-                                <Text className="font-AnekBangla text-sm text-black-300 mt-3">
+                                <Text className="font-AnekBangla text-sm leading-6 text-black-300 mt-3">
                                     <Text className="font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text>  
                                     {shanenuzul}
                                 </Text>
@@ -146,7 +146,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                             {
                                 tika?.length > 0 &&
                                 tika.map((text, index) => (
-                                    <Text key={index} className="font-AnekBangla text-sm text-black-300 mt-3">
+                                    <Text key={index} className="font-AnekBangla text-sm leading-6 text-black-300 mt-3">
                                         <Text className="font-AnekBanglaSemiBold text-yellow-400">টিকা ({index+1}): </Text>  
                                         {text}
                                     </Text>
@@ -154,7 +154,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                             }
                             {
                                 quote &&
-                                <Text className="font-AnekBangla text-sm text-black-300 mt-3">
+                                <Text className="font-AnekBangla text-sm leading-6 text-black-300 mt-3">
                                     <Text className="font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text>  
                                     {quote}
                                 </Text>

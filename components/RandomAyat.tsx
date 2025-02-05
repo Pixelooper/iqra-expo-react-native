@@ -33,13 +33,13 @@ const RandomAyat: React.FC<RandomProps> = ({ random }) => {
                 AYAT OF THE DAY!
             </Text>
             <Text className="text-xl my-4 text-right text-black">{random?.ar}</Text>
-            <Text className="font-AnekBanglaMedium mb-1 text-left text-black">{random?.bn}</Text>
+            <Text className="font-AnekBanglaMedium mb-1 text-left text-black text-sm leading-6">{random?.bn}</Text>
             <View className="flex flex-row justify-between">
-                <Text className=" text-black text-left font-AnekBangla">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>
+                <Text className=" text-black text-left font-AnekBangla text-sm leading-6">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>
                 <CustomButton
                     title="পড়ুন"
                     onPress={() => router.push(`/ayats/${random?.surahId}`)}
-                    className="rounded-sm py-1 px-2 h-5 w-[56px] border-dark-green"
+                    className="rounded-sm px-2 w-[62px] border-dark-green"
                 />
             </View>
         </View>

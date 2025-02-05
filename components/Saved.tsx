@@ -35,24 +35,24 @@ const Saved = () => {
     return (
         <View className="w-full p-4 bg-white">
             <Title title="Saved Items" subtitle="এখানে আপনি সংরক্ষিত আইটেম খুঁজে পেতে পারেন" btnText={false}/>
-            <View className="flex flex-row flex-wrap mt-4  justify-between items-center">
+            <View className="flex flex-row flex-wrap mt-4 justify-between items-center">
             {items.map((item, index) => (
                 <TouchableOpacity
                     key={index}
                     onPress={() => {
                         router.replace(item.url);
                     }}
-                    className={`rounded-lg p-3 justify-between items-start w-[31%] h-[120px] border border-gray-white bg-white`}
+                    className={`rounded-lg p-2 justify-between items-start w-[31%] h-[120px] border border-gray-white bg-white`}
                 >
                     <Image
-                    source={item.img}
-                    className="w-[40px] h-[40px] absolute right-3 top-3"
-                    resizeMode="contain"
+                        source={item.img}
+                        className="w-[40px] h-[40px] absolute right-2 top-2"
+                        resizeMode="contain"
                     />
-                    <Text className={`text-lg font-AnekBanglaSemiBold text-black`}>
+                    <Text className={`text-lg leading-8 font-AnekBanglaSemiBold text-gray-black`}>
                         {item.title}
                     </Text>
-                    <Text className="text-dark-green text-xs pt-2 font-AnekBangla">
+                    <Text className="text-dark-green text-sm leading-6 font-AnekBangla">
                         {convertToBengaliDigits(item.total)}{item.total === 0 ? '' : 'টি'} সংরক্ষিত
                     </Text>
                 </TouchableOpacity>

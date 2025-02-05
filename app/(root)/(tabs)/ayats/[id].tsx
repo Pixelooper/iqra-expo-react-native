@@ -19,7 +19,7 @@ const Ayats = () => {
   const flashListRef = useRef<FlashList<any>>(null);
 
   const translateY = useRef(new Animated.Value(0)).current;
-  const containerHeight = useRef(new Animated.Value(100)).current; 
+  const containerHeight = useRef(new Animated.Value(100)).current;
 
   // Data handling
   const { data: surahData, loading, error } = useSurahData(id);
@@ -88,16 +88,17 @@ const Ayats = () => {
 
     return (
     <AnimatedSafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35 }}>
-        {/* Animated header */}
+      <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 60 }}>
         <Animated.View style={{ height: containerHeight, overflow: 'hidden' }}>
-          <Animated.View style={{ transform: [{ translateY }], paddingTop: 10 }}>
-            <SurahHead
-              ar={surahData?.name_ar}
-              bn={surahData?.name_bn}
-              total={surahData?.totalAyat}
-              tafsir={false}
-            />
+          <Animated.View style={{ transform: [{ translateY }] }}>
+                <View>
+                  <SurahHead
+                    ar={surahData?.name_ar}
+                    bn={surahData?.name_bn}
+                    total={surahData?.totalAyat}
+                    tafsir={false}
+                  />
+                </View>
           </Animated.View>
         </Animated.View>
 
@@ -109,11 +110,11 @@ const Ayats = () => {
           onChangeText={setSearchQuery}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-2 bg-white"
+          className="w-full px-3 border border-gray-black rounded-md text-gray-black mt-3 py-1 bg-white font-AnekBangla text-sm leading-6"
         />
 
         {/* Ayat list */}
-        <View className="mt-2 px-4 pt-6 text-dark-greem  border border-gray-white bg-white rounded-3xl" style={{ 
+        <View className="mt-2 px-4 pt-4 text-dark-greem  border border-gray-white bg-white rounded-3xl" style={{ 
             flex: 1,
             minHeight: 200,
             backgroundColor: 'transparent' 

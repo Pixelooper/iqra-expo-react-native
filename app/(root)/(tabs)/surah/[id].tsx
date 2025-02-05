@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { Text, ActivityIndicator, View } from "react-native";
+import { Text, ActivityIndicator, View, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { useEffect, useRef, useState } from "react";
@@ -60,7 +60,7 @@ const Surah = () => {
     return (
         <SafeAreaView className="bg-white">
             <AutoScrollToTop>
-                <View className="w-full px-4 pt-14 mb-20">
+                <View className="w-full px-4 mb-20" style={{ marginTop: Platform.OS === 'ios' ? 20 : 60 }}>
                     {
                         loading ? 
                         <View className="min-h-screen d-flex justify-center">
@@ -75,51 +75,51 @@ const Surah = () => {
                             />
 
                             <View className="mb-4 py-2">
-                                <View className="flex flex-row justify-between my-4">
-                                    <Text className="text-lg font-AnekBanglaSemiBold text-dark-green">
+                                <View className="flex flex-row justify-between mt-4 mb-2">
+                                    <Text className="text-lg leading-8 font-AnekBanglaSemiBold text-dark-green">
                                         পারা {convertToBengaliDigits(surahData?.para)} / সূরা {convertToBengaliDigits(surahData?.no)}
                                     </Text>
                                     <CustomButton
                                         title="সংরক্ষণ"
-                                        className="rounded-2xl py-1 px-1 h-5 w-[68px] border-gray-white"
+                                        className="rounded-2xl px-1 h-5 w-20 border-gray-white"
                                         ImgLeft={bookmark}
                                         onPress={() => handleSurahSave(surahData?._id)}
                                         bgVariant="secondary"
                                     />
                                 </View>
                                 <View className="flex flex-row justify-between mb-4">
-                                    <Text className="text-sm font-AnekBanglaSemiBold">{surahData?.place}</Text>
-                                    <Text className="text-sm font-AnekBanglaSemiBold">রুকুঃ {convertToBengaliDigits(surahData?.ruku)}</Text>
+                                    <Text className="text-sm leading-6 font-AnekBanglaSemiBold">{surahData?.place}</Text>
+                                    <Text className="text-sm leading-6 font-AnekBanglaSemiBold">রুকুঃ {convertToBengaliDigits(surahData?.ruku)}</Text>
                                 </View>
                                 {surahData?.naming && 
                                 <View className="mt-2">
                                     <Text> 
-                                        <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">নামকরণ: </Text> 
-                                        <Text className="text-sm text-black font-AnekBangla">{surahData?.naming}</Text>   
+                                        <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">নামকরণ: </Text> 
+                                        <Text className="text-sm leading-6 text-black font-AnekBangla">{surahData?.naming}</Text>   
                                     </Text>
                                 </View>
                                 }
                                 {surahData?.shanenuzul && 
                                 <View className="mt-2">
                                     <Text> 
-                                        <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text> 
-                                        <Text className="text-sm text-black font-AnekBangla">{surahData?.shanenuzul}</Text>   
+                                        <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text> 
+                                        <Text className="text-sm leading-6 text-black font-AnekBangla">{surahData?.shanenuzul}</Text>   
                                     </Text>
                                 </View>
                                 }
                                 {surahData?.fazilat && 
                                 <View className="mt-2">
                                     <Text> 
-                                        <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">ফজিলত: </Text> 
-                                        <Text className="text-sm text-black font-AnekBangla">{surahData?.fazilat}</Text>   
+                                        <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">ফজিলত: </Text> 
+                                        <Text className="text-sm leading-6 text-black font-AnekBangla">{surahData?.fazilat}</Text>   
                                     </Text>
                                 </View>
                                 }
                                 {surahData?.quote && 
                                 <View className="mt-2">
                                     <Text> 
-                                        <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text> 
-                                        <Text className="text-sm text-black font-AnekBangla">{surahData?.quote}</Text>   
+                                        <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text> 
+                                        <Text className="text-sm leading-6 text-black font-AnekBangla">{surahData?.quote}</Text>   
                                     </Text>
                                 </View>
                                 }
@@ -139,7 +139,7 @@ const Surah = () => {
                                     <CustomButton
                                         title="সব আয়াত পড়ুন"
                                         onPress={() => {router.push(`/ayats/${id}`)}} 
-                                        className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm border-dark-green"
+                                        className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold border-dark-green"
                                         bgVariant="primary"
                                         textVariant="secondary"
                                         ImgRight={angleRight}

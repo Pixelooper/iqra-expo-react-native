@@ -74,16 +74,16 @@ const Ayat = () => {
                                     {ayatData?.shanenuzul && 
                                     <View className="mt-2">
                                         <Text> 
-                                            <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text> 
-                                            <Text className="text-sm text-black font-AnekBangla">{ayatData?.shanenuzul}</Text>   
+                                            <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text> 
+                                            <Text className="text-sm leading-6 text-black font-AnekBangla">{ayatData?.shanenuzul}</Text>   
                                         </Text>
                                     </View>
                                     }
                                     {ayatData?.quote && 
                                     <View className="mt-2">
                                         <Text> 
-                                            <Text className="text-sm font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text> 
-                                            <Text className="text-sm text-black font-AnekBangla">{ayatData?.quote}</Text>   
+                                            <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text> 
+                                            <Text className="text-sm leading-6 text-black font-AnekBangla">{ayatData?.quote}</Text>   
                                         </Text>
                                     </View>
                                     }
@@ -92,7 +92,7 @@ const Ayat = () => {
                                     <CustomButton
                                         title="সব আয়াত পড়ুন"
                                         onPress={() => {router.push(`/ayats/${id}`)}} 
-                                        className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold text-sm border-dark-green"
+                                        className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold border-dark-green"
                                         bgVariant="primary"
                                         textVariant="secondary"
                                         ImgRight={angleRight}

@@ -114,7 +114,7 @@ const Search = () => {
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 onChangeText={(text) => setSearchQuery(text)}
-                className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-2 bg-white"
+                className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-1 bg-white text-sm leading-6"
               />
               <Animated.FlatList
                 data={surahWithShapes}
@@ -167,10 +167,10 @@ const Search = () => {
                           resizeMode="contain"
                         />
                         <View className="flex-1 flex items-start justify-between pl-3">
-                          <Text className="text-md text-black font-AnekBanglaSemiBold mb-1">
+                          <Text className="text-lg leading-8 text-black font-AnekBanglaSemiBold mb-1">
                             সূরা {item.name_bn}
                           </Text>
-                          <Text className="text-xs text-black mb-4">
+                          <Text className="text-sm leading-6 text-black mb-4">
                             আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
                           </Text>
                           <View className="flex flex-row items-center justify-between w-full">

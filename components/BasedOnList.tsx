@@ -32,7 +32,7 @@ const BasedOnList: React.FC<BasedOnProps> = ({basedon}) => {
                         className="w-[16px] h-[16px]"
                         resizeMode="contain"
                     />
-                    <Text className="text-gray-black font-AnekBanglaSemiBold ml-2">
+                    <Text className="text-sm leading-6 text-gray-black font-AnekBanglaSemiBold ml-2">
                         {item.topic}
                     </Text>
                 </View>

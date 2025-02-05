@@ -22,11 +22,11 @@ const Title: React.FC<TitleProps> = ({ title, subtitle, btnText, btnUrl }) => {
                     <CustomButton
                         title={btnText}
                         onPress={() => router.replace(btnUrl)}
-                        className="rounded-sm py-1 px-2 h-5 w-[74px] border-dark-green"
+                        className="rounded-sm px-2 w-[74px] border-dark-green"
                     />
                 }
             </View>
-            <Text className="leading-5 font-AnekBangla text-black">
+            <Text className="text-sm leading-6 font-AnekBangla text-black">
                 {subtitle}
             </Text>
         </View>

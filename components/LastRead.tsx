@@ -72,15 +72,15 @@ const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
                   resizeMode="contain"
                 />
                 <View className="flex items-end justify-between">
-                  <Text className="text-md text-black font-AnekBanglaSemiBold mb-1">
+                  <Text className="text-lg leading-8 text-gray-black font-AnekBanglaSemiBold mb-1">
                     সূরা {item.name_bn}
                   </Text>
-                  <Text className="text-xs text-black mb-4">
+                  <Text className="text-sm leading-6 text-gray-black mb-4">
                     আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
                   </Text>
                   <View className="flex flex-row items-center justify-between">
                     <View className="flex items-center justify-center border border-gray-white px-3 py-1 rounded-md">
-                      <Text className="text-sx text-black font-AnekBanglaSemiBold">
+                      <Text className="text-sx text-gray-black font-AnekBanglaSemiBold">
                         {convertToBengaliDigits(item.no)}
                       </Text>
                     </View>

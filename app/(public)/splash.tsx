@@ -38,7 +38,7 @@ const Splash = () => {
                             <CustomButton
                                 title="শুরু করছি"
                                 onPress={() => router.replace("/(root)/(tabs)/home")}
-                                className="rounded-lg py-3 px-3 h-12 w-[275px] border-dark-green"
+                                className="bg-dark-green px-5 py-2 rounded-lg font-AnekBanglaSemiBold border-dark-green w-[275px]"
                                 bgVariant="primary"
                                 textVariant="secondary"
                                 ImgRight={angleRight}

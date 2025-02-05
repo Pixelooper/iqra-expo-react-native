@@ -20,14 +20,14 @@ const SurahHead = ({ ar, bn, total, tafsir } : TitleProps) => {
             <Text className="text-center text-3xl text-green-950 mb-2">
                 سورة {ar}
             </Text>
-            <Text className="text-center text-lg font-AnekBanglaMedium gray-black mb-1">
+            <Text className="text-center text-lg leading-8 font-AnekBanglaMedium gray-black mb-1">
                 সূরা {bn}
             </Text>
             {tafsir ? 
-                <Text className="text-center text-sm text-gray-600">
+                <Text className="text-center text-sm leading-6 text-gray-600">
                     তাফসীর ইবনে কাসীর
                 </Text> :
-                <Text className="text-center text-sm text-gray-black font-AnekBanglaMedium">
+                <Text className="text-center text-sm leading-6 text-gray-black font-AnekBanglaMedium">
                     আয়াত সংখ্যা {convertToBengaliDigits(total)}
                 </Text>
             }

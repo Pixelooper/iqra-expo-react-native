@@ -17,8 +17,8 @@ const PathHeader = () => {
 
   const getTextClass = (...pages: string[]) => {
     return pages.includes(currentPage)
-      ? "text-lg font-AneekBanglabold text-dark-green"
-      : "text-xs font-AneekBangla text-[#B6B6B6]";
+      ? "text-lg leading-8 font-AneekBanglabold text-dark-green"
+      : "text-sm leading-6 font-AneekBangla text-[#B6B6B6]";
   };
 
 

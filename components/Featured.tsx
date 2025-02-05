@@ -25,7 +25,7 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
 
   return (
       <View className="w-full px-4 bg-white">
-        <Title title="Featured" subtitle="আপনি আমাদের পরামর্শে সূরা পড়তে পারেন" btnText="সব দেখুন" btnUrl="/(root)/(tabs)/search"/>
+        <Title title="Featured" subtitle="আপনি আমাদের পরামর্শে সূরা পড়তে পারেন" btnText="সব দেখুন" btnUrl="/search"/>
         <FlatList 
           ref={flatListRef}
           data={surahWithShapes}
@@ -36,16 +36,15 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
           renderItem={({item, index}) => (
             <TouchableOpacity 
                 key={index} 
-                // onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
                 onPress={() => {router.push(`/surah/${item._id}`)}} 
             >
               <View className="mr-3 rounded-lg p-3 border border-gray-white bg-white">
-                <ImageBackground source={item.shape} className="w-[150px] h-[150px] flex justify-center items-center">
-                  <Text className="text-lg text-gray-black font-AnekBanglaBold mb-24 text-center">
+                <ImageBackground source={item.shape} className="w-[160px] h-[160px] flex justify-center items-center">
+                  <Text className="text-lg leading-8 text-gray-black font-AnekBanglaBold mb-24 text-center">
                     সূরা {item.name_bn}
                   </Text>
                 </ImageBackground>
-                <Text className="text-xs text-dark-green text-center font-AnekBanglaMedium mt-5">
+                <Text className="text-sm leading-6 text-dark-green text-center font-AnekBanglaMedium mt-5">
                     সূরা নং {convertToBengaliDigits(item.no)} | আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
                 </Text>
               </View>
