@@ -53,7 +53,7 @@ const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
 
   return (
       <View className="w-full p-4 bg-white">
-        <Title title="Last Read" subtitle="এখানে আপনি যা পড়ছিলেন তা পেতে পারেন" btnText={false}/>
+        <Title title="সর্বশেষ পড়া" subtitle="এখানে আপনি যা পড়ছিলেন তা পেতে পারেন" btnText={false}/>
         <FlatList 
           ref={flatListRef}
           data={surahWithShapes}
@@ -65,7 +65,7 @@ const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
             <TouchableOpacity key={index} 
               onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
             >
-              <View className="w-[240px] mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-between">
+              <View className="w-[260px] mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-between">
                 <Image
                   source={item.shape}
                   className="w-[100px] h-[100px]"
@@ -76,7 +76,7 @@ const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
                     সূরা {item.name_bn}
                   </Text>
                   <Text className="text-sm leading-6 text-gray-black mb-4">
-                    আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
+                    সর্বমোট আয়াত {convertToBengaliDigits(item.totalAyat)}
                   </Text>
                   <View className="flex flex-row items-center justify-between">
                     <View className="flex items-center justify-center border border-gray-white px-3 py-1 rounded-md">

@@ -42,7 +42,7 @@ const MoodAyats: React.FC<MoodAyatsProps> = () => {
     }, [slug]);
 
     return (
-      <BookedAyats loading={loading} ayatData={ayatData} Component={() => <Title title={`আয়াত তালিকা: ${slug}`} subtitle="এখানে আপনি আপনার মেজাজের উপর ভিত্তি করে আয়াত পাবেন" btnText={false} />}/>
+      <BookedAyats loading={loading} ayatData={ayatData} Component={() => <Title title={`মেজাজভিত্তিক আয়াত: ${slug}`} subtitle="এখানে আপনি আপনার মেজাজের উপর ভিত্তি করে আয়াত পাবেন" btnText={false} />}/>
     );
 };
 

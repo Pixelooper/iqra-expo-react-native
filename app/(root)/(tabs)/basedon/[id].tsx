@@ -40,7 +40,7 @@ const BasedOnPage = () => {
     }, [id]);
 
     return (
-        <BookedAyats loading={loading} ayatData={ayatData} Component={() => <Title title="আয়াত ভিত্তিক বিষয়:" subtitle={topic} btnText={false}/>}/>
+        <BookedAyats loading={loading} ayatData={ayatData} Component={() => <Title title="বিষয়ভিত্তিক আয়াত:" subtitle={topic} btnText={false}/>}/>
     );
 };
 

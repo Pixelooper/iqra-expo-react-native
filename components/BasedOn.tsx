@@ -15,7 +15,7 @@ type BasedOnProps = {
 const BasedOn: React.FC<BasedOnProps> = ({basedon}) => {
   return (
     <View className="w-full p-4 bg-white">
-        <Title title="Ayat Based Topics" subtitle="আয়াত ভিত্তিক বিষয়গুলি এখানে খুঁজে পেতে পারেন" btnText="সব দেখুন" btnUrl="/(root)/(tabs)/basedons"/>
+        <Title title="বিষয়ভিত্তিক আয়াত" subtitle="বিষয় ভিত্তিক আয়াতগুলি এখানে খুঁজে পেতে পারেন" btnText="সব দেখুন" btnUrl="/(root)/(tabs)/basedons"/>
         <BasedOnList basedon={basedon}/>
     </View>
   );

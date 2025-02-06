@@ -13,7 +13,7 @@ type BlogProps = {
 const Blogs: React.FC<BlogProps> = ({blogs}) => {
   return (
     <View className="w-full p-4 bg-white">
-        <Title title="Blogs" subtitle="আপনি এখানে তথ্যপূর্ণ ইসলামিক ব্লগ পেতে পারেন" btnText="সব দেখুন" btnUrl="/(root)/(tabs)/blogs"/>
+        <Title title="ইসলামিক ব্লগ" subtitle="আপনি এখানে তথ্যপূর্ণ ইসলামিক ব্লগ পেতে পারেন" btnText="সব দেখুন" btnUrl="/(root)/(tabs)/blogs"/>
         <BlogList blogs={blogs}/>
     </View>
   );

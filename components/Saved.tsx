@@ -34,7 +34,7 @@ const Saved = () => {
 
     return (
         <View className="w-full p-4 bg-white">
-            <Title title="Saved Items" subtitle="এখানে আপনি সংরক্ষিত আইটেম খুঁজে পেতে পারেন" btnText={false}/>
+            <Title title="সংরক্ষণ" subtitle="এখানে আপনি সংরক্ষিত আইটেম খুঁজে পেতে পারেন" btnText={false}/>
             <View className="flex flex-row flex-wrap mt-4 justify-between items-center">
             {items.map((item, index) => (
                 <TouchableOpacity
@@ -49,11 +49,14 @@ const Saved = () => {
                         className="w-[40px] h-[40px] absolute right-2 top-2"
                         resizeMode="contain"
                     />
-                    <Text className={`text-lg leading-8 font-AnekBanglaSemiBold text-gray-black`}>
+                    <Text className={`text-lg leading-8 font-AnekBanglaSemiBold text-black`}>
                         {item.title}
                     </Text>
+                    <Text className="text-[#B6B6B6] text-lg leading-8 font-AnekBanglaBold pt-3">
+                        {convertToBengaliDigits(item.total)}{item.total === 0 ? ' টি' : ' টি'}
+                    </Text>
                     <Text className="text-dark-green text-sm leading-6 font-AnekBangla">
-                        {convertToBengaliDigits(item.total)}{item.total === 0 ? '' : 'টি'} সংরক্ষিত
+                        সংরক্ষিত
                     </Text>
                 </TouchableOpacity>
             ))}

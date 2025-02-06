@@ -28,7 +28,7 @@ const SurahHead = ({ ar, bn, total, tafsir } : TitleProps) => {
                     তাফসীর ইবনে কাসীর
                 </Text> :
                 <Text className="text-center text-sm leading-6 text-gray-black font-AnekBanglaMedium">
-                    আয়াত সংখ্যা {convertToBengaliDigits(total)}
+                    সর্বমোট আয়াত {convertToBengaliDigits(total)}
                 </Text>
             }
         </View>

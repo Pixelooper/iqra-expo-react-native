@@ -4,6 +4,7 @@ import { router } from "expo-router";
 import { Image, Platform, Text, View } from "react-native";
 import CustomButton from "./CustomButton";
 import shape from "../assets/shapes/shape-11.png";
+import Title from "./Title";
 
 type RandomProps = {
     random: ayat & {
@@ -22,25 +23,27 @@ const paddingTop = Platform.select({
 
 const RandomAyat: React.FC<RandomProps> = ({ random }) => {
     return (
-        <View className={`bg-white mx-3 mt-20 p-4 border border-gray-white rounded-3xl pb-4 ${paddingTop}`}>
-            <Image
-                source={shape}
-                className="w-[130px] h-[130px] absolute left-3 top-3"
-                resizeMode="contain"
-            />
-            
-            <Text className={`text-lg font-AnekBanglaMedium text-dark-green text-right`}>
-                AYAT OF THE DAY!
+        <View className="w-full bg-white mt-20">
+            <Text className="mx-3 text-lg font-AnekBanglaBold text-[#B6B6B6] text-left mb-2">
+                আজকের আয়াত
             </Text>
-            <Text className="text-xl my-4 text-right text-black">{random?.ar}</Text>
-            <Text className="font-AnekBanglaMedium mb-1 text-left text-black text-sm leading-6">{random?.bn}</Text>
-            <View className="flex flex-row justify-between">
-                <Text className=" text-black text-left font-AnekBangla text-sm leading-6">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>
-                <CustomButton
-                    title="পড়ুন"
-                    onPress={() => router.push(`/ayats/${random?.surahId}`)}
-                    className="rounded-sm px-2 w-[62px] border-dark-green"
+            <View className={`mx-3 p-4 border border-gray-white rounded-3xl ${paddingTop}`}>
+                <Image
+                    source={shape}
+                    className="w-[130px] h-[130px] absolute left-3 top-3"
+                    resizeMode="contain"
                 />
+                <Text className="text-xl my-4 text-right text-black pt-4">{random?.ar}</Text>
+                <Text className="font-AnekBanglaMedium mb-1 text-left text-black text-lg leading-7">{random?.bn}</Text>
+                <View className="flex flex-row justify-between">
+                    <Text className=" text-black text-left font-AnekBangla text-xs leading-5">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>
+                    <CustomButton
+                        title="পড়ুন"
+                        onPress={() => router.push(`/ayats/${random?.surahId}`)}
+                        className="rounded-sm px-2 w-[62px] border-dark-green"
+                        bgVariant="secondary"
+                    />
+                </View>
             </View>
         </View>
     );

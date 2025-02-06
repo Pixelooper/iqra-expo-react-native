@@ -17,7 +17,7 @@ const Mood = () => {
 
   return (
     <View className="w-full px-4 bg-white">
-        <Title title="Moods" subtitle="আপনার মেজাজের উপর ভিত্তি করে পড়ুন" btnText={false}/>
+        <Title title="আজ কেমন বোধ করছেন?" subtitle="আপনার মেজাজের উপর ভিত্তি করে পড়ুন" btnText={false}/>
         <FlatList 
             ref={flatListRef}
             data={moods}

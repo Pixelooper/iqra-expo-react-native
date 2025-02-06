@@ -25,7 +25,7 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
 
   return (
       <View className="w-full px-4 bg-white">
-        <Title title="Featured" subtitle="আপনি আমাদের পরামর্শে সূরা পড়তে পারেন" btnText="সব দেখুন" btnUrl="/search"/>
+        <Title title="প্রদর্শিত সূরা তালিকা" subtitle="আপনি এখান থেকে সূরা পড়া শুরু করতে পারেন" btnText="সব দেখুন" btnUrl="/search"/>
         <FlatList 
           ref={flatListRef}
           data={surahWithShapes}
@@ -45,7 +45,7 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
                   </Text>
                 </ImageBackground>
                 <Text className="text-sm leading-6 text-dark-green text-center font-AnekBanglaMedium mt-5">
-                    সূরা নং {convertToBengaliDigits(item.no)} | আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
+                    সূরা নং {convertToBengaliDigits(item.no)} | সর্বমোট আয়াত {convertToBengaliDigits(item.totalAyat)}
                 </Text>
               </View>
             </TouchableOpacity>

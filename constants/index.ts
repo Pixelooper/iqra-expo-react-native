@@ -7,7 +7,7 @@ import home from "@/assets/icons/homenav.png";
 import avatar from "@/assets/images/avatar.png";
 import ham from "@/assets/images/ham.png";
 
-import logo from "@/assets/images/icon.png";
+import logo from "@/assets/images/logo.png";
 import check from "@/assets/images/check.png";
 import noResult from "@/assets/images/no-result.png";
 

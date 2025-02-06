@@ -46,7 +46,7 @@ const basedons = () => {
             </View>
           ) : (
             <ScrollView style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35, marginBottom: Platform.OS === 'ios' ? 12 : 50 }}>
-                <Title title="Ayat Based Topics" subtitle="আয়াত ভিত্তিক বিষয়গুলি এখানে খুঁজে পেতে পারেন" btnText={false}/>
+                <Title title="বিষয়ভিত্তিক আয়াত" subtitle="বিষয় ভিত্তিক আয়াতগুলি এখানে খুঁজে পেতে পারেন" btnText={false}/>
                 <BasedOnList basedon={basedon}/>
             </ScrollView>
           )}

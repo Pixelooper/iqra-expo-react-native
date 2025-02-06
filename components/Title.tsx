@@ -14,7 +14,7 @@ const Title: React.FC<TitleProps> = ({ title, subtitle, btnText, btnUrl }) => {
     return (
         <View className='mt-4'>
             <View className='flex flex-row justify-between'>
-                <Text className="text-lg font-AnekBanglaMedium text-dark-green">
+                <Text className="text-lg font-AnekBanglaBold text-[#B6B6B6]">
                     {title}
                 </Text>
                 {
@@ -23,6 +23,7 @@ const Title: React.FC<TitleProps> = ({ title, subtitle, btnText, btnUrl }) => {
                         title={btnText}
                         onPress={() => router.replace(btnUrl)}
                         className="rounded-sm px-2 w-[74px] border-dark-green"
+                        bgVariant='secondary'
                     />
                 }
             </View>

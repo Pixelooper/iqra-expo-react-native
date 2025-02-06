@@ -171,7 +171,7 @@ const Search = () => {
                             সূরা {item.name_bn}
                           </Text>
                           <Text className="text-sm leading-6 text-black mb-4">
-                            আয়াত সংখ্যা {convertToBengaliDigits(item.totalAyat)}
+                            সর্বমোট আয়াত {convertToBengaliDigits(item.totalAyat)}
                           </Text>
                           <View className="flex flex-row items-center justify-between w-full">
                             <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
