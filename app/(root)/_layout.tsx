@@ -21,7 +21,6 @@ const PathHeader = () => {
       : "text-sm leading-6 font-AneekBangla text-[#B6B6B6]";
   };
 
-
   return (
       <View>
         <StatusBar backgroundColor="#FFFFFF" translucent={false} />

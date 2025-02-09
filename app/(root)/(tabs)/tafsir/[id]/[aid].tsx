@@ -42,6 +42,11 @@ const Tafsir = () => {
         };
     }, [id, aid]);
 
+    const handleNavigation = (direction: 'prev' | 'next') => {
+        const newAyatNo = direction === 'prev' ? ayatNo - 1 : ayatNo + 1;
+        router.push(`/tafsir/${surahData?.no}/${newAyatNo}`);
+    };
+
     return (
         <SafeAreaView className="bg-white">
             {
@@ -79,7 +84,8 @@ const Tafsir = () => {
                                 <View className="flex flex-row justify-between">
                                     <CustomButton
                                         title="পূর্ববর্তী"
-                                        onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayatNo - 1}`)}}
+                                        // onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayatNo - 1}`)}}
+                                        onPress={() => handleNavigation('prev')}
                                         className={`px-6 rounded-lg border-dark-green ${
                                             ayatNo === 1 ? "opacity-40 cursor-not-allowed" : ""
                                         }`}
@@ -89,7 +95,8 @@ const Tafsir = () => {
                                     />
                                     <CustomButton
                                         title="পরবর্তী"
-                                        onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayatNo + 1}`)}}
+                                        // onPress={() => {router.push(`/tafsir/${surahData?.no}/${ayatNo + 1}`)}}
+                                        onPress={() => handleNavigation('next')}
                                         className={`px-6 rounded-lg border-dark-green ${
                                             ayatNo === surahData?.totalAyat ? "opacity-40 cursor-not-allowed" : ""
                                         }`}

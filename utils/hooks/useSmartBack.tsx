@@ -9,11 +9,11 @@ const useSmartBack = () => {
 
     const smartBack = () => {
         if (previousRoutes.length > 1) {
-        const targetRoute = previousRoutes[previousRoutes.length - 2];
-        dispatch(removeLastRoute());
-        router.push(targetRoute);
+            const targetRoute = previousRoutes[previousRoutes.length - 2];
+            dispatch(removeLastRoute());
+            router.push(targetRoute);
         } else {
-        router.push('/home');
+            router.push('/home');
         }
     };
 

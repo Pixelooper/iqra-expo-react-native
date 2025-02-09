@@ -77,6 +77,11 @@ const bookmarkSlice = createSlice({
         state.previousRoutes.push(action.payload);
       }
     },
+    replaceLastRouteIfTafsir: (state, action: PayloadAction<string>) => {
+      if (state.previousRoutes.length > 0) {
+        state.previousRoutes[state.previousRoutes.length - 1] = action.payload;
+      }
+    },
     removeLastRoute: (state) => {
       state.previousRoutes.pop();
     },
@@ -86,5 +91,5 @@ const bookmarkSlice = createSlice({
   },
 });
 
-export const { addSurah, addAyat, addTafsir, updateLastRead, setContinueReading, addRoute, addPreviousRoute, removeLastRoute, clearHistory } = bookmarkSlice.actions;
+export const { addSurah, addAyat, addTafsir, updateLastRead, setContinueReading, addRoute, addPreviousRoute, replaceLastRouteIfTafsir, removeLastRoute, clearHistory } = bookmarkSlice.actions;
 export default bookmarkSlice.reducer;
