@@ -81,7 +81,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
     return (
         <View className="mb-4">
             <View className="flex flex-row justify-between mb-4">
-                <Text className="text-lg leading-8 font-AnekBanglaSemiBold text-yellow-400 mb-2">
+                <Text className="text-lg leading-8 font-AnekBanglaSemiBold text-yellow-600 mb-2">
                     {convertToBengaliDigits(no)}
                 </Text>
                 <View className="flex flex-row justify-between gap-2">

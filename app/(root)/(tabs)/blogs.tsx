@@ -47,8 +47,8 @@ const blogs = () => {
               <ActivityIndicator size="large" color="#00ff00" />
             </View>
           ) : (
-            <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35, marginBottom: Platform.OS === 'ios' ? 12 : 50 }}>
-                <Title title="ইসলামিক ব্লগ" subtitle="আপনি এখানে তথ্যপূর্ণ ইসলামিক ব্লগ পেতে পারেন" btnText={false} />
+            <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35, marginBottom: Platform.OS === 'ios' ? 12 : 75 }}>
+                <Title title="ইসলামিক আর্টিকেল" subtitle="আপনি এখানে তথ্যপূর্ণ ইসলামিক আর্টিকেল পেতে পারেন" btnText={false} />
                 <BlogList blogs={blogs}/>
             </View>
           )}

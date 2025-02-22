@@ -9,6 +9,7 @@ import { useSurahData } from '@/utils/hooks/useSurahData';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SurahHead from '@/components/SurahHead';
 import { AyatList } from '@/components/AyatList';
+import { convertToBengaliDigits, convertToEnglishDigits } from '@/utils/hooks/useBengaliDigit';
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
@@ -23,9 +24,22 @@ const Ayats = () => {
 
   // Data handling
   const { data: surahData, loading, error } = useSurahData(id);
-  const filteredAyats = surahData?.ayat?.filter((ayat) => 
-    ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)
-  ) || [];
+  const filteredAyats = surahData?.ayat?.filter((ayat) => {
+    const banglaNumber = convertToBengaliDigits(searchQuery); // Convert input to Bangla digits
+    const englishNumber = convertToEnglishDigits(searchQuery); // Convert Bangla input to English digits
+
+    const isNumberSearch = !isNaN(englishNumber); // Check if input (after conversion) is a valid number
+
+    return (
+        ayat.bn.includes(searchQuery) || 
+        ayat.ar.includes(searchQuery) || 
+        (isNumberSearch && ayat.no.toString().includes(englishNumber)) || // Match with English numbers
+        (isNumberSearch && ayat.no.toString().includes(banglaNumber)) // Match with Bangla numbers
+    );
+}) || [];
+
+
+
 
   // Scroll handling
   useScrollToAyat({

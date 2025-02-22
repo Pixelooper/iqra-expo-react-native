@@ -3,6 +3,8 @@ import search from "@/assets/icons/search.png";
 import read from "@/assets/icons/read-icon.png";
 import keepread from "@/assets/icons/continue.png";
 import home from "@/assets/icons/homenav.png";
+import blog from "@/assets/icons/blog.png";
+import about from "@/assets/icons/about.png";
 
 import avatar from "@/assets/images/avatar.png";
 import ham from "@/assets/images/ham.png";
@@ -30,6 +32,8 @@ export const icons = {
     keepread,
     avatar,
     ham,
+    blog,
+    about,
 };
 
 export const images = {

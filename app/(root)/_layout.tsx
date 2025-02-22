@@ -13,7 +13,7 @@ const PathHeader = () => {
 
   const currentPage = segments[2] || "home";
   const isHome = currentPage === "home";
-  const isHide = (currentPage === "blog" || currentPage === "blogs" || currentPage === "mood" || currentPage === "basedons");
+  const isHide = (currentPage === "blog" || currentPage === "blogs" || currentPage === "mood" || currentPage === "basedons" || currentPage === "about");
 
   const getTextClass = (...pages: string[]) => {
     return pages.includes(currentPage)

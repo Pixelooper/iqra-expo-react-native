@@ -105,21 +105,21 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                         }}
                       >
                         <View className="flex-1 min-h-[95px]">
-                          <View className="flex-1 flex flex-row items-center justify-between">
+                          <View className="flex-1 flex flex-row items-start justify-between">
                             <Image
                               source={item.shape}
-                              className="w-[24px] h-[24px]"
+                              className="w-[24px] h-[24px] mt-2"
                               resizeMode="contain"
                             />
-                            <View className="flex flex-1 items-end justify-between w-full">
+                            <View className="flex flex-1 items-end justify-between w-full ml-2">
                                 <Text className="text-sm leading-6 text-black">
                                   {/* {item.ar.slice(0, 100)}... */}
-                                  {item.ar.length > 100 ? item.ar.substring(0, 100) + "..." : item.ar}
+                                  {item.ar.length > 400 ? item.ar.substring(0, 400) + "..." : item.ar}
                                 </Text>
                               </View>
                           </View>
                           <Text className="text-sm leading-6 text-black font-AnekBanglaSemiBold pt-3">
-                            {item.bn.length > 100 ? item.bn.substring(0, 100) + "..." : item.bn}
+                            {item.bn.length > 400 ? item.bn.substring(0, 400) + "..." : item.bn}
                           </Text>
 
                           <View className="flex flex-row items-center justify-between w-full mt-2">

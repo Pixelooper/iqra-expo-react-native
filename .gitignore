@@ -36,3 +36,6 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+# eas build --profile development --platform android
+# eas build -p android --profile preview

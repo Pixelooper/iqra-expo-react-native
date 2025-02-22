@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { FlashList } from '@shopify/flash-list';
 import SingleAyat from './SingleAyat';
 import { Text, View } from 'react-native';
+import EmptyData from './EmptyData';
 
 type AyatListProps = {
   currentAyatId?: string;
@@ -36,15 +37,20 @@ export const AyatList = memo(({ sid, data, flashListRef, tafsirPage, currentAyat
         />
       )}
       ListHeaderComponent={
-        <View className="text-center mb-8">
-          <Text className="text-2xl text-dark-green mb-2 text-center">
-            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-          </Text>
-          <Text className="text-sm leading-6 font-AnekBangla text-dark-green mb-4 text-center">
-            পরম করুণাময় অসীম দয়ালু আল্লাহতায়ালার নামে
-          </Text>
-        </View>
+        data.length > 0 ? (
+          <View className="text-center mb-8">
+            <Text className="text-2xl text-dark-green mb-2 text-center">
+              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </Text>
+            <Text className="text-sm leading-6 font-AnekBangla text-dark-green mb-4 text-center">
+              পরম করুণাময় অসীম দয়ালু আল্লাহতায়ালার নামে
+            </Text>
+          </View>
+        ) : null
       }
+      ListEmptyComponent={() => (
+       <EmptyData/>
+      )}
       contentContainerStyle={data.length === 1 ? { paddingBottom: 0} : { paddingBottom: 40 }}
       showsVerticalScrollIndicator={false}
     />

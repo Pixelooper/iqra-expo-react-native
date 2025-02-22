@@ -24,7 +24,7 @@ const Mood = () => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             onScroll={handleScroll}
-            className="pt-4 pb-12"
+            className="pt-4 "
             renderItem={({item, index}) => (
                 <TouchableOpacity
                     key={index} 
@@ -48,7 +48,7 @@ const Mood = () => {
                 </TouchableOpacity>
             )}
         />
-        <View className="flex-row justify-center mb-4">
+        <View className="flex-row justify-center pb-24">
         {moods.slice(0, 5).map((_, index) => (
             <View
             key={index}

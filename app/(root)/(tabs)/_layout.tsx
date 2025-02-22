@@ -89,6 +89,16 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
+        name="blogs"
+        options={{
+          title: "Blogs",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon source={icons.blog} focused={focused} text="Blogs"/>
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="ayats/[id]"
         options={{
           title: "Ayats",
@@ -104,7 +114,6 @@ export default function Layout() {
           ),
         }}
       /> 
-      
       <Tabs.Screen
         name="search"
         options={{
@@ -112,6 +121,16 @@ export default function Layout() {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon source={icons.search} focused={focused} text="Search"/>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="about"
+        options={{
+          title: "About",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon source={icons.about} focused={focused} text="About"/>
           ),
         }}
       />
@@ -159,14 +178,6 @@ export default function Layout() {
         name="blog/[id]"
         options={{
           title: "Blog",
-          headerShown: false,
-          href: null, // Prevent these from being added as tabs
-        }}
-      />
-      <Tabs.Screen
-        name="blogs"
-        options={{
-          title: "Blogs",
           headerShown: false,
           href: null, // Prevent these from being added as tabs
         }}

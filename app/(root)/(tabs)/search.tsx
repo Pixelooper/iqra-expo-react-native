@@ -11,7 +11,6 @@ import EmptyData from "@/components/EmptyData";
 
 const SPACING = 20;
 const AVATAR_SIZE = 100;
-const ITEM_SIZE = AVATAR_SIZE + SPACING * 2;
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
 const Search = () => {
@@ -125,30 +124,6 @@ const Search = () => {
                 )}
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {
-                  const inputRange = [
-                    -1,
-                    0,
-                    ITEM_SIZE * index,
-                    ITEM_SIZE * (index + 1), // Correct scaling range
-                  ];
-    
-                  const scaleInputRange = [
-                    -1,
-                    0,
-                    ITEM_SIZE * index,
-                    ITEM_SIZE * (index + 0.5), // Visible scaling happens earlier
-                  ];
-    
-                  const opacity = scrollY.interpolate({
-                    inputRange,
-                    outputRange: [1, 1, 1, 0],
-                  });
-    
-                  const scale = scrollY.interpolate({
-                    inputRange: scaleInputRange,
-                    outputRange: [1, 1, 1, 0.8],
-                  });
-    
                   return (
                     <TouchableOpacity key={index} 
                       onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
@@ -157,8 +132,6 @@ const Search = () => {
                         style={{
                           marginBottom: SPACING,
                           borderRadius: 12,
-                          transform: [{ scale }],
-                          opacity,
                         }}
                       >
                         <Image

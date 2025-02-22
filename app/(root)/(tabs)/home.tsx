@@ -1,13 +1,13 @@
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import RandomAyat from "@/components/RandomAyat";
 import LastRead from "@/components/LastRead";
 import Featured from "@/components/Featured";
-import Blogs from "@/components/Blogs";
 import Mood from "@/components/Mood";
 import { useSelector } from "react-redux";
 import { RootState } from "@/utils/store/store";
 import Saved from "@/components/Saved";
 import BasedOn from "@/components/BasedOn";
+import Blogs from "@/components/Blogs";
 
 const Home = () => {
     const { data } = useSelector((state: RootState) => state.home);
@@ -24,7 +24,7 @@ const Home = () => {
                     }
                     <Featured featured={data.featured}/>
                     <BasedOn basedon={data.basedon}/>
-                    <Blogs blogs={data.blogs}/>
+                    {/* <Blogs blogs={data.blogs}/> */}
                     <Mood/>
                 </View>
             )}
