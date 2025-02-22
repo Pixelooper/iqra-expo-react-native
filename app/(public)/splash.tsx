@@ -29,10 +29,10 @@ const Splash = () => {
                         loading ?
                         <ActivityIndicator size="large" color="#00ff00"/> :
                         <View className="flex items-center justify-between">
-                            <Text className="text-black text-3xl text-center">
+                            <Text className="text-black text-3xl text-center font-NotoNaskhArabicBold leading-10">
                                 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
                             </Text>
-                            <Text className="text-sm font-AnekBangla text-center text-gray-500 my-3">
+                            <Text className="text-sm text-center text-gray-500 my-3">
                                 পরম করুণাময় অসীম দয়ালু আল্লাহতায়ালার নামে
                             </Text>
                             <CustomButton

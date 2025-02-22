@@ -126,7 +126,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                 </View>
             </View>
             <View className="border-b border-gray-white pb-4">
-                <Text className="text-2xl text-black mb-6 text-right">
+                <Text className="text-2xl text-black mb-6 text-right font-NotoNaskhArabicBold leading-10">
                     {ar}
                 </Text>
                 <Text className="text-sm leading-6 text-black mb-2 font-AnekBangla">

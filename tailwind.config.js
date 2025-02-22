@@ -5,11 +5,10 @@ module.exports = {
       extend: {
         fontFamily: {
             AnekBangla: ["AnekBangla", "sans-serif"],
-            AnekBanglaLight: ["AnekBangla-Light", "sans-serif"],
             AnekBanglaMedium: ["AnekBangla-Medium", "sans-serif"],
             AnekBanglaSemiBold: ["AnekBangla-SemiBold", "sans-serif"],
             AnekBanglaBold: ["AnekBangla-Bold", "sans-serif"],
-            AnekBanglaExtraBold: ["AnekBangla-ExtraBold", "sans-serif"],
+            NotoNaskhArabicBold: ["NotoNaskhArabic-Bold", "serif"],
         },
         colors: {
             'light-olive': '#ECF8E3',

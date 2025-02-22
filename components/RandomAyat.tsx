@@ -33,8 +33,8 @@ const RandomAyat: React.FC<RandomProps> = ({ random }) => {
                     className="w-[130px] h-[130px] absolute left-3 top-3"
                     resizeMode="contain"
                 />
-                <Text className="text-2xl my-4 text-right text-black pt-4">{random?.ar}</Text>
-                <Text className="font-AnekBanglaMedium mb-1 text-left text-black text-lg leading-7">{random?.bn}</Text>
+                <Text className="text-2xl my-4 text-right text-black font-NotoNaskhArabicBold leading-10 pt-4">{random?.ar}</Text>
+                <Text className="font-AnekBanglaMedium mb-1 text-left text-black  text-lg leading-7">{random?.bn}</Text>
                 <View className="flex flex-row justify-between">
                     <Text className=" text-black text-left font-AnekBangla text-xs leading-5">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>
                     <CustomButton
