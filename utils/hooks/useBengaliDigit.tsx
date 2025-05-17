@@ -28,3 +28,28 @@ export const convertToEnglishDigits = (banglaNumber: string): string => {
 
     return banglaNumber.split('').map(char => banglaToEnglishMap[char] || char).join('');
 };
+
+export function convertToArabicDigits(number: number | string): string {
+    const englishToArabicDigitsMap: Record<string, string> = {
+        '0': '٠',
+        '1': '١',
+        '2': '٢',
+        '3': '٣',
+        '4': '٤',
+        '5': '٥',
+        '6': '٦',
+        '7': '٧',
+        '8': '٨',
+        '9': '٩',
+    };
+    
+
+    const convertedNumber = number
+        .toString() // Ensure the input is treated as a string
+        .split('')  // Split into individual characters
+        .map((digit) => englishToArabicDigitsMap[digit] || digit) // Convert each digit
+        .join(''); // Join back into a single string
+
+        
+    return convertedNumber;
+}

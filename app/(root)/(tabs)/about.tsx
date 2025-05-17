@@ -28,14 +28,13 @@ const about = () => {
                 <Text className="text-lg leading-8 font-AnekBanglaSemiBold text-dark-green mb-2">
                     📌 এই বইয়ে যা পাবেন:
                 </Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}কুরআনের আয়াতসমূহঃ সহজ-সরল বাংলা অনুবাদ সহ বিশ্লেষণ।</Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}বিশুদ্ধ হাদীস সংকলনঃ রাসূলের গুরুত্বপূর্ণ বাণী ও দিকনির্দেশনা।</Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}ইসলামিক জ্ঞান ও শিক্ষাঃ দৈনন্দিন জীবনে অনুসরণীয় নির্দেশিকা।</Text>
+                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}কুরআনের আয়াতসমূহ</Text>
+                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}সহজ-সরল বাংলা অনুবাদ সহ বিশ্লেষণ</Text>
+                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}বিশুদ্ধ হাদীস সংকলন</Text>
+                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}রাসূলের গুরুত্বপূর্ণ বাণী ও দিকনির্দেশনা</Text>
+                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}ইসলামিক জ্ঞান ও শিক্ষা</Text>
+                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}দৈনন্দিন জীবনে অনুসরণীয় নির্দেশিকা</Text>
             </View>
-
-            <Text className="text-center text-black text-lg leading-8 font-AnekBanglaBold my-6">
-                প্রকাশনায়: কাজী শফকত হোসেন  
-            </Text>
         </ScrollView>
     </AnimatedSafeAreaView>
   );

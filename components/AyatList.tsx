@@ -39,7 +39,7 @@ export const AyatList = memo(({ sid, data, flashListRef, tafsirPage, currentAyat
       ListHeaderComponent={
         data.length > 0 ? (
           <View className="text-center mb-8">
-            <Text className="text-2xl text-dark-green mb-2 text-center font-NotoNaskhArabicBold leading-10">
+            <Text className="text-2xl text-dark-green mb-2 text-center font-IndopakRegular leading-[55px]">
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
             </Text>
             <Text className="text-sm leading-6 font-AnekBangla text-dark-green mb-4 text-center">

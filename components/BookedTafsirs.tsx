@@ -111,7 +111,7 @@ const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData, Compo
                               resizeMode="contain"
                             />
                             <View className="flex flex-1 items-end justify-between w-full ml-2">
-                              <Text className="text-lg leading-8 text-black font-NotoNaskhArabicBold">
+                              <Text className="text-2xl leading-[55px] text-black font-IndopakRegular">
                                 {item.ar.length > 400 ? item.ar.substring(0, 400) + "..." : item.ar}
                               </Text>
                             </View>

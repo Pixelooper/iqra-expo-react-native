@@ -16,6 +16,8 @@ export default function RootLayout() {
     "AnekBangla-SemiBold": require("../assets/fonts/AnekBangla-SemiBold.ttf"),
     "AnekBangla-Bold": require("../assets/fonts/AnekBangla-Bold.ttf"),
     "NotoNaskhArabic-Bold": require("../assets/fonts/NotoNaskhArabic-Bold.ttf"),
+    "Indopak-Regular": require("../assets/fonts/Indopak-Regular.ttf"),
+    "Uthmanic-Regular": require("../assets/fonts/Uthmanic-Regular.otf"),
   });
 
   useEffect(() => {

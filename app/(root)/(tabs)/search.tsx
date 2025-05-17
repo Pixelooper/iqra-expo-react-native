@@ -152,7 +152,7 @@ const Search = () => {
                                 {convertToBengaliDigits(item.no)}
                               </Text>
                             </View>
-                            <Text className="text-xl text-black text-right pr-1 font-NotoNaskhArabicBold leading-10">
+                            <Text className="text-2xl text-black text-right pr-1 font-IndopakRegular leading-[55px]">
                               {item.name_ar}
                             </Text>
                           </View>

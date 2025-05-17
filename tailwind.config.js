@@ -9,6 +9,8 @@ module.exports = {
             AnekBanglaSemiBold: ["AnekBangla-SemiBold", "sans-serif"],
             AnekBanglaBold: ["AnekBangla-Bold", "sans-serif"],
             NotoNaskhArabicBold: ["NotoNaskhArabic-Bold", "serif"],
+            IndopakRegular: ["Indopak-Regular", "serif"],
+            UthmanicRegular: ["Uthmanic-Regular", "serif"],
         },
         colors: {
             'light-olive': '#ECF8E3',

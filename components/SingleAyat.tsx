@@ -6,7 +6,7 @@ import tafsir from "../assets/icons/tafsir.png";
 import read from "../assets/icons/continue.png";
 import bookmark from "../assets/icons/bookmark.png";
 import tick from "../assets/icons/tick.png";
-import { convertToBengaliDigits } from '@/utils/hooks/useBengaliDigit';
+import { convertToArabicDigits, convertToBengaliDigits } from '@/utils/hooks/useBengaliDigit';
 import Toast from 'react-native-toast-message';
 import { addAyat, addTafsir, setContinueReading } from '@/utils/store/slices/bookmarkSlice';
 import { useDispatch } from 'react-redux';
@@ -126,8 +126,12 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                 </View>
             </View>
             <View className="border-b border-gray-white pb-4">
-                <Text className="text-2xl text-black mb-6 text-right font-NotoNaskhArabicBold leading-10">
-                    {ar}
+                <Text className="text-3xl text-black mb-6 text-right font-IndopakRegular leading-[70px]">
+                    {/* {ar}{" "} */}
+                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                    <Text className="text-3xl text-black font-UthmanicRegular">
+                        {convertToArabicDigits(no)}
+                    </Text> 
                 </Text>
                 <Text className="text-sm leading-6 text-black mb-2 font-AnekBangla">
                     {bn}

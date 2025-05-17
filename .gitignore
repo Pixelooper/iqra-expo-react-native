@@ -37,5 +37,8 @@ yarn-error.*
 
 app-example
 
+
 # eas build --profile development --platform android
 # eas build -p android --profile preview
+# eas update:configure
+# eas update

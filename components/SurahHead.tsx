@@ -17,8 +17,8 @@ const SurahHead = ({ ar, bn, total, tafsir } : TitleProps) => {
                 className="w-[100px] h-[100px] absolute left-0 bottom-3"
                 resizeMode="contain"
             />
-            <Text className="text-center text-3xl text-green-950 font-NotoNaskhArabicBold leading-10">
-                سورة {ar}
+            <Text className="text-center text-xl text-green-950 font-IndopakRegular leading-[40px]">
+                سورة {ar} 
             </Text>
             <Text className="text-center text-lg leading-8 font-AnekBanglaMedium gray-black mb-1">
                 সূরা {bn}

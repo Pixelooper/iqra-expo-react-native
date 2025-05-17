@@ -1,6 +1,6 @@
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
-import { Image, Text, View, ActivityIndicator } from "react-native";
+import { Image, Text, View, ActivityIndicator, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import splash from "@/assets/images/splash.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,7 @@ const Splash = () => {
 
     return (
         <SafeAreaView className="min-h-screen flex justify-center bg-white">
+                <Text className="text-gray-500 text-lg text-center font-AnekBanglaMedium absolute right-5" style={{ top: Platform.OS === 'ios' ? 50 : 10}}>v1.3</Text>
                 <View className="flex items-center justify-between p-5">
                     <Image
                         source={splash}
@@ -29,10 +30,10 @@ const Splash = () => {
                         loading ?
                         <ActivityIndicator size="large" color="#00ff00"/> :
                         <View className="flex items-center justify-between">
-                            <Text className="text-black text-3xl text-center font-NotoNaskhArabicBold leading-10">
+                            <Text className="text-black text-3xl text-center font-IndopakRegular leading-[70px]">
                                 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
                             </Text>
-                            <Text className="text-sm text-center text-gray-500 my-3">
+                            <Text className="text-sm text-center text-gray-500 mb-3">
                                 পরম করুণাময় অসীম দয়ালু আল্লাহতায়ালার নামে
                             </Text>
                             <CustomButton
