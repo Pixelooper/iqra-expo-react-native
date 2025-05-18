@@ -78,7 +78,7 @@ const Tafsir = () => {
                                     tafsirPage={true}
                                 />
                                 <Text className="mt-3"> 
-                                    <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">তাফসির: </Text> 
+                                    <Text className="text-sm leading-6 font-NotoSansBengaliSemiBold text-yellow-400">তাফসির: </Text> 
                                 </Text>
                                 <TafsirTexts tafsir={ayatData?.tafsir || []} />
                                 <View className="flex flex-row justify-between">

@@ -56,7 +56,7 @@ const CustomButton = ({
           resizeMode="contain"
         />
       }
-      <Text className={`font-AnekBangla ${getTextVariantStyle(textVariant)}`}>
+      <Text className={`font-NotoSansBengali ${getTextVariantStyle(textVariant)}`}>
         {title}
       </Text>
       {ImgRight && 

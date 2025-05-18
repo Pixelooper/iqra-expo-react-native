@@ -38,10 +38,10 @@ const Mood = () => {
                             className="w-[84px] h-[84px] absolute left-2 bottom-2"
                             resizeMode="contain"
                         />
-                        <Text className="text-xl font-AnekBanglaBold text-center">
+                        <Text className="text-xl font-NotoSansBengaliBold text-center">
                             {item.icon}
                         </Text>
-                        <Text className="text-sm leading-6 text-black text-md pt-2 font-AnekBanglaSemiBold text-center w-full">
+                        <Text className="text-sm leading-6 text-black text-md pt-2 font-NotoSansBengaliSemiBold text-center w-full">
                             {item.name}
                         </Text>
                     </View>

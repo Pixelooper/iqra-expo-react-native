@@ -40,11 +40,11 @@ const Featured: React.FC<FeaturedProps> = ({ featured }) => {
             >
               <View className="mr-3 rounded-lg p-3 border border-gray-white bg-white">
                 <ImageBackground source={item.shape} className="w-[160px] h-[160px] flex justify-center items-center">
-                  <Text className="text-lg leading-8 text-gray-black font-AnekBanglaBold mb-24 text-center">
+                  <Text className="text-lg leading-8 text-gray-black font-NotoSansBengaliBold mb-24 text-center">
                     সূরা {item.name_bn}
                   </Text>
                 </ImageBackground>
-                <Text className="text-sm leading-6 text-dark-green text-center font-AnekBanglaMedium mt-5">
+                <Text className="text-sm leading-6 text-dark-green text-center font-NotoSansBengaliMedium mt-5">
                     সূরা নং {convertToBengaliDigits(item.no)} | সর্বমোট আয়াত {convertToBengaliDigits(item.totalAyat)}
                 </Text>
               </View>

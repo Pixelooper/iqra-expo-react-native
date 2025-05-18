@@ -81,7 +81,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
     return (
         <View className="mb-4">
             <View className="flex flex-row justify-between mb-4">
-                <Text className="text-lg leading-8 font-AnekBanglaSemiBold text-yellow-600 mb-2">
+                <Text className="text-lg leading-8 font-NotoSansBengaliSemiBold text-yellow-600 mb-2">
                     {convertToBengaliDigits(no)}
                 </Text>
                 <View className="flex flex-row justify-between gap-2">
@@ -127,13 +127,12 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
             </View>
             <View className="border-b border-gray-white pb-4">
                 <Text className="text-3xl text-black mb-6 text-right font-IndopakRegular leading-[70px]">
-                    {/* {ar}{" "} */}
-                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                    {ar}{" "}
                     <Text className="text-3xl text-black font-UthmanicRegular">
                         {convertToArabicDigits(no)}
                     </Text> 
                 </Text>
-                <Text className="text-sm leading-6 text-black mb-2 font-AnekBangla">
+                <Text className="text-sm leading-6 text-black mb-2 font-NotoSansBengali">
                     {bn}
                 </Text>
 
@@ -142,24 +141,24 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                         <View ref={expandableRef}>
                             {
                                 shanenuzul &&
-                                <Text className="font-AnekBangla text-sm leading-6 text-black-300 mt-3">
-                                    <Text className="font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text>  
+                                <Text className="font-NotoSansBengali text-sm leading-6 text-black-300 mt-3">
+                                    <Text className="font-NotoSansBengaliSemiBold text-yellow-400">শানে নুযূল: </Text>  
                                     {shanenuzul}
                                 </Text>
                             }
                             {
                                 tika?.length > 0 &&
                                 tika.map((text, index) => (
-                                    <Text key={index} className="font-AnekBangla text-sm leading-6 text-black-300 mt-3">
-                                        <Text className="font-AnekBanglaSemiBold text-yellow-400">টিকা ({index+1}): </Text>  
+                                    <Text key={index} className="font-NotoSansBengali text-sm leading-6 text-black-300 mt-3">
+                                        <Text className="font-NotoSansBengaliSemiBold text-yellow-400">টিকা ({index+1}): </Text>  
                                         {text}
                                     </Text>
                                 ))
                             }
                             {
                                 quote &&
-                                <Text className="font-AnekBangla text-sm leading-6 text-black-300 mt-3">
-                                    <Text className="font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text>  
+                                <Text className="font-NotoSansBengali text-sm leading-6 text-black-300 mt-3">
+                                    <Text className="font-NotoSansBengaliSemiBold text-yellow-400">লেখকের কথা: </Text>  
                                     {quote}
                                 </Text>
                             }

@@ -4,18 +4,14 @@ module.exports = {
     theme: {
       extend: {
         fontFamily: {
-            AnekBangla: ["AnekBangla", "sans-serif"],
-            AnekBanglaMedium: ["AnekBangla-Medium", "sans-serif"],
-            AnekBanglaSemiBold: ["AnekBangla-SemiBold", "sans-serif"],
-            AnekBanglaBold: ["AnekBangla-Bold", "sans-serif"],
-            NotoNaskhArabicBold: ["NotoNaskhArabic-Bold", "serif"],
             IndopakRegular: ["Indopak-Regular", "serif"],
             UthmanicRegular: ["Uthmanic-Regular", "serif"],
+            NotoSansBengali: ["NotoSansBengali", "sans-serif"],
+            NotoSansBengaliMedium: ["NotoSansBengali-Medium", "sans-serif"],
+            NotoSansBengaliSemiBold: ["NotoSansBengali-SemiBold", "sans-serif"],
+            NotoSansBengaliBold: ["NotoSansBengali-Bold", "sans-serif"],
         },
         colors: {
-            'light-olive': '#ECF8E3',
-            'light-green': '#E8F7DF',
-            'medium-green': '#1E2B1E',
             'dark-green': '#0C7900',
             'gray-black': '#5A5A5A',
             'gray-white': '#E3E3E3',
@@ -63,17 +59,6 @@ module.exports = {
                 700: "#C53030",
                 800: "#9B2C2C",
                 900: "#742A2A",
-            },
-            warning: {
-                100: "#FFFBEB",
-                200: "#FEF3C7",
-                300: "#FDE68A",
-                400: "#FACC15",
-                500: "#EAB308",
-                600: "#CA8A04",
-                700: "#A16207",
-                800: "#854D0E",
-                900: "#713F12",
             },
             general: {
                 100: "#CED1DD",
