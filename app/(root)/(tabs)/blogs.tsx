@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, Animated, Platform, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 type Blogs = [
     {
         _id: string;
@@ -23,7 +26,11 @@ const blogs = () => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/blog`);
+                const response = await axios.get(`${API_URL}/blog`, {
+                    headers: {
+                        Authorization: " Bearer " + JWT_TOKEN,
+                    }
+                });
                 setBlogs(response.data.data);
             } catch (error) {
                 console.error("Error fetching data", error);

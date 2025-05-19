@@ -5,6 +5,8 @@ import Title from "@/components/Title";
 import axios from "axios";
 import BookedAyats from "@/components/BookedAyats";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
 
 type MoodAyatsProps = {
     loading: boolean;
@@ -24,7 +26,11 @@ const MoodAyats: React.FC<MoodAyatsProps> = () => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/mood?mood=${slug}`);
+                const response = await axios.get(`${API_URL}/mood?mood=${slug}`, {
+                    headers: {
+                        Authorization: " Bearer " + JWT_TOKEN,
+                    }
+                });
                 setAyatData(response.data.data);
             } catch (error) {
                 console.error("Error fetching data", error);

@@ -12,6 +12,8 @@ import Blogs from "@/components/Blogs";
 const Home = () => {
     const { data } = useSelector((state: RootState) => state.home);
     const { lastRead } = useSelector((state: RootState) => state.bookmark);
+    const API_URL = process.env.EXPO_PUBLIC_API_URL;
+    const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
 
     return (
             <FlatList data={[6]} renderItem={ ()=> (
@@ -20,7 +22,7 @@ const Home = () => {
                     <Saved/>
                     {
                         lastRead.length > 0 ?
-                        <LastRead lastRead={lastRead}/> : null
+                        <LastRead lastRead={lastRead} API_URL={API_URL} JWT_TOKEN={JWT_TOKEN}/> : null
                     }
                     <Featured featured={data.featured}/>
                     <BasedOn basedon={data.basedon}/>

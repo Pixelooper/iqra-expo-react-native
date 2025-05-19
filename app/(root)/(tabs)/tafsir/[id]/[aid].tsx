@@ -9,6 +9,9 @@ import TafsirTexts from "@/components/TafsirTexts";
 import SurahHead from "@/components/SurahHead";
 import SingleAyat from "@/components/SingleAyat";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 const Tafsir = () => {
     const { id, aid } = useLocalSearchParams();
     const [surahData, setSurahData] = useState<surah | null>(null);
@@ -20,9 +23,11 @@ const Tafsir = () => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(
-                    `https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/tafsir/${id}/${aid}`
-                );
+                const response = await axios.get(`${API_URL}/tafsir/${id}/${aid}`, {
+                    headers: {
+                        Authorization: " Bearer " + JWT_TOKEN,
+                    }
+                });
                 setSurahData(response.data.data);
                 setAyatData(response.data.data.ayat[0]);
                 setAyatNo(response.data.data.ayat[0].no);

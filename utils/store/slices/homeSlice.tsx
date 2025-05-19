@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction  } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk  } from "@reduxjs/toolkit";
 import axios from "axios";
 
 interface homeState {
@@ -17,7 +17,15 @@ const initialState: homeState = {
 
 export const fetchHomeData = createAsyncThunk("surah/fetchHomeData", async (_, thunkAPI) => {
   try {
-    const response = await axios.get("https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/home");
+    const API_URL = process.env.EXPO_PUBLIC_API_URL;
+    const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+    
+    const response = await axios.get(`${API_URL}/home`, {
+      headers: {
+         Authorization: " Bearer " + JWT_TOKEN,
+      }
+    });
+
     return response.data.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.message || "Failed to fetch surah data");

@@ -9,6 +9,9 @@ import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
 import EmptyData from "@/components/EmptyData";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 const SPACING = 20;
 const AVATAR_SIZE = 100;
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
@@ -27,7 +30,11 @@ const Search = () => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surahs`);
+                const response = await axios.get(`${API_URL}/surahs`, {
+                    headers: {
+                        Authorization: " Bearer " + JWT_TOKEN,
+                    }
+                });
                 setSurahData(response.data.data);
             } catch (error) {
                 console.error("Error fetching data", error);

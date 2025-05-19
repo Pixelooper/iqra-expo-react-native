@@ -16,6 +16,9 @@ import { addSurah } from "@/utils/store/slices/bookmarkSlice";
 import { FlashList } from "@shopify/flash-list";
 import { AyatList } from "@/components/AyatList";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 const Surah = () => {
     const { id } = useLocalSearchParams();
     const [surahData, setSurahData] = useState<surah | null>(null);
@@ -27,7 +30,11 @@ const Surah = () => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/surah/${id}`);
+                const response = await axios.get(`${API_URL}/surah/${id}`, {
+                    headers: {
+                        Authorization: " Bearer " + JWT_TOKEN,
+                    }
+                });
                 setSurahData(response.data.data);
                 setAyatData(response.data.data.ayat)
             } catch (error) {

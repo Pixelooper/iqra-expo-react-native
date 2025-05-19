@@ -5,6 +5,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 const bookmarkSurah = () => {
     const { surah } = useSelector((state: RootState) => state.bookmark);
     const [loading, setLoading] = useState(true);
@@ -16,11 +19,12 @@ const bookmarkSurah = () => {
 
         try {
           const response = await axios.post(
-            "https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/lastread",
-            surah, // Send your lastRead array in the request body
+          `${API_URL}/lastread`,
+            surah,
             {
               headers: {
-                "Content-Type": "application/json", // Specify headers if required
+                "Content-Type": "application/json",
+              Authorization: " Bearer " + JWT_TOKEN,
               },
             }
           );

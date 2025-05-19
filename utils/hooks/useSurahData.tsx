@@ -2,6 +2,9 @@ import { surah } from '@/types/type';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 export const useSurahData = (id: string) => {
   const [data, setData] = useState<surah | null>(null);
   const [loading, setLoading] = useState(true);
@@ -10,9 +13,11 @@ export const useSurahData = (id: string) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/ayat/${id}`
-        );
+        const response = await axios.get(`${API_URL}/ayat/${id}`, {
+            headers: {
+                Authorization: " Bearer " + JWT_TOKEN,
+            }
+        });
         setData(response.data.data);
         setError(null);
       } catch (err) {

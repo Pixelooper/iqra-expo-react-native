@@ -11,6 +11,9 @@ import AutoScrollToTop from "@/utils/AutoScrollToTop";
 import { FlashList } from "@shopify/flash-list";
 import { AyatList } from "@/components/AyatList";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 const Ayat = () => {
     const { id, aid } = useLocalSearchParams();
     const [surahData, setSurahData] = useState<surah | null>(null);
@@ -22,7 +25,11 @@ const Ayat = () => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/singleayat/${id}/${aid}`);
+                const response = await axios.get(`${API_URL}/singleayat/${id}/${aid}`, {
+                    headers: {
+                        Authorization: " Bearer " + JWT_TOKEN,
+                    }
+                });
                 setSurahData(response.data.data);
                 setAyatData(response.data.data.ayat)
             } catch (error) {

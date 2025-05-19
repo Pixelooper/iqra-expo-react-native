@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, Animated, Platform, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 type Baseons = [{
     _id: string;
     title: string;
@@ -21,7 +24,11 @@ const basedons = () => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/basedon`);
+                const response = await axios.get(`${API_URL}/basedon`, {
+                    headers: {
+                        Authorization: " Bearer " + JWT_TOKEN,
+                    }
+                });
                 setBasedon(response.data.data);
             } catch (error) {
                 console.error("Error fetching data", error);

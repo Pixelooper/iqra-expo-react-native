@@ -5,6 +5,9 @@ import React, { useEffect, useState } from 'react';
 import BookedAyats from '@/components/BookedAyats';
 import { ayat } from '@/types/type';
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 type ayatData = ayat & {
     surahId: string;
     surahNo: number;
@@ -21,7 +24,11 @@ const BasedOnPage = () => {
         const fetchData = async () => {
             setLoading(true); 
             try {
-                const response = await axios.get(`https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/basedon/${id}`);
+                const response = await axios.get(`${API_URL}/basedon/${id}`, {
+                    headers: {
+                        Authorization: " Bearer " + JWT_TOKEN,
+                    }
+                });
                 setAyatData(response.data.data.info);
                 setTopic(response.data.data.topic)
             } catch (error) {

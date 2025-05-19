@@ -6,6 +6,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 const PageTitle: React.FC = () => {
   return <Title title="সংরক্ষিত আয়াত তালিকা" subtitle="এখানে আপনি আপনার সংরক্ষিত আয়াতটি খুঁজে পেতে পারেন" btnText={false} />;
 };
@@ -22,11 +25,12 @@ const bookmarkAyat = () => {
 
         try {
           const response = await axios.post(
-            "https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/savedayats",
+          `${API_URL}/savedayats`,
             ayat, 
             {
               headers: {
-                "Content-Type": "application/json", // Specify headers if required
+                "Content-Type": "application/json",
+                Authorization: " Bearer " + JWT_TOKEN,
               },
             }
           );

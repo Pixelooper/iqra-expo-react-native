@@ -19,7 +19,6 @@ const paddingTop = Platform.select({
     default: 'pt-4',
 });
 
-
 const RandomAyat: React.FC<RandomProps> = ({ random }) => {
     return (
         <View className="w-full bg-white mt-20">

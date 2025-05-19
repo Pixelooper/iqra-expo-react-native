@@ -12,6 +12,9 @@ type LastReadProps = {
   lastRead: [];
 };
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
+
 const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
@@ -30,12 +33,12 @@ const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
 
       try {
         const response = await axios.post(
-          // "http://localhost:5000/api/iqra/expo/lastread",
-          "https://iqra-backend-git-master-iftikharrashas-projects.vercel.app/api/iqra/expo/lastread",
-          lastRead, // Send your lastRead array in the request body
+          `${API_URL}/lastread`,
+          lastRead,
           {
             headers: {
-              "Content-Type": "application/json", // Specify headers if required
+              "Content-Type": "application/json",
+              Authorization: " Bearer " + JWT_TOKEN,
             },
           }
         );
