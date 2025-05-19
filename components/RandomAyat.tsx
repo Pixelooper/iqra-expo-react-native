@@ -4,7 +4,6 @@ import { router } from "expo-router";
 import { Image, Platform, Text, View } from "react-native";
 import CustomButton from "./CustomButton";
 import shape from "../assets/shapes/shape-11.png";
-import Title from "./Title";
 
 type RandomProps = {
     random: ayat & {
@@ -33,7 +32,7 @@ const RandomAyat: React.FC<RandomProps> = ({ random }) => {
                     className="w-[130px] h-[130px] absolute left-3 top-3"
                     resizeMode="contain"
                 />
-                <Text className="text-3xl my-4 text-right text-black font-IndopakRegular leading-[70px] pt-4">{random?.ar}</Text>
+                <Text className="text-3xl my-4 text-right text-black font-IndopakRegular leading-[50px] pt-4">{random?.ar}</Text>
                 <Text className="font-NotoSansBengaliMedium mb-1 text-left text-black  text-lg leading-7">{random?.bn}</Text>
                 <View className="flex flex-row justify-between">
                     <Text className=" text-black text-left font-NotoSansBengali text-sm leading-5">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>

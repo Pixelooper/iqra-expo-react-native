@@ -6,7 +6,6 @@ import home from "@/assets/icons/homenav.png";
 import blog from "@/assets/icons/blog.png";
 import about from "@/assets/icons/about.png";
 
-import avatar from "@/assets/images/avatar.png";
 import ham from "@/assets/images/ham.png";
 
 import logo from "@/assets/images/logo.png";
@@ -30,7 +29,6 @@ export const icons = {
     search,
     read,
     keepread,
-    avatar,
     ham,
     blog,
     about,
