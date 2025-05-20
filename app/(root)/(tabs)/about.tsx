@@ -24,7 +24,7 @@ const about = () => {
                 সুন্নাহর আলোকে জীবন পরিচালনার জন্য এটি একটি নির্ভরযোগ্য গ্রন্থ।
             </Text>
 
-            <View className="p-4 rounded-lg">
+            <View className="p-4 pt-0 rounded-lg">
                 <Text className="text-lg leading-8 font-NotoSansBengaliSemiBold text-dark-green mb-2">
                     📌 এই বইয়ে যা পাবেন:
                 </Text>

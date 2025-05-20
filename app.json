@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "iqra-expo",
+    "name": "Iqra - Bangla Quran",
     "slug": "iqra-expo",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -32,8 +32,8 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/splash.jpg",
-          "imageWidth": 200,
-          "resizeMode": "contain",
+          "imageWidth": 590,
+          "resizeMode": "cover",
           "backgroundColor": "#FFFFFF"
         }
       ]
