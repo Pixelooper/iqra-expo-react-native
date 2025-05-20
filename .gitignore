@@ -42,3 +42,5 @@ app-example
 # eas build -p android --profile preview
 # eas update:configure
 # eas update
+
+# eas build -p android --profile production
