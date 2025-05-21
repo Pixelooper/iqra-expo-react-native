@@ -49,13 +49,13 @@ const Saved = () => {
                         className="w-[40px] h-[40px] absolute right-2 top-2"
                         resizeMode="contain"
                     />
-                    <Text className={`text-lg leading-8 font-AnekBanglaSemiBold text-black`}>
+                    <Text className={`text-lg leading-8 font-NotoSansBengaliSemiBold text-black`}>
                         {item.title}
                     </Text>
-                    <Text className="text-[#B6B6B6] text-lg leading-8 font-AnekBanglaBold pt-3">
+                    <Text className="text-[#B6B6B6] text-lg leading-8 font-NotoSansBengaliBold pt-3">
                         {convertToBengaliDigits(item.total)}{item.total === 0 ? ' টি' : ' টি'}
                     </Text>
-                    <Text className="text-dark-green text-sm leading-6 font-AnekBangla">
+                    <Text className="text-dark-green text-sm leading-6 font-NotoSansBengali">
                         সংরক্ষিত
                     </Text>
                 </TouchableOpacity>

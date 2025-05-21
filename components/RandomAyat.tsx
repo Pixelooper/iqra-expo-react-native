@@ -22,7 +22,7 @@ const paddingTop = Platform.select({
 const RandomAyat: React.FC<RandomProps> = ({ random }) => {
     return (
         <View className="w-full bg-white mt-20">
-            <Text className="mx-3 text-lg font-AnekBanglaMedium text-black text-left mb-2">
+            <Text className="mx-3 text-lg font-NotoSansBengaliMedium text-black text-left mb-2">
                 আজকের আয়াত
             </Text>
             <View className={`mx-3 p-4 border border-gray-white rounded-3xl ${paddingTop}`}>
@@ -32,9 +32,9 @@ const RandomAyat: React.FC<RandomProps> = ({ random }) => {
                     resizeMode="contain"
                 />
                 <Text className="text-3xl my-4 text-right text-black font-IndopakRegular leading-[50px] pt-4">{random?.ar}</Text>
-                <Text className="font-AnekBanglaMedium mb-1 text-left text-black  text-lg leading-7">{random?.bn}</Text>
+                <Text className="font-NotoSansBengaliMedium mb-1 text-left text-black  text-lg leading-7">{random?.bn}</Text>
                 <View className="flex flex-row justify-between">
-                    <Text className=" text-black text-left font-AnekBangla text-sm leading-5">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>
+                    <Text className=" text-black text-left font-NotoSansBengali text-sm leading-5">- সূরা: {random?.surahName_bn} {convertToBengaliDigits(random?.surahNo)} / {convertToBengaliDigits(random?.no)}</Text>
                     <CustomButton
                         title="পড়ুন"
                         onPress={() => router.push(`/ayats/${random?.surahId}`)}

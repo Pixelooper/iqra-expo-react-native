@@ -147,7 +147,7 @@ const Search = () => {
                           resizeMode="contain"
                         />
                         <View className="flex-1 flex items-start justify-between pl-3">
-                          <Text className="text-lg leading-8 text-black font-AnekBanglaSemiBold mb-1">
+                          <Text className="text-lg leading-8 text-black font-NotoSansBengaliSemiBold mb-1">
                             সূরা {item.name_bn}
                           </Text>
                           <Text className="text-sm leading-6 text-black mb-4">
@@ -155,7 +155,7 @@ const Search = () => {
                           </Text>
                           <View className="flex flex-row items-center justify-between w-full">
                             <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
-                              <Text className="text-md text-black font-AnekBanglaSemiBold">
+                              <Text className="text-md text-black font-NotoSansBengaliSemiBold">
                                 {convertToBengaliDigits(item.no)}
                               </Text>
                             </View>

@@ -42,7 +42,7 @@ export const AyatList = memo(({ sid, data, flashListRef, tafsirPage, currentAyat
             <Text className="text-2xl text-dark-green mb-2 text-center font-IndopakRegular leading-[55px]">
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
             </Text>
-            <Text className="text-sm leading-6 font-AnekBangla text-dark-green mb-4 text-center">
+            <Text className="text-sm leading-6 font-NotoSansBengali text-dark-green mb-4 text-center">
               পরম করুণাময় অসীম দয়ালু আল্লাহতায়ালার নামে
             </Text>
           </View>

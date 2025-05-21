@@ -83,7 +83,7 @@ const Surah = () => {
 
                             <View className="mb-4 py-2">
                                 <View className="flex flex-row justify-between mt-4 mb-2">
-                                    <Text className="text-lg leading-8 font-AnekBanglaSemiBold text-dark-green">
+                                    <Text className="text-lg leading-8 font-NotoSansBengaliSemiBold text-dark-green">
                                         পারা {convertToBengaliDigits(surahData?.para)} / সূরা {convertToBengaliDigits(surahData?.no)}
                                     </Text>
                                     <CustomButton
@@ -95,38 +95,38 @@ const Surah = () => {
                                     />
                                 </View>
                                 <View className="flex flex-row justify-between mb-4">
-                                    <Text className="text-sm leading-6 font-AnekBanglaSemiBold">{surahData?.place}</Text>
-                                    <Text className="text-sm leading-6 font-AnekBanglaSemiBold">রুকুঃ {convertToBengaliDigits(surahData?.ruku)}</Text>
+                                    <Text className="text-sm leading-6 font-NotoSansBengaliSemiBold">{surahData?.place}</Text>
+                                    <Text className="text-sm leading-6 font-NotoSansBengaliSemiBold">রুকুঃ {convertToBengaliDigits(surahData?.ruku)}</Text>
                                 </View>
                                 {surahData?.naming && 
                                 <View className="mt-2">
                                     <Text> 
-                                        <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">নামকরণ: </Text> 
-                                        <Text className="text-sm leading-6 text-black font-AnekBangla">{surahData?.naming}</Text>   
+                                        <Text className="text-sm leading-6 font-NotoSansBengaliSemiBold text-yellow-400">নামকরণ: </Text> 
+                                        <Text className="text-sm leading-6 text-black font-NotoSansBengali">{surahData?.naming}</Text>   
                                     </Text>
                                 </View>
                                 }
                                 {surahData?.shanenuzul && 
                                 <View className="mt-2">
                                     <Text> 
-                                        <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">শানে নুযূল: </Text> 
-                                        <Text className="text-sm leading-6 text-black font-AnekBangla">{surahData?.shanenuzul}</Text>   
+                                        <Text className="text-sm leading-6 font-NotoSansBengaliSemiBold text-yellow-400">শানে নুযূল: </Text> 
+                                        <Text className="text-sm leading-6 text-black font-NotoSansBengali">{surahData?.shanenuzul}</Text>   
                                     </Text>
                                 </View>
                                 }
                                 {surahData?.fazilat && 
                                 <View className="mt-2">
                                     <Text> 
-                                        <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">ফজিলত: </Text> 
-                                        <Text className="text-sm leading-6 text-black font-AnekBangla">{surahData?.fazilat}</Text>   
+                                        <Text className="text-sm leading-6 font-NotoSansBengaliSemiBold text-yellow-400">ফজিলত: </Text> 
+                                        <Text className="text-sm leading-6 text-black font-NotoSansBengali">{surahData?.fazilat}</Text>   
                                     </Text>
                                 </View>
                                 }
                                 {surahData?.quote && 
                                 <View className="mt-2">
                                     <Text> 
-                                        <Text className="text-sm leading-6 font-AnekBanglaSemiBold text-yellow-400">লেখকের কথা: </Text> 
-                                        <Text className="text-sm leading-6 text-black font-AnekBangla">{surahData?.quote}</Text>   
+                                        <Text className="text-sm leading-6 font-NotoSansBengaliSemiBold text-yellow-400">লেখকের কথা: </Text> 
+                                        <Text className="text-sm leading-6 text-black font-NotoSansBengali">{surahData?.quote}</Text>   
                                     </Text>
                                 </View>
                                 }
@@ -146,7 +146,7 @@ const Surah = () => {
                                     <CustomButton
                                         title="সব আয়াত পড়ুন"
                                         onPress={() => {router.push(`/ayats/${id}`)}} 
-                                        className="bg-dark-green px-6 py-3 rounded-lg font-AnekBanglaSemiBold border-dark-green"
+                                        className="bg-dark-green px-6 py-3 rounded-lg font-NotoSansBengaliSemiBold border-dark-green"
                                         bgVariant="primary"
                                         textVariant="secondary"
                                         ImgRight={angleRight}

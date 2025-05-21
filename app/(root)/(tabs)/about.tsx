@@ -13,10 +13,10 @@ const about = () => {
                 className="w-full h-[200px]"
                 resizeMode="contain"
             />
-            <Text className="text-2xl font-AnekBanglaBold leading-10 text-dark-green text-center mt-6">
+            <Text className="text-2xl font-NotoSansBengaliBold leading-10 text-dark-green text-center mt-6">
                 কুরআন ও হাদীস শরীফ বাংলায় 
             </Text>
-            <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 text-justify">
+            <Text className="text-sm leading-6 font-NotoSansBengaliMedium text-gray-700 text-justify">
                 ইসলামিক জ্ঞানের এক অমূল্য ভাণ্ডার,{" "}
                 <Text className="font-semibold">"কুরআন ও হাদীস শরীফ বাংলায়"</Text> 
                 {" "}বইটি প্রিয় পাঠকদের জন্য সহজ-সরল বাংলায় কুরআন ও হাদীসের মূল শিক্ষাগুলো তুলে
@@ -25,15 +25,15 @@ const about = () => {
             </Text>
 
             <View className="p-4 pt-0 rounded-lg">
-                <Text className="text-lg leading-8 font-AnekBanglaSemiBold text-dark-green mb-2">
+                <Text className="text-lg leading-8 font-NotoSansBengaliSemiBold text-dark-green mb-2">
                     📌 এই বইয়ে যা পাবেন:
                 </Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}কুরআনের আয়াতসমূহ</Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}সহজ-সরল বাংলা অনুবাদ সহ বিশ্লেষণ</Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}বিশুদ্ধ হাদীস সংকলন</Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}রাসূলের গুরুত্বপূর্ণ বাণী ও দিকনির্দেশনা</Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}ইসলামিক জ্ঞান ও শিক্ষা</Text>
-                <Text className="text-sm leading-6 font-AnekBanglaMedium text-gray-700 mb-1">✅ {" "}দৈনন্দিন জীবনে অনুসরণীয় নির্দেশিকা</Text>
+                <Text className="text-sm leading-6 font-NotoSansBengaliMedium text-gray-700 mb-1">✅ {" "}কুরআনের আয়াতসমূহ</Text>
+                <Text className="text-sm leading-6 font-NotoSansBengaliMedium text-gray-700 mb-1">✅ {" "}সহজ-সরল বাংলা অনুবাদ সহ বিশ্লেষণ</Text>
+                <Text className="text-sm leading-6 font-NotoSansBengaliMedium text-gray-700 mb-1">✅ {" "}বিশুদ্ধ হাদীস সংকলন</Text>
+                <Text className="text-sm leading-6 font-NotoSansBengaliMedium text-gray-700 mb-1">✅ {" "}রাসূলের গুরুত্বপূর্ণ বাণী ও দিকনির্দেশনা</Text>
+                <Text className="text-sm leading-6 font-NotoSansBengaliMedium text-gray-700 mb-1">✅ {" "}ইসলামিক জ্ঞান ও শিক্ষা</Text>
+                <Text className="text-sm leading-6 font-NotoSansBengaliMedium text-gray-700 mb-1">✅ {" "}দৈনন্দিন জীবনে অনুসরণীয় নির্দেশিকা</Text>
             </View>
         </ScrollView>
     </AnimatedSafeAreaView>
