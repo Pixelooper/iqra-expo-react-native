@@ -6,10 +6,10 @@ module.exports = {
         fontFamily: {
             IndopakRegular: ["Indopak-Regular", "serif"],
             UthmanicRegular: ["Uthmanic-Regular", "serif"],
-            NotoSansBengali: ["NotoSansBengali", "sans-serif"],
-            NotoSansBengaliMedium: ["NotoSansBengali-Medium", "sans-serif"],
-            NotoSansBengaliSemiBold: ["NotoSansBengali-SemiBold", "sans-serif"],
-            NotoSansBengaliBold: ["NotoSansBengali-Bold", "sans-serif"],
+            AnekBangla: ["AnekBangla", "sans-serif"],
+            AnekBanglaMedium: ["AnekBangla-Medium", "sans-serif"],
+            AnekBanglaSemiBold: ["AnekBangla-SemiBold", "sans-serif"],
+            AnekBanglaBold: ["AnekBangla-Bold", "sans-serif"],
         },
         colors: {
             'dark-green': '#0C7900',

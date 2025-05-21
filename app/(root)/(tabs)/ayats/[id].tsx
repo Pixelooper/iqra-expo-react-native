@@ -124,7 +124,7 @@ const Ayats = () => {
           onChangeText={setSearchQuery}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className="w-full px-3 border border-gray-black rounded-md text-gray-black mt-3 py-1 bg-white font-NotoSansBengali text-sm leading-6"
+          className="w-full px-3 border border-gray-black rounded-md text-gray-black mt-3 py-1 bg-white font-AnekBangla text-sm leading-6"
         />
 
         {/* Ayat list */}

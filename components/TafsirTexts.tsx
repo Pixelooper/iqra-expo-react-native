@@ -5,7 +5,7 @@ import { Text } from "react-native";
 const TafsirTexts = React.memo(({ tafsir }: { tafsir: string[] }) => {
     const renderItem=useCallback(({item}: { item: string })=>{
       return(
-        <Text className="text-sm leading-6 text-black mb-2 font-NotoSansBengali">{item}</Text>
+        <Text className="text-sm leading-6 text-black mb-2 font-AnekBangla">{item}</Text>
       )
     },[])
 

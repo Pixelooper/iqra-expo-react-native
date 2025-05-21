@@ -14,7 +14,7 @@ const Title: React.FC<TitleProps> = ({ title, subtitle, btnText, btnUrl }) => {
     return (
         <View className='mt-4'>
             <View className='flex flex-row justify-between'>
-                <Text className="text-lg font-NotoSansBengaliMedium text-black">
+                <Text className="text-lg font-AnekBanglaMedium text-black">
                     {title}
                 </Text>
                 {
@@ -27,7 +27,7 @@ const Title: React.FC<TitleProps> = ({ title, subtitle, btnText, btnUrl }) => {
                     />
                 }
             </View>
-            <Text className="text-sm leading-6 font-NotoSansBengali text-[#686767]">
+            <Text className="text-sm leading-6 font-AnekBangla text-[#686767]">
                 {subtitle}
             </Text>
         </View>

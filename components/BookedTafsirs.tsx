@@ -116,13 +116,13 @@ const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData, Compo
                               </Text>
                             </View>
                           </View>
-                          <Text className="text-sm leading-6 text-black font-NotoSansBengaliMedium pt-3">
+                          <Text className="text-sm leading-6 text-black font-AnekBanglaMedium pt-3">
                               {item.bn.length > 400 ? item.bn.substring(0, 400) + "..." : item.bn}
                           </Text>
 
                           <View className="flex flex-row items-center justify-between w-full mt-2">
                               <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
-                                  <Text className="text-sm leading-6 text-black font-NotoSansBengaliSemiBold">
+                                  <Text className="text-sm leading-6 text-black font-AnekBanglaSemiBold">
                                   সূরা {item.surahName_bn}
                                   </Text>
                               </View>

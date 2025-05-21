@@ -19,7 +19,7 @@ const Splash = () => {
 
     return (
         <SafeAreaView className="min-h-screen flex justify-center bg-white">
-                <Text className="text-green-500 text-lg text-center font-NotoSansBengaliMedium absolute right-5" style={{ top: Platform.OS === 'ios' ? 50 : 10}}>v1.1.0</Text>
+                <Text className="text-green-500 text-lg text-center font-AnekBanglaMedium absolute right-5" style={{ top: Platform.OS === 'ios' ? 50 : 10}}>v1.1.0</Text>
                 <View className="flex items-center justify-between p-5">
                     <Image
                         source={splash}
@@ -39,7 +39,7 @@ const Splash = () => {
                             <CustomButton
                                 title="শুরু করছি"
                                 onPress={() => router.replace("/(root)/(tabs)/home")}
-                                className="bg-dark-green px-5 py-2 rounded-lg font-NotoSansBengaliSemiBold border-dark-green w-[275px]"
+                                className="bg-dark-green px-5 py-2 rounded-lg font-AnekBanglaSemiBold border-dark-green w-[275px]"
                                 bgVariant="primary"
                                 textVariant="secondary"
                                 ImgRight={angleRight}

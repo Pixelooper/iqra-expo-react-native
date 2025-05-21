@@ -21,7 +21,7 @@ const TabIcon = ({
         resizeMode="contain"
         className="w-6 h-6"
       />
-      <Text className="text-xs text-black font-NotoSansBengaliMedium uppercase pt-1">{text}</Text>
+      <Text className="text-xs text-black font-AnekBanglaMedium uppercase pt-1">{text}</Text>
     </View>
   </View>
 );

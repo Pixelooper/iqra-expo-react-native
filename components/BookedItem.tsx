@@ -122,7 +122,7 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
                           resizeMode="contain"
                         />
                         <View className="flex-1 flex items-start justify-between pl-3">
-                          <Text className="text-lg leading-/ text-black font-NotoSansBengaliSemiBold mb-1">
+                          <Text className="text-lg leading-/ text-black font-AnekBanglaSemiBold mb-1">
                             সূরা {item.name_bn}
                           </Text>
                           <Text className="text-sm leading-6 text-black mb-4">
@@ -130,7 +130,7 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
                           </Text>
                           <View className="flex flex-row items-center justify-between w-full">
                             <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
-                              <Text className="text-sm leading-6 text-black font-NotoSansBengaliSemiBold">
+                              <Text className="text-sm leading-6 text-black font-AnekBanglaSemiBold">
                                 {convertToBengaliDigits(item.no)}
                               </Text>
                             </View>
