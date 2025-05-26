@@ -15,6 +15,8 @@ import Toast from "react-native-toast-message";
 import { addSurah } from "@/utils/store/slices/bookmarkSlice";
 import { FlashList } from "@shopify/flash-list";
 import { AyatList } from "@/components/AyatList";
+import Offline from "@/components/Offline";
+import useNetworkStatus from "@/utils/hooks/useNetworkStatus";
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
@@ -25,32 +27,38 @@ const Surah = () => {
     const [ayatData, setAyatData] = useState<ayat | null>(null);
     const [loading, setLoading] = useState(true);
     const flashListRef = useRef<FlashList<any>>(null);
+    const { isConnected, setIsConnected, checkNetworkStatus } = useNetworkStatus();
+    
+    const fetchData = async () => {
+        setLoading(true);
+
+        try {
+            const connected = await checkNetworkStatus();
+            if (!connected) {
+                console.log("No internet connection.");
+                setIsConnected(false);
+                setSurahData(null);
+                setAyatData(null);
+                return;
+            }
+            setIsConnected(true);
+            
+            const response = await axios.get(`${API_URL}/surah/${id}`, {
+                headers: {
+                    Authorization: " Bearer " + JWT_TOKEN,
+                }
+            });
+            setSurahData(response.data.data);
+            setAyatData(response.data.data.ayat)
+        } catch (error) {
+            console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true); 
-            try {
-                const response = await axios.get(`${API_URL}/surah/${id}`, {
-                    headers: {
-                        Authorization: " Bearer " + JWT_TOKEN,
-                    }
-                });
-                setSurahData(response.data.data);
-                setAyatData(response.data.data.ayat)
-            } catch (error) {
-                console.error("Error fetching data", error);
-            } finally {
-                setLoading(false); 
-            }
-        };
-
         fetchData();
-
-        // Optional: Cleanup to reset state when component unmounts
-        return () => {
-            setSurahData(null);
-            setAyatData(null);
-        };
     }, [id]);
 
     const dispatch = useDispatch();
@@ -65,6 +73,10 @@ const Surah = () => {
     };
 
     return (
+        !isConnected ?  
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+            <Offline connect={fetchData}/>
+        </View> :
         <SafeAreaView className="bg-white">
             <AutoScrollToTop>
                 <View className="w-full px-4 mb-20" style={{ marginTop: Platform.OS === 'ios' ? 20 : 60 }}>

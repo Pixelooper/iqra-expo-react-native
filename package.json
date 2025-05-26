@@ -23,6 +23,7 @@
     "@shopify/flash-list": "1.7.3",
     "axios": "^1.7.9",
     "expo": "~52.0.46",
+    "expo-constants": "~17.0.8",
     "expo-dev-client": "~5.0.20",
     "expo-font": "~13.0.1",
     "expo-haptics": "~14.0.1",
@@ -48,7 +49,7 @@
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
     "reselect": "^5.1.1",
-    "expo-constants": "~17.0.8"
+    "expo-network": "~7.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -11,6 +11,7 @@ import ham from "@/assets/images/ham.png";
 import logo from "@/assets/images/logo.png";
 import check from "@/assets/images/check.png";
 import noResult from "@/assets/images/no-result.png";
+import disconnect from "@/assets/images/disconnect.png";
 
 import shape1 from "@/assets/shapes/shape-1.png";
 import shape2 from "@/assets/shapes/shape-2.png";
@@ -38,6 +39,7 @@ export const images = {
   logo,
   check,
   noResult,
+  disconnect
 };
 
 export const shapes = [

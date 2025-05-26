@@ -8,6 +8,8 @@ import Title from "@/components/Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
 import EmptyData from "@/components/EmptyData";
+import useNetworkStatus from "@/utils/hooks/useNetworkStatus";
+import Offline from "@/components/Offline";
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
@@ -21,34 +23,40 @@ const Search = () => {
     const [surahData, setSurahData] = useState<surah[] | null>(null);
     const [loading, setLoading] = useState(true);
     const scrollY = useRef(new Animated.Value(0)).current;
+    const { isConnected, setIsConnected, checkNetworkStatus } = useNetworkStatus();
 
     const filteredSurahs = !surahData ? [] : surahData.filter((surah: surah) =>
       surah.name_bn.includes(searchQuery) || surah.name_en.includes(searchQuery) || surah.name_en.toUpperCase().includes(searchQuery) || surah.name_en.toLowerCase().includes(searchQuery) || surah.name_ar.includes(searchQuery)
     );
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true); 
-            try {
-                const response = await axios.get(`${API_URL}/surahs`, {
-                    headers: {
-                        Authorization: " Bearer " + JWT_TOKEN,
-                    }
-                });
-                setSurahData(response.data.data);
-            } catch (error) {
-                console.error("Error fetching data", error);
-            } finally {
-                setLoading(false); 
+    const fetchData = async () => {
+        setLoading(true);
+
+        try {
+            const connected = await checkNetworkStatus();
+            if (!connected) {
+                console.log("No internet connection.");
+                setIsConnected(false);
+                setSurahData(null);
+                return;
             }
-        };
+            setIsConnected(true);
+            
+            const response = await axios.get(`${API_URL}/surahs`, {
+                headers: {
+                    Authorization: " Bearer " + JWT_TOKEN,
+                }
+            });
+            setSurahData(response.data.data);
+        } catch (error) {
+            console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
-
-        // Optional: Cleanup to reset state when component unmounts
-        return () => {
-            setSurahData(null);
-        };
     }, []);
 
     const translateY = useRef(new Animated.Value(0)).current;
@@ -92,6 +100,8 @@ const Search = () => {
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
               <ActivityIndicator size="large" color="#00ff00" />
             </View>
+          ) : !isConnected ? (
+            <Offline connect={fetchData}/>
           ) : (
             <View style={{ flex: 1, paddingHorizontal: 16, marginTop: Platform.OS === 'ios' ? 0 : 35, marginBottom: Platform.OS === 'ios' ? 0 : 50 }}>
               <Animated.View

@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, Platform, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { shapes } from "@/constants";
+import useNetworkStatus from '@/utils/hooks/useNetworkStatus';
+import Offline from '@/components/Offline';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
@@ -18,33 +20,43 @@ const Blog = () => {
     const { id } = useLocalSearchParams();
     const [blog, setBlog] = useState<Blog | []>([]);
     const [loading, setLoading] = useState(true);
+    const { isConnected, setIsConnected, checkNetworkStatus } = useNetworkStatus();
+
+    const fetchData = async () => {
+        setLoading(true);
+
+        try {
+            const connected = await checkNetworkStatus();
+            if (!connected) {
+                console.log("No internet connection.");
+                setIsConnected(false);
+                setBlog([]);
+                return;
+            }
+            setIsConnected(true);
+            
+            const response = await axios.get(`${API_URL}/blog/${id}`, {
+                headers: {
+                    Authorization: " Bearer " + JWT_TOKEN,
+                }
+            });
+            setBlog(response.data.data);
+        } catch (error) {
+            console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true); 
-            try {
-                const response = await axios.get(`${API_URL}/blog/${id}`, {
-                    headers: {
-                        Authorization: " Bearer " + JWT_TOKEN,
-                    }
-                });
-                setBlog(response.data.data);
-            } catch (error) {
-                console.error("Error fetching data", error);
-            } finally {
-                setLoading(false); 
-            }
-        };
-
         fetchData();
-
-        // Optional: Cleanup to reset state when component unmounts
-        return () => {
-            setBlog([]);
-        };
     }, [id]);
 
     return (
+        !isConnected ?  
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+            <Offline connect={fetchData}/>
+        </View> :
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
           {loading ? (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

@@ -7,6 +7,7 @@ import { TouchableOpacity } from "react-native";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import axios from "axios";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
+import useNetworkStatus from "@/utils/hooks/useNetworkStatus";
 
 type LastReadProps = {
   lastRead: [];
@@ -19,6 +20,8 @@ const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const [lastReadData, setLastReadData] = useState<surah[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { isConnected, setIsConnected, checkNetworkStatus } = useNetworkStatus();
 
   const handleScroll = (event: any) => {
       const offsetX = event.nativeEvent.contentOffset.x;
@@ -28,33 +31,43 @@ const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
 
   const surahWithShapes = useAssignShapes(lastReadData);
 
-  useEffect(() => {
-    const fetchLastReadSurahs = async () => {
+  const fetchLastReadSurahs = async () => {
+        setLoading(true);
 
-      try {
-        const response = await axios.post(
-          `${API_URL}/lastread`,
-          lastRead,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: " Bearer " + JWT_TOKEN,
-            },
-          }
-        );
-        setLastReadData(response.data.data); // Assuming `data.data` is the correct response
-      } catch (err) {
-        console.error("Error fetching last read surahs:", err);
-      }
+        try {
+            const connected = await checkNetworkStatus();
+            if (!connected) {
+                console.log("No internet connection.");
+                setIsConnected(false);
+                setLastReadData([]);
+                return;
+            }
+            setIsConnected(true);
+            
+          const response = await axios.post(
+            `${API_URL}/lastread`,
+            lastRead,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: " Bearer " + JWT_TOKEN,
+              },
+            }
+          );
+          setLastReadData(response.data.data);
+        } catch (error) {
+            console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    // Fetch data only if `lastRead` has elements
-    if (lastRead.length > 0) {
-      fetchLastReadSurahs();
-    }
-  }, [lastRead]);
+    useEffect(() => {
+        fetchLastReadSurahs();
+    }, [lastRead]);
 
   return (
+      !isConnected ? null :
       <View className="w-full p-4 bg-white">
         <Title title="সর্বশেষ পড়া" subtitle="এখানে আপনি যা পড়ছিলেন তা পেতে পারেন" btnText={false}/>
         <FlatList 

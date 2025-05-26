@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import TafsirTexts from "@/components/TafsirTexts";
 import SurahHead from "@/components/SurahHead";
 import SingleAyat from "@/components/SingleAyat";
+import Offline from "@/components/Offline";
+import useNetworkStatus from "@/utils/hooks/useNetworkStatus";
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
@@ -18,33 +20,39 @@ const Tafsir = () => {
     const [ayatData, setAyatData] = useState<ayat | null>(null);
     const [loading, setLoading] = useState(true);
     const [ayatNo, setAyatNo] = useState<number | 0>(0);
+    const { isConnected, setIsConnected, checkNetworkStatus } = useNetworkStatus();
+    
+    const fetchData = async () => {
+        setLoading(true);
+
+        try {
+            const connected = await checkNetworkStatus();
+            if (!connected) {
+                console.log("No internet connection.");
+                setIsConnected(false);
+                setSurahData(null);
+                setAyatData(null);
+                return;
+            }
+            setIsConnected(true);
+            
+            const response = await axios.get(`${API_URL}/tafsir/${id}/${aid}`, {
+                headers: {
+                    Authorization: " Bearer " + JWT_TOKEN,
+                }
+            });
+            setSurahData(response.data.data);
+            setAyatData(response.data.data.ayat[0]);
+            setAyatNo(response.data.data.ayat[0].no);
+        } catch (error) {
+            console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true); 
-            try {
-                const response = await axios.get(`${API_URL}/tafsir/${id}/${aid}`, {
-                    headers: {
-                        Authorization: " Bearer " + JWT_TOKEN,
-                    }
-                });
-                setSurahData(response.data.data);
-                setAyatData(response.data.data.ayat[0]);
-                setAyatNo(response.data.data.ayat[0].no);
-            } catch (error) {
-                console.error("Error fetching data", error);
-            } finally {
-                setLoading(false); 
-            }
-        };
-
         fetchData();
-
-        // Optional: Cleanup to reset state when component unmounts
-        return () => {
-            setSurahData(null);
-            setAyatData(null);
-        };
     }, [id, aid]);
 
     const handleNavigation = (direction: 'prev' | 'next') => {
@@ -53,6 +61,10 @@ const Tafsir = () => {
     };
 
     return (
+        !isConnected ?  
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+            <Offline connect={fetchData}/>
+        </View> :
         <SafeAreaView className="bg-white">
             {
                 loading ? 

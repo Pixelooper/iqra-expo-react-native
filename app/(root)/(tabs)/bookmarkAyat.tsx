@@ -1,9 +1,12 @@
 import BookedAyats from "@/components/BookedAyats";
+import Offline from "@/components/Offline";
 import Title from "@/components/Title";
 import { surah } from "@/types/type";
+import useNetworkStatus from "@/utils/hooks/useNetworkStatus";
 import { RootState } from "@/utils/store/store";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import { useSelector } from "react-redux";
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
@@ -18,39 +21,48 @@ const bookmarkAyat = () => {
 
     const [loading, setLoading] = useState(true);
     const [ayatData, setAyatData] = useState<surah[]>([]);
+    const { isConnected, setIsConnected, checkNetworkStatus } = useNetworkStatus();
 
-    useEffect(() => {
-      const fetchLastReadSurahs = async () => {
-        setLoading(true); 
+    const fetchData = async () => {
+        setLoading(true);
 
         try {
-          const response = await axios.post(
-          `${API_URL}/savedayats`,
-            ayat, 
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: " Bearer " + JWT_TOKEN,
-              },
+            const connected = await checkNetworkStatus();
+            if (!connected) {
+                console.log("No internet connection.");
+                setIsConnected(false);
+                setAyatData([]);
+                return;
             }
-          );
-          setAyatData(response.data.data);
-        } catch (err) {
-          console.error("Error fetching last read surahs:", err);
-        } finally {
-          setLoading(false); 
-        }
-      };
+            setIsConnected(true);
 
-      // Fetch data only if `lastRead` has elements
-      if (ayat.length > 0) {
-        fetchLastReadSurahs();
-      }else{
-        setLoading(false); 
-      }
+            const response = await axios.post(
+            `${API_URL}/savedayats`,
+              ayat, 
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: " Bearer " + JWT_TOKEN,
+                },
+              }
+            );
+            setAyatData(response.data.data);
+        } catch (error) {
+            console.error("Error fetching data", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
     }, [ayat]);
 
     return (
+        !isConnected ?  
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+            <Offline connect={fetchData}/>
+        </View> :
         <BookedAyats loading={loading} ayatData={ayatData} Component={PageTitle}/>
     );
 };

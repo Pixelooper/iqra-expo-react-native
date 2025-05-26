@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SurahHead from '@/components/SurahHead';
 import { AyatList } from '@/components/AyatList';
 import { convertToBengaliDigits, convertToEnglishDigits } from '@/utils/hooks/useBengaliDigit';
+import Offline from '@/components/Offline';
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 
@@ -23,7 +24,7 @@ const Ayats = () => {
   const containerHeight = useRef(new Animated.Value(100)).current;
 
   // Data handling
-  const { data: surahData, loading, error } = useSurahData(id);
+  const { isConnected, data: surahData, loading, error, refetch } = useSurahData(id);
   const filteredAyats = surahData?.ayat?.filter((ayat) => {
     const banglaNumber = convertToBengaliDigits(searchQuery); // Convert input to Bangla digits
     const englishNumber = convertToEnglishDigits(searchQuery); // Convert Bangla input to English digits
@@ -38,9 +39,6 @@ const Ayats = () => {
     );
 }) || [];
 
-
-
-
   // Scroll handling
   useScrollToAyat({
     flashListRef,
@@ -53,6 +51,14 @@ const Ayats = () => {
   useEffect(() => {
     dispatch(updateLastRead(id));
   }, [dispatch, id]);
+
+   if (!isConnected) {
+    return (
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+          <Offline connect={refetch}/>
+      </View>
+    );
+  }
 
   if (error) {
     return (

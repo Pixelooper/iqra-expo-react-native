@@ -27,9 +27,9 @@ export const fetchHomeData = createAsyncThunk("surah/fetchHomeData", async (_, t
     });
 
     return response.data.data;
-  } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.message || "Failed to fetch surah data");
-  }
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.message || "Failed to fetch surah data");
+    }
 });
 
 const homeSlice = createSlice({
