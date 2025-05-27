@@ -21,7 +21,7 @@ const TabIcon = ({
         resizeMode="contain"
         className="w-6 h-6"
       />
-      <Text className="text-xs text-black font-NotoSansBengaliMedium uppercase pt-1">{text}</Text>
+      <Text className="text-sm text-black font-NotoSansBengaliBold uppercase pt-0">{text}</Text>
     </View>
   </View>
 );
@@ -47,7 +47,7 @@ const ReadIcon = ({
         className={focused ? "w-10 h-10" : "w-[70px] h-[54px]"}
       />
       {
-        !focused && <Text className="text-xs text-black">পড়া চালিয়ে যান</Text>
+        !focused && <Text className="text-xs text-black ">পড়া চালিয়ে যান</Text>
       }
     </View>
   </TouchableOpacity>
@@ -84,7 +84,7 @@ export default function Layout() {
           title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.home} focused={focused} text="Home"/>
+            <TabIcon source={icons.home} focused={focused} text="হোম"/>
           ),
         }}
       />
@@ -94,7 +94,7 @@ export default function Layout() {
           title: "Blogs",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.blog} focused={focused} text="Blogs"/>
+            <TabIcon source={icons.blog} focused={focused} text="ব্লগ"/>
           ),
         }}
       />
@@ -120,7 +120,7 @@ export default function Layout() {
           title: "Search",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.search} focused={focused} text="Search"/>
+            <TabIcon source={icons.search} focused={focused} text="সার্চ"/>
           ),
         }}
       />
@@ -130,7 +130,7 @@ export default function Layout() {
           title: "About",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon source={icons.about} focused={focused} text="About"/>
+            <TabIcon source={icons.about} focused={focused} text="পরিচিতি"/>
           ),
         }}
       />
