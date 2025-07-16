@@ -95,7 +95,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                             />
                         </TouchableOpacity>
                     }
-                    {
+                    {/* {
                         !tafsirPage &&
                         <CustomButton
                             title="তাফসীর"
@@ -104,7 +104,7 @@ const SingleAyat = ({ no, sid, aid, ar, bn, tafsirPage, shanenuzul, tika, quote,
                             ImgLeft={tafsir}
                             bgVariant="secondary"
                         />
-                    }
+                    } */}
                     <CustomButton
                         title="সংরক্ষণ"
                         className="rounded-2xl px-1 h-5 w-20 border-gray-white"

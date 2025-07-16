@@ -23,26 +23,26 @@ const Saved = () => {
             total: ayat.length,
             url: '/(root)/(tabs)/bookmarkAyat',
             img: shape2
-        },
-        {
-            title: 'তাফসীর',
-            total: tafsir.length,
-            url: '/(root)/(tabs)/bookmarkTafsir',
-            img: shape3
         }
+        // {
+        //     title: 'তাফসীর',
+        //     total: tafsir.length,
+        //     url: '/(root)/(tabs)/bookmarkTafsir',
+        //     img: shape3
+        // }
     ]
 
     return (
         <View className="w-full p-4 bg-white">
             <Title title="সংরক্ষণ" subtitle="এখানে আপনি সংরক্ষিত আইটেম খুঁজে পেতে পারেন" btnText={false}/>
-            <View className="flex flex-row flex-wrap mt-4 justify-between items-center">
+            <View className="flex flex-row flex-wrap mt-4 justify-start items-center">
             {items.map((item, index) => (
                 <TouchableOpacity
                     key={index}
                     onPress={() => {
                         router.replace(item.url);
                     }}
-                    className={`rounded-lg p-2 justify-between items-start w-[31%] h-[120px] border border-gray-white bg-white`}
+                    className={`rounded-lg p-2 justify-between items-start w-[31%] h-[120px] border border-gray-white bg-white mr-4`}
                 >
                     <Image
                         source={item.img}

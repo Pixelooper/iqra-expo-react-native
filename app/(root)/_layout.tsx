@@ -58,9 +58,9 @@ const PathHeader = () => {
               <View className="mr-4">
                 <Text className={getTextClass("ayats", "ayat", "bookmarkAyat", "basedon")}>আয়াত</Text>
               </View>
-              <View>
+              {/* <View>
                 <Text className={getTextClass("tafsir", "bookmarkTafsir")}>তাফসীর</Text>
-              </View>
+              </View> */}
             </View>
           }
         </View>

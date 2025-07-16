@@ -74,5 +74,8 @@ module.exports = {
       },
     },
     plugins: [],
+    nativewind: {
+        debug: true,
+    },
   };
   

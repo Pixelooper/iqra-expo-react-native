@@ -3,13 +3,13 @@
     "name": "Iqra - Bangla Quran",
     "slug": "iqra-expo",
     "version": "1.1.0",
+    "runtimeVersion": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "versionCode": 1,
       "supportsTablet": true,
       "bundleIdentifier": "com.iftikharrasha.iqraexpo"
     },
@@ -48,9 +48,6 @@
       "eas": {
         "projectId": "515edd4e-2c23-4bab-af47-eaa6fdfd14e3"
       }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
     },
     "updates": {
       "url": "https://u.expo.dev/515edd4e-2c23-4bab-af47-eaa6fdfd14e3"
