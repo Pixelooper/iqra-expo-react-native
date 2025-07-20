@@ -40,11 +40,20 @@ app-example
 
 
 # eas build --profile development --platform android
-# eas build -p android --profile preview
 # eas update:configure
 # eas update
 
+# eas build -p android --profile preview
+
 # eas build -p android --profile production
+
+
+# java -version
+
+# powershell
+# cd android
+# .\gradlew clean
+# cd ..
 
 
 # npx expo run:android
