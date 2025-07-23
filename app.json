@@ -11,7 +11,13 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.iftikharrasha.iqraexpo"
+      "bundleIdentifier": "com.iftikharrasha.iqraexpo",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
     },
     "android": {
       "versionCode": 1,
