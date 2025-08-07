@@ -107,7 +107,6 @@ const Search = () => {
               <Animated.View
                 style={{
                   height: containerHeight, // Animates the container height
-                  overflow: "hidden", // Prevents overflow content from being visible
                 }}
               >
                 <Animated.View
@@ -157,21 +156,21 @@ const Search = () => {
                           resizeMode="contain"
                         />
                         <View className="flex-1 flex items-start justify-between pl-3">
-                          <Text className="text-lg leading-8 text-black font-NotoSansBengaliSemiBold mb-1">
+                          <Text className="text-md leading-8 text-black font-NotoSansBengaliSemiBold">
                             সূরা {item.name_bn}
                           </Text>
-                          <Text className="text-sm leading-6 text-black mb-4">
-                            সর্বমোট আয়াত {convertToBengaliDigits(item.totalAyat)}
+                          <Text className="text-lg leading-8 text-black">
+                            {item.name_ar}
                           </Text>
                           <View className="flex flex-row items-center justify-between w-full">
+                            <Text className="text-sm leading-6 text-black text-left pr-1 font-IndopakRegular">
+                                সর্বমোট আয়াত {convertToBengaliDigits(item.totalAyat)}
+                            </Text>
                             <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
                               <Text className="text-md text-black font-NotoSansBengaliSemiBold">
                                 {convertToBengaliDigits(item.no)}
                               </Text>
                             </View>
-                            <Text className="text-2xl text-black text-right pr-1 font-IndopakRegular leading-[55px]">
-                              {item.name_ar}
-                            </Text>
                           </View>
                         </View>
                       </Animated.View>
