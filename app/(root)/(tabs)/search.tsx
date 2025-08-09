@@ -156,7 +156,7 @@ const Search = () => {
                           resizeMode="contain"
                         />
                         <View className="flex-1 flex items-start justify-between pl-3">
-                          <Text className="text-black">
+                          <Text className="text-lg leading-8 text-black">
                             সূরা {item.name_bn}
                           </Text>
                           <Text className="text-lg leading-8 text-black">
