@@ -157,7 +157,9 @@ const Search = () => {
                         />
                         <View className="flex-1 flex items-start justify-between pl-3">
                           <Text className="text-lg leading-8 text-black">
-                            সূরা {item.name_bn}
+                              {/* সূরা {item.name_bn} */}
+                              {/* সূরা {getSurahNameBn(item.no)} */}
+                              {`সূরা ${item.name_bn}`.normalize('NFC')}
                           </Text>
                           <Text className="text-lg leading-8 text-black">
                             {item.name_ar}
