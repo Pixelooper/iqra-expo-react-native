@@ -94,6 +94,7 @@ const Search = () => {
     };
     
     const surahWithShapes = useAssignShapes(filteredSurahs);
+    const reversedData = [...surahWithShapes].reverse();
 
     return (
         <AnimatedSafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -133,7 +134,7 @@ const Search = () => {
                 className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-1 bg-white text-sm leading-6"
               />
               <Animated.FlatList
-                data={surahWithShapes}
+                data={reversedData}
                 contentContainerStyle={{ paddingTop: 16 }}
                 onScroll={Animated.event(
                   [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -158,10 +159,8 @@ const Search = () => {
                         />
                         <View className="flex-1 flex items-start justify-between pl-3">
                           <Text className="text-lg leading-8 text-black">
-                              {/* সূরা {item.name_bn} */}
-                              {`সূরা হুদ`}
                               {/* {`সূরা ${item.name_bn}`.normalize('NFC')} */}
-                               {/* {`সূরা ${getSurahNameBn(item.no)}`.normalize('NFC')} */}
+                               {`সূরা ${getSurahNameBn(item.no)}`.normalize('NFC')}
                           </Text>
                           <Text className="text-lg leading-8 text-black">
                             {item.name_ar}
