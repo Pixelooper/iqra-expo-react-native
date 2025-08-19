@@ -19,7 +19,7 @@ const Splash = () => {
 
     return (
         <SafeAreaView className="min-h-screen flex justify-center bg-white">
-                <Text className="text-green-500 text-lg text-center font-NotoSansBengaliMedium absolute right-5" style={{ top: Platform.OS === 'ios' ? 50 : 10}}>v1.1.0</Text>
+                <Text className="text-green-500 text-lg text-center font-NotoSansBengaliMedium absolute right-5" style={{ top: Platform.OS === 'ios' ? 50 : 10}}>v1.1.2</Text>
                 <View className="flex items-center justify-between p-5">
                     <Image
                         source={splash}
