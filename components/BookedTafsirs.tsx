@@ -61,6 +61,7 @@ const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData, Compo
     };
     
     const surahWithShapes = useAssignShapes(filteredSurahs);
+    const surahReversed = [...surahWithShapes].reverse(); // avoid mutating
 
     return (
         <AnimatedSafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -89,7 +90,7 @@ const BookedTafsirs: React.FC<BookedTafsirsProps> = ({loading, tafsirData, Compo
                 className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-2 bg-white"
               />
               <Animated.FlatList
-                data={surahWithShapes}
+                data={surahReversed}
                 contentContainerStyle={{ paddingTop: 16 }}
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {

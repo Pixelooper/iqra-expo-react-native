@@ -59,6 +59,7 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
     };
     
     const surahWithShapes = useAssignShapes(filteredSurahs);
+    const surahReversed = [...surahWithShapes].reverse(); // avoid mutating
 
     return (
         <AnimatedSafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -97,7 +98,7 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
                 className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-2 bg-white"
               />
               <Animated.FlatList
-                data={surahWithShapes}
+                data={surahReversed}
                 contentContainerStyle={{ paddingTop: 16 }}
                 // keyExtractor={(item) => item._id}
                 onScroll={Animated.event(

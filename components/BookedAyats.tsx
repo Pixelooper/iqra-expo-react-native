@@ -60,6 +60,7 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
     };
     
     const surahWithShapes = useAssignShapes(filteredSurahs);
+    const surahReversed = [...surahWithShapes].reverse(); // avoid mutating
 
     return (
         <AnimatedSafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -88,7 +89,7 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                 className="w-full px-4 border border-gray-black rounded-md text-gray-black mt-3 py-1 bg-white text-sm leading-6"
               />
               <Animated.FlatList
-                data={surahWithShapes}
+                data={surahReversed}
                 contentContainerStyle={{ paddingTop: 16, paddingBottom: 64 }}
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {
