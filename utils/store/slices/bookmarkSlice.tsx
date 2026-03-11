@@ -33,6 +33,9 @@ const bookmarkSlice = createSlice({
           state.surah.push(action.payload);
         }
     },
+    removeSurah: (state, action: PayloadAction<number>) => {
+        state.surah = state.surah.filter(id => id !== action.payload);
+    },
     addAyat: (state, action: PayloadAction<{ sId: string; aId: string }>) => {
         const { sId, aId } = action.payload;
         const exists = state.ayat.some(
@@ -43,6 +46,12 @@ const bookmarkSlice = createSlice({
             state.ayat.push({ sId, aId });
         }
     },
+    removeAyat: (state, action: PayloadAction<{ sId: string; aId: string }>) => {
+        const { sId, aId } = action.payload;
+        state.ayat = state.ayat.filter(
+            item => !(item.sId === sId && item.aId === aId)
+        );
+    },
     addTafsir: (state, action: PayloadAction<{ sId: string; aId: string }>) => {
         const { sId, aId } = action.payload;
         const exists = state.tafsir.some(
@@ -52,6 +61,12 @@ const bookmarkSlice = createSlice({
         if (!exists) {
             state.tafsir.push({ sId, aId });
         }
+    },
+    removeTafsir: (state, action: PayloadAction<{ sId: string; aId: string }>) => {
+        const { sId, aId } = action.payload;
+        state.tafsir = state.tafsir.filter(
+            item => !(item.sId === sId && item.aId === aId)
+        );
     },
     updateLastRead: (state, action: PayloadAction<string>) => {
         // Remove the existing surahId if it already exists
@@ -91,5 +106,5 @@ const bookmarkSlice = createSlice({
   },
 });
 
-export const { addSurah, addAyat, addTafsir, updateLastRead, setContinueReading, addRoute, addPreviousRoute, replaceLastRouteIfTafsir, removeLastRoute, clearHistory } = bookmarkSlice.actions;
+export const { addSurah, addAyat, addTafsir, updateLastRead, setContinueReading, addRoute, addPreviousRoute, replaceLastRouteIfTafsir, removeLastRoute, clearHistory, removeSurah, removeAyat, removeTafsir  } = bookmarkSlice.actions;
 export default bookmarkSlice.reducer;

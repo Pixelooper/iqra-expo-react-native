@@ -81,10 +81,10 @@ const LastRead: React.FC<LastReadProps> = ({ lastRead }) => {
             <TouchableOpacity key={index} 
               onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
             >
-              <View className="w-[260px] mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-between">
+              <View className="w-[260px] mr-3 border border-gray-white bg-white rounded-lg p-2 flex flex-row items-center justify-end">
                 <Image
                   source={item.shape}
-                  className="w-[100px] h-[100px]"
+                  className="w-[100px] h-[100px] absolute left-4 top-2"
                   resizeMode="contain"
                 />
                 <View className="flex items-end justify-between">

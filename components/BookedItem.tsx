@@ -6,6 +6,7 @@ import { surah } from "@/types/type";
 import Title from "@/components/Title";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
+import minus from "../assets/icons/delete.png";
 import EmptyData from "./EmptyData";
 
 const SPACING = 20;
@@ -15,10 +16,12 @@ const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
 type BookedItemProps = {
     loading: boolean;
     surahData: surah[];
+    onDeleteSurah?: (surahId: number) => Promise<void>;
 };
 
-const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
+const BookedItem: React.FC<BookedItemProps> = ({loading, surahData, onDeleteSurah}) => {
     const [searchQuery, setSearchQuery] = useState("");
+    const [deletingIds, setDeletingIds] = useState<number[]>([]);
     const scrollY = useRef(new Animated.Value(0)).current;
 
     const filteredSurahs = !surahData ? [] : surahData.filter((surah: surah) =>
@@ -56,6 +59,23 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
           useNativeDriver: false,
         }),
       ]).start();
+    };
+
+    const handleDelete = async (surahId: number, surahName: string) => {
+      try {
+          setDeletingIds(prev => [...prev, surahId]);
+          
+          if (onDeleteSurah) {
+              await onDeleteSurah(surahId);
+          }
+          
+          // No need to update local state here as parent will pass new surahData
+          
+      } catch (error) {
+          console.error("Error in delete:", error);
+      } finally {
+          setDeletingIds(prev => prev.filter(id => id !== surahId));
+      }
     };
     
     const surahWithShapes = useAssignShapes(filteredSurahs);
@@ -107,6 +127,8 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
                 )}
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {
+                  const isDeleting = deletingIds.includes(item._id);
+
                   return (
                     <TouchableOpacity key={index} 
                       onPress={() => {router.push(`/(root)/(tabs)/surah/${item._id}`)}} 
@@ -115,30 +137,64 @@ const BookedItem: React.FC<BookedItemProps> = ({loading, surahData}) => {
                         style={{
                           marginBottom: SPACING,
                           borderRadius: 12,
+                          opacity: isDeleting ? 0.5 : 1,
                         }}
                       >
-                        <Image
+                        <View className="relative flex items-start justify-between pl-3">
+                        {/* <Image
                           source={item.shape}
                           className={`w-[${AVATAR_SIZE}px] h-[${AVATAR_SIZE}px]`}
                           resizeMode="contain"
-                        />
-                        <View className="flex-1 flex items-start justify-between pl-3">
+                        /> */}
+                          <Image
+                            source={item.shape}
+                            style={{
+                              width: AVATAR_SIZE,
+                              height: AVATAR_SIZE,
+                              position: 'absolute',
+                              right: 6,
+                              top: 8,
+                              resizeMode: 'contain'
+                            }}
+                            className="z-0"
+                          />
                           <Text className="text-lg leading-/ text-black font-NotoSansBengaliSemiBold mb-1">
                             সূরা {item.name_bn}
                           </Text>
                           <Text className="text-sm leading-6 text-black mb-4">
                             সর্বমোট আয়াত {convertToBengaliDigits(item.totalAyat)}
                           </Text>
-                          <View className="flex flex-row items-center justify-between w-full">
-                            <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md">
-                              <Text className="text-sm leading-6 text-black font-NotoSansBengaliSemiBold">
-                                {convertToBengaliDigits(item.no)}
+                            <View className="flex flex-row items-center justify-between w-full">
+                              <View className="flex flex-row items-center justify-between">
+                                <View className="flex items-center justify-between border border-gray-white px-3 py-1 rounded-md mr-1">
+                                  <Text className="text-sm leading-6 text-black font-NotoSansBengaliSemiBold">
+                                    {convertToBengaliDigits(item.no)}
+                                  </Text>
+                                </View>
+                              
+                                {/* Delete Button */}
+                                <TouchableOpacity
+                                  onPress={() => handleDelete(item._id, item.name_bn)}
+                                  disabled={isDeleting}
+                                  className="p-2"
+                                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                                >
+                                  {isDeleting ? (
+                                    <ActivityIndicator size="small" color="#FF3B30" />
+                                  ) : (
+                                    <Image
+                                      source={minus}
+                                      tintColor="#686767"
+                                      resizeMode="contain"
+                                      className="w-6 h-6"
+                                    />
+                                  )}
+                                </TouchableOpacity>
+                              </View>
+                              <Text className="text-2xl text-black text-right pr-1 font-IndopakRegular leading-[55px]">
+                                {item.name_ar}
                               </Text>
                             </View>
-                            <Text className="text-2xl text-black text-right pr-1 font-IndopakRegular leading-[55px]">
-                              {item.name_ar}
-                            </Text>
-                          </View>
                         </View>
                       </Animated.View>
                     </TouchableOpacity>

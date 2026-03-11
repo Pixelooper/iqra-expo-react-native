@@ -5,6 +5,7 @@ import keepread from "@/assets/icons/continue.png";
 import home from "@/assets/icons/homenav.png";
 import blog from "@/assets/icons/blog.png";
 import about from "@/assets/icons/about.png";
+import minus from "@/assets/icons/delete.png";
 
 import ham from "@/assets/images/ham.png";
 
@@ -25,6 +26,7 @@ import shape9 from "@/assets/shapes/shape-9.png";
 import shape10 from "@/assets/shapes/shape-10.png";
 
 export const icons = {
+    minus,
     home,
     profile,
     search,

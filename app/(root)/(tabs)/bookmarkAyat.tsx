@@ -3,11 +3,12 @@ import Offline from "@/components/Offline";
 import Title from "@/components/Title";
 import { surah } from "@/types/type";
 import useNetworkStatus from "@/utils/hooks/useNetworkStatus";
+import { removeAyat } from "@/utils/store/slices/bookmarkSlice";
 import { RootState } from "@/utils/store/store";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 const JWT_TOKEN = process.env.EXPO_PUBLIC_JWT_TOKEN;
@@ -20,8 +21,9 @@ const bookmarkAyat = () => {
     const { ayat } = useSelector((state: RootState) => state.bookmark);
 
     const [loading, setLoading] = useState(true);
-    const [ayatData, setAyatData] = useState<surah[]>([]);
+    const [ayatData, setAyatData] = useState<any[]>([]);
     const { isConnected, setIsConnected, checkNetworkStatus } = useNetworkStatus();
+    const dispatch = useDispatch();
 
     const fetchData = async () => {
         setLoading(true);
@@ -54,6 +56,19 @@ const bookmarkAyat = () => {
         }
     };
 
+    const handleDeleteAyat = async (surahId: string, ayatId: string) => {
+        try {
+            // 1. Remove from Redux state immediately
+            dispatch(removeAyat({ sId: surahId, aId: ayatId }));
+            
+            // 2. Update local state immediately for UI
+            setAyatData(prevData => prevData.filter(item => item._id !== ayatId));
+            
+        } catch (error) {
+            console.error("Error deleting ayat:", error);
+        }
+    };
+
     useEffect(() => {
         fetchData();
     }, [ayat]);
@@ -63,7 +78,12 @@ const bookmarkAyat = () => {
         <View style={{ flex: 1, backgroundColor: "white" }}>
             <Offline connect={fetchData}/>
         </View> :
-        <BookedAyats loading={loading} ayatData={ayatData} Component={PageTitle}/>
+        <BookedAyats 
+            loading={loading} 
+            ayatData={ayatData} 
+            Component={PageTitle}
+            onDeleteAyat={handleDeleteAyat}
+        />
     );
 };
 

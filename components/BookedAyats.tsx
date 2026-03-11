@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { ayat } from "@/types/type";
 import { convertToBengaliDigits } from "@/utils/hooks/useBengaliDigit";
 import useAssignShapes from "@/utils/hooks/useAssignShapes";
+import minus from "../assets/icons/delete.png";
 import EmptyData from "./EmptyData";
 
 const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
@@ -17,10 +18,12 @@ type BookedAyatsProps = {
         surahName_bn: string;
     };
     Component: React.ElementType;
+    onDeleteAyat?: (surahId: string, ayatId: string) => Promise<void>;
 };
 
-const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component}) => {
+const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component, onDeleteAyat}) => {
     const [searchQuery, setSearchQuery] = useState("");
+    const [deletingIds, setDeletingIds] = useState<string[]>([]);
 
     const filteredSurahs = !ayatData ? [] : ayatData.filter((ayat: ayat) =>
       ayat.bn.includes(searchQuery) || ayat.ar.includes(searchQuery)
@@ -58,6 +61,21 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
         }),
       ]).start();
     };
+
+    const handleDelete = async (surahId: string, ayatId: string, ayatText: string) => {
+      try {
+          setDeletingIds(prev => [...prev, ayatId]);
+          
+          if (onDeleteAyat) {
+              await onDeleteAyat(surahId, ayatId);
+          }
+          
+      } catch (error) {
+          console.error("Error in delete:", error);
+      } finally {
+          setDeletingIds(prev => prev.filter(id => id !== ayatId));
+      }
+    };
     
     const surahWithShapes = useAssignShapes(filteredSurahs);
     const surahReversed = [...surahWithShapes].reverse(); // avoid mutating
@@ -93,6 +111,8 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                 contentContainerStyle={{ paddingTop: 16, paddingBottom: 64 }}
                 scrollEventThrottle={16}
                 renderItem={({ item, index }) => {
+                  const isDeleting = deletingIds.includes(item._id);
+
                   return (
                     <TouchableOpacity 
                       key={index} 
@@ -103,6 +123,7 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                         style={{
                           marginBottom: 20,
                           borderRadius: 12,
+                          opacity: isDeleting ? 0.5 : 1,
                         }}
                       >
                         <View className="flex-1 min-h-[95px]">
@@ -124,11 +145,35 @@ const BookedAyats: React.FC<BookedAyatsProps> = ({loading, ayatData, Component})
                           </Text>
 
                           <View className="flex flex-row items-center justify-between w-full mt-2">
-                            <View className="border border-gray-white px-3 py-1 rounded-md">
-                              <Text className=" text-xs leading-5 text-black font-NotoSansBengaliSemiBold">
-                                সূরা {item.surahName_bn}
-                              </Text>
-                            </View>
+                            <View className="flex flex-row items-center">
+                                <View className="border border-gray-white px-3 py-1 rounded-md">
+                                  <Text className="text-xs leading-5 text-black font-NotoSansBengaliSemiBold">
+                                    সূরা {item.surahName_bn}
+                                  </Text>
+                                </View>
+                                
+                                {/* Delete Button */}
+                                <TouchableOpacity
+                                  onPress={() => handleDelete(item.surahId, item._id, item.ar)}
+                                  disabled={isDeleting}
+                                  className="p-2 ml-2"
+                                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                                >
+                                  {isDeleting ? (
+                                    <ActivityIndicator size="small" color="#FF3B30" />
+                                  ) : (
+                                    <Image
+                                      source={minus}
+                                      style={{
+                                        width: 20,
+                                        height: 20,
+                                        tintColor: "#686767"
+                                      }}
+                                      resizeMode="contain"
+                                    />
+                                  )}
+                                </TouchableOpacity>
+                              </View>
                             <Text className="text-xs leading-5 text-black text-right pr-1">
                               আয়াত নম্বর {convertToBengaliDigits(item.no)}
                             </Text>
